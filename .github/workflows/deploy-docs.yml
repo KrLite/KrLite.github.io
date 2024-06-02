@@ -37,6 +37,11 @@ jobs:
       - name: Build VuePress site
         run: pnpm build
 
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: /docs/.vuepress/dist
+
   deploy:
     needs: build
 
