@@ -7,7 +7,7 @@ export default defineUserConfig({
   base: baseUrl,
 
   lang: "zh-CN",
-  title: "Press",
+  title: "一些可有可无的故事",
   description: "Once a fantacy unconjectured",
 
   theme: theme,
