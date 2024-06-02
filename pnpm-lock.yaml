@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@iconify/json':
+        specifier: ^2.2.215
+        version: 2.2.215
       '@vuepress/bundler-vite':
         specifier: 2.0.0-rc.13
         version: 2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5)
@@ -34,7 +37,7 @@ importers:
         version: 2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))
       vuepress-theme-plume:
         specifier: 1.0.0-rc.61
-        version: 1.0.0-rc.61(@algolia/client-search@4.23.3)(chart.js@4.4.3)(echarts@5.5.0)(flowchart.ts@3.0.0)(markdown-it@14.1.0)(mermaid@10.9.1)(search-insights@2.14.0)(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5)))
+        version: 1.0.0-rc.61(@algolia/client-search@4.23.3)(@iconify/json@2.2.215)(chart.js@4.4.3)(echarts@5.5.0)(flowchart.ts@3.0.0)(markdown-it@14.1.0)(mermaid@10.9.1)(search-insights@2.14.0)(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5)))
 
 packages:
 
@@ -310,6 +313,9 @@ packages:
   '@hutson/parse-repository-url@3.0.2':
     resolution: {integrity: sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==}
     engines: {node: '>=6.9.0'}
+
+  '@iconify/json@2.2.215':
+    resolution: {integrity: sha512-uXEk3uB5pqNQmYw004lDQwaRVHbNKTDvHkOI0x24QvOGPqhQ+CbcWUlT/fOnwcjwPjsHxeAgUpwKz84sh0jpDg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -3293,6 +3299,11 @@ snapshots:
   '@floating-ui/utils@0.2.2': {}
 
   '@hutson/parse-repository-url@3.0.2': {}
+
+  '@iconify/json@2.2.215':
+    dependencies:
+      '@iconify/types': 2.0.0
+      pathe: 1.1.2
 
   '@iconify/types@2.0.0': {}
 
@@ -6318,7 +6329,7 @@ snapshots:
       - markdown-it
       - typescript
 
-  vuepress-plugin-md-power@1.0.0-rc.61(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))):
+  vuepress-plugin-md-power@1.0.0-rc.61(@iconify/json@2.2.215)(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))):
     dependencies:
       '@iconify/utils': 2.1.24
       '@vuepress/helper': 2.0.0-rc.31(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5)))
@@ -6331,6 +6342,8 @@ snapshots:
       tm-themes: 1.4.3
       vue: 3.4.27(typescript@5.4.5)
       vuepress: 2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))
+    optionalDependencies:
+      '@iconify/json': 2.2.215
     transitivePeerDependencies:
       - '@vue/composition-api'
       - supports-color
@@ -6352,7 +6365,7 @@ snapshots:
       - '@vue/composition-api'
       - typescript
 
-  vuepress-theme-plume@1.0.0-rc.61(@algolia/client-search@4.23.3)(chart.js@4.4.3)(echarts@5.5.0)(flowchart.ts@3.0.0)(markdown-it@14.1.0)(mermaid@10.9.1)(search-insights@2.14.0)(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))):
+  vuepress-theme-plume@1.0.0-rc.61(@algolia/client-search@4.23.3)(@iconify/json@2.2.215)(chart.js@4.4.3)(echarts@5.5.0)(flowchart.ts@3.0.0)(markdown-it@14.1.0)(mermaid@10.9.1)(search-insights@2.14.0)(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))):
     dependencies:
       '@pengzhanbo/utils': 1.1.2
       '@vuepress-plume/plugin-auto-frontmatter': 1.0.0-rc.61(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5)))
@@ -6386,7 +6399,7 @@ snapshots:
       vue-router: 4.3.2(vue@3.4.27(typescript@5.4.5))
       vuepress: 2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))
       vuepress-plugin-md-enhance: 2.0.0-rc.45(chart.js@4.4.3)(echarts@5.5.0)(flowchart.ts@3.0.0)(katex@0.16.10)(markdown-it@14.1.0)(mermaid@10.9.1)(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5)))
-      vuepress-plugin-md-power: 1.0.0-rc.61(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5)))
+      vuepress-plugin-md-power: 1.0.0-rc.61(@iconify/json@2.2.215)(typescript@5.4.5)(vuepress@2.0.0-rc.13(@vuepress/bundler-vite@2.0.0-rc.13(@types/node@20.13.0)(sass@1.77.4)(typescript@5.4.5))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5)))
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@iconify/json'
