@@ -9,7 +9,7 @@ node_modules
 
 # VuePress temp directory
 .temp
-.vuepress
+.cache
 
 # Docs dist directory
 /vuepress
