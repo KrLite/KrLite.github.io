@@ -5,11 +5,10 @@ import { plumeTheme } from "vuepress-theme-plume";
 const isDev = process.env.NODE_ENV === "development";
 
 export default defineUserConfig({
-  base: "/Press/", // isDev? "/" : "/Press/",
-
   lang: "zh-CN",
   title: "Press",
   description: "Once a fantacy unconjectured",
+  base: "/Press/", // isDev? "/" : "/Press/",
 
   theme: plumeTheme({
     avatar: {
