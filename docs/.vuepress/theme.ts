@@ -1,6 +1,7 @@
 import plumeTheme from "vuepress-theme-plume";
 import { Theme } from "vuepress/core";
 import navbar from "./navbar";
+import notes from "./notes";
 
 export const theme: Theme = plumeTheme({
   avatar: {
@@ -59,6 +60,7 @@ export const theme: Theme = plumeTheme({
 
   footer: { message: "坚守此岸", copyright: "©2024→未来　KrLite" },
 
+  notes: notes,
   navbar: navbar,
   hostname: "https://krlite.github.io/Press/", // SEO
 });
