@@ -11,9 +11,11 @@ export default definePlumeNotesConfig({
 		    "readme",
         {
           text: "Deploying",
-		      icon: "solar:download-square-bold",
+          dir: "deploying",
+          link: "/deploying/",
+          collapsed: false,
           items: [
-			      "github_pages_integration",
+            "github_pages_integration"
           ],
         },
       ],

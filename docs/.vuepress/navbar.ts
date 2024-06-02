@@ -5,9 +5,11 @@ export default defineNavbarConfig([
   {
     text: "笔记",
     icon: "solar:bookmark-bold",
+    activeMatch: "^/notes/",
     items: [
       {
         text: "Coding",
+        activeMatch: "^/notes/coding/",
         items: [
           {
             text: "VuePress",
@@ -16,7 +18,6 @@ export default defineNavbarConfig([
             activeMatch: "^/notes/coding/vuepress/",
           },
         ],
-        activeMatch: "^/notes/",
       },
     ],
   },
