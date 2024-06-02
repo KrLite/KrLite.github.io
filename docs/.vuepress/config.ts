@@ -2,8 +2,10 @@ import { defineUserConfig } from "vuepress";
 import { viteBundler } from "@vuepress/bundler-vite";
 import { plumeTheme } from "vuepress-theme-plume";
 
+const isDev = process.env.NODE_ENV === "development";
+
 export default defineUserConfig({
-  base: "/Press/",
+  base: isDev? "/" : "/Press/",
 
   lang: "zh-CN",
   title: "Press",
@@ -26,6 +28,10 @@ export default defineUserConfig({
         categoryId: "DIC_kwDOMDumMM4Cfys_",
       },
     },
+    navbar: [
+      { text: "友链", link: "/friends/", icon: "solar:compass-bold" }
+    ],
+    hostname: "https://KrLite.github.io/Press/", // SEO
   }),
 
   bundler: viteBundler(),
