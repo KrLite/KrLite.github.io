@@ -2,11 +2,11 @@ import { definePlumeNotesConfig } from "vuepress-theme-plume";
 
 export default definePlumeNotesConfig({
   dir: "notes",
-  link: "/",
+  link: "/notes/",
   notes: [
     {
-      dir: "languages/vuepress",
-      link: "/languages/vuepress/",
+      dir: "coding/vuepress",
+      link: "/coding/vuepress/",
       sidebar: [
 		    "readme",
         {

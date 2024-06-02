@@ -58,6 +58,11 @@ export const theme: Theme = plumeTheme({
 
   footer: { message: "坚守此岸", copyright: "©2024→未来　KrLite" },
 
+  notFound: {
+    title: "少女祈祷中",
+    quote: "你正在寻找的页面也许去了幻想乡"
+  },
+
   notes: notes,
   navbar: navbar,
   hostname: "https://krlite.github.io/Press/", // SEO

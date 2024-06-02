@@ -1,12 +1,25 @@
 import { defineNavbarConfig } from "vuepress-theme-plume";
 
 export default defineNavbarConfig([
-  { text: "cd ~", link: "/", icon: "solar:home-2-bold" },
-  { text: "笔记", icon: "solar:bookmark-bold", items: [
-    { text: "Languages", items: [
-      { text: "VuePress", link: "/notes/languages/vuepress/" },
-    ] },
-  ] },
-  { text: "碎碎念", link: "/blog/", icon: "solar:document-text-bold" },
-  { text: "友链", link: "/friends/", icon: "solar:compass-bold" },
+  { text: "cd ~", icon: "iconoir:dollar", link: "/" },
+  {
+    text: "笔记",
+    icon: "solar:bookmark-bold",
+    items: [
+      {
+        text: "Coding",
+        items: [
+          {
+            text: "VuePress",
+            icon: "bxl:vuejs",
+            link: "/notes/coding/vuepress/",
+            activeMatch: "^/notes/coding/vuepress/",
+          },
+        ],
+        activeMatch: "^/notes/",
+      },
+    ],
+  },
+  { text: "碎碎念", icon: "solar:document-text-bold", link: "/blog/" },
+  { text: "朋友们", icon: "solar:compass-bold", link: "/friends/" },
 ]);

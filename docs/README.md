@@ -18,13 +18,4 @@ config:
     hero:
       name: 一些可有可无的故事
       text: KrLite的碎碎念、笔记和杂谈
-      actions:
-        -
-          theme: brand
-          text: 主页
-          link: /
-        -
-          theme: alt
-          text: 友情链接
-          link: /friends/
 ---
