@@ -1,6 +1,5 @@
 import { defineUserConfig } from "vuepress";
 import { viteBundler } from "@vuepress/bundler-vite";
-import { plumeTheme } from "vuepress-theme-plume";
 import { baseUrl } from "./helper";
 import { theme } from "./theme";
 
