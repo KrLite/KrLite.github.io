@@ -13,6 +13,7 @@ export const theme: Theme = plumeTheme({
   plugins: {
     shiki: { twoslash: true },
 
+    /*
     markdownEnhance: {
       demo: true,
       include: true,
@@ -38,6 +39,7 @@ export const theme: Theme = plumeTheme({
         kotlin: true,
       },
     },
+	*/
 
     comment: {
       provider: "Giscus",
