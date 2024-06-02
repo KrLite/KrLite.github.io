@@ -8,12 +8,12 @@ export default definePlumeNotesConfig({
       dir: "languages/vuepress",
       link: "/languages/vuepress/",
       sidebar: [
-		"readme",
+		    "readme",
         {
           text: "Deploying",
-		  icon: "solar:download-square-bold",
+		      icon: "solar:download-square-bold",
           items: [
-			"github_pages_integration",
+			      "github_pages_integration",
           ],
         },
       ],
