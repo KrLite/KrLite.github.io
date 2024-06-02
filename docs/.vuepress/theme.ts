@@ -43,7 +43,7 @@ export const theme: Theme = plumeTheme({
     comment: {
       provider: "Giscus",
       comment: true,
-      repo: "KrLite/Press",
+      repo: "KrLite/KrLite.github.io",
       repoId: "R_kgDOMDumMA",
       category: "Announcements",
       categoryId: "DIC_kwDOMDumMM4Cfys_",
