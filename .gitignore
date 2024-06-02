@@ -1,0 +1,19 @@
+# node modules
+node_modules
+
+# macOS
+.DS_Store
+
+# Log files
+*.log
+
+# VuePress temp directory
+.temp
+.vuepress
+
+# Docs dist directory
+/vuepress
+
+# Typescript build dist
+packages/@vuepress/shared-utils/lib/
+packages/@vuepress/shared-utils/types/
