@@ -31,7 +31,7 @@ export default defineUserConfig({
     navbar: [
       { text: "友链", link: "/friends/", icon: "solar:compass-bold" }
     ],
-    hostname: "https://KrLite.github.io/Press/", // SEO
+    hostname: "https://krlite.github.io/Press/", // SEO
   }),
 
   bundler: viteBundler(),
