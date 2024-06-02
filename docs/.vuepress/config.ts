@@ -4,8 +4,6 @@ import { baseUrl } from "./helper";
 import { theme } from "./theme";
 
 export default defineUserConfig({
-  base: baseUrl,
-
   lang: "zh-CN",
   title: "Press",
   description: "Once a fantacy unconjectured",
