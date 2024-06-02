@@ -1,14 +1,14 @@
 import { defineUserConfig } from "vuepress";
 import { viteBundler } from "@vuepress/bundler-vite";
 import { plumeTheme } from "vuepress-theme-plume";
-
-const isDev = process.env.NODE_ENV === "development";
+import { baseUrl } from "./helper";
+import navbar from "./navbar";
 
 export default defineUserConfig({
   lang: "zh-CN",
   title: "Press",
   description: "Once a fantacy unconjectured",
-  base: "/Press/", // isDev? "/" : "/Press/",
+  base: baseUrl,
 
   theme: plumeTheme({
     avatar: {
@@ -27,9 +27,7 @@ export default defineUserConfig({
         categoryId: "DIC_kwDOMDumMM4Cfys_",
       },
     },
-    navbar: [
-      { text: "友链", link: "/friends/", icon: "solar:compass-bold" }
-    ],
+    navbar: navbar,
     hostname: "https://krlite.github.io/Press/", // SEO
   }),
 
