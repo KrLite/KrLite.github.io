@@ -11,7 +11,6 @@ export default defineNavbarConfig([
         text: "VuePress",
         icon: "bxl:vuejs",
         link: "/notes/coding/vuepress/",
-        activeMatch: "^/notes/coding/vuepress/",
       },
     ],
   },
