@@ -4,12 +4,32 @@ import navbar from "./navbar";
 import notes from "./notes";
 
 export const theme: Theme = plumeTheme({
+  docsRepo: "KrLite/KrLite.github.io",
+  docsDir: "docs",
+
   avatar: {
     url: "https://github.com/KrLite.png",
     name: "KrLite",
     description: "坚守此岸。",
     circle: true,
   },
+
+  social: [
+    { icon: "bilibili", link: "https://space.bilibili.com/399487383" },
+    { icon: "github", link: "https://github.com/KrLite" },
+  ],
+  navbarSocialInclude: ["github", "bilibili"],
+
+  footer: { message: "坚守此岸", copyright: "©2024→未来　KrLite" },
+
+  notFound: {
+    title: "少女祈祷中",
+    quote: "你正在寻找的页面也许去了幻想乡"
+  },
+
+  notes: notes,
+  navbar: navbar,
+  hostname: "https://krlite.github.io/Press/", // SEO
 
   plugins: {
     shiki: { twoslash: true },
@@ -49,21 +69,4 @@ export const theme: Theme = plumeTheme({
       categoryId: "DIC_kwDOMDumMM4Cfys_",
     },
   },
-
-  social: [
-    { icon: "bilibili", link: "https://space.bilibili.com/399487383" },
-    { icon: "github", link: "https://github.com/KrLite" },
-  ],
-  navbarSocialInclude: ["github", "bilibili"],
-
-  footer: { message: "坚守此岸", copyright: "©2024→未来　KrLite" },
-
-  notFound: {
-    title: "少女祈祷中",
-    quote: "你正在寻找的页面也许去了幻想乡"
-  },
-
-  notes: notes,
-  navbar: navbar,
-  hostname: "https://krlite.github.io/Press/", // SEO
 });

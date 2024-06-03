@@ -6,5 +6,5 @@ permalink: /article/ejmlfxil/
 ---
 
 ```typescript
-console.log("Hello World!");
+console.log("Hello world!");
 ```
