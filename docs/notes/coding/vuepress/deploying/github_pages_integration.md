@@ -6,4 +6,4 @@ createTime: 2024/06/02 20:06:25
 permalink: /notes/coding/vuepress/deploying/wqervoc2/
 ---
 
-@[code](../../../../../workflows/deploy.yml)
+@[code](/.github/workflows/deploy.yml)
