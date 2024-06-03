@@ -8,11 +8,10 @@ export default definePlumeNotesConfig({
       dir: "coding/vuepress",
       link: "/coding/vuepress/",
       sidebar: [
-		    "readme",
+		    "README",
         {
           text: "Deploying",
           dir: "deploying",
-          link: "/deploying/",
           collapsed: false,
           items: [
             "github_pages_integration"
