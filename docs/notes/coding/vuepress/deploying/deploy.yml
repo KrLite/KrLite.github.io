@@ -10,18 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # [!code highlight]
         with:
           fetch-depth: 0 # Needed for page update histories
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v3 # [!code highlight]
         with:
           version: 8
           run_install: true # Install with pnpm
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4 # [!code highlight]
         with:
           node-version: 20 # Node.js version
           cache: pnpm # Cache pnpm
@@ -30,7 +30,7 @@ jobs:
         run: pnpm build # Build VuePress site
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v3 # [!code highlight]
         with:
           path: docs/.vuepress/dist # The directory where the built VuePress site is located
 
@@ -49,4 +49,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4 # [!code highlight]
