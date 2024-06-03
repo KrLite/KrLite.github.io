@@ -3,21 +3,15 @@ import { defineNavbarConfig } from "vuepress-theme-plume";
 export default defineNavbarConfig([
   { text: "cd ~", icon: "iconoir:dollar", link: "/" },
   {
-    text: "笔记",
-    icon: "solar:bookmark-bold",
-    activeMatch: "^/notes/",
+    text: "Coding",
+    icon: "solar:code-circle-bold",
+    activeMatch: "^/notes/coding/",
     items: [
       {
-        text: "Coding",
-        activeMatch: "^/notes/coding/",
-        items: [
-          {
-            text: "VuePress",
-            icon: "bxl:vuejs",
-            link: "/notes/coding/vuepress/",
-            activeMatch: "^/notes/coding/vuepress/",
-          },
-        ],
+        text: "VuePress",
+        icon: "bxl:vuejs",
+        link: "/notes/coding/vuepress/",
+        activeMatch: "^/notes/coding/vuepress/",
       },
     ],
   },
