@@ -1,7 +1,6 @@
 import { defineNavbarConfig } from "vuepress-theme-plume";
 
 export default defineNavbarConfig([
-  { text: "cd ~", icon: "iconoir:dollar", link: "/" },
   {
     text: "Coding",
     icon: "solar:code-circle-bold",
