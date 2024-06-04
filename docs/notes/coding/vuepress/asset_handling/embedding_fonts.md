@@ -10,7 +10,7 @@ permalink: /notes/coding/vuepress/m7dwlzkj/
 
 To embed fonts, you simply put them in a static directory and reference them in your `css` stylesheets.
 
-### Steps
+### Step 1: Configure the Static Directory
 
 #### 1. Create a Static Directory
 
@@ -42,6 +42,8 @@ For better maintainability, you can create a stylesheet to define the font face 
 Let's assume the font face stylesheet is located at `.vuepress/styles/fonts/font.scss`.
 :::
 
+### Review
+
 ::: code-tabs#example
 @tab Current File Structure
 ```:no-line-numbers
@@ -52,7 +54,84 @@ Let's assume the font face stylesheet is located at `.vuepress/styles/fonts/font
 │   │   ├── font.scss // [!code ++]
 │   │   └── font.otf // [!code ++]
 ```
+:::
 
-@tab index.scss
+### Step 2: Fill the Stylesheets
+
+
+#### 1. Define the Font Face
+
+In the font face stylesheet, define the font face using the `@font-face` rule.
+
+::: warning
+Make sure to use a path relative to the static directory instead of the stylesheet's directory in `url` in order to load the static asset correctly.
+
+::: tip
+You can refer to the [official documentation (from Vite)](https://vitejs.dev/guide/assets) for more information about how to handle static assets.
+:::
+
+::: caution
+Adding a `format` parameter to the `src` attribute literally breaks the font embedding.
+:::
+
+::: info Example
+::: code-tabs
+@tab `.vuepress/styles/fonts/font.scss`
 ```scss
+@font-face {
+  font-family: "My Font";
+  src: url("./fonts/font.otf"); // Relative path to the static directory // [!code warning]
+  font-weight: normal;
+  font-style: normal;
+}
+```
+:::
+
+#### 2. Import into the Stylesheet
+
+In the main stylesheet, import the font face stylesheet and apply the font to the desired elements.
+
+::: info Example
+::: code-tabs
+@tab `.vuepress/styles/index.scss`
+```scss
+@import "./fonts/font";
+
+body {
+  font-family: "My Font";
+}
+```
+:::
+
+### Review
+
+::: code-tabs#example
+@tab Current File Structure
+```:no-line-numbers
+.vuepress/
+├── styles/
+│   ├── index.scss // [!code warning]
+│   ├── fonts/
+│   │   ├── font.scss // [!code warning]
+│   │   └── font.otf
+```
+
+@tab `index.scss`
+```scss
+@import "./fonts/font";
+
+body {
+  font-family: "My Font";
+}
+```
+
+@tab `font.scss`
+```scss
+@font-face {
+  font-family: "My Font";
+  src: url("./fonts/font.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+```
 :::
