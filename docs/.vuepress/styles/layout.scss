@@ -1,0 +1,7 @@
+.hint-container.details {
+  &[open], & {
+	> summary {
+		margin-bottom: -1.1rem; // Fix details summary margin
+	}
+  }
+}
