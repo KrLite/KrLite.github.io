@@ -19,6 +19,16 @@ export default definePlumeNotesConfig({
             "github_pages_integration"
           ],
         },
+        {
+          text: "Asset Handling",
+          icon: "none",
+          collapsed: false,
+
+          dir: "asset_handling",
+          items: [
+            "embedding_fonts"
+          ],
+        },
       ],
     },
   ],
