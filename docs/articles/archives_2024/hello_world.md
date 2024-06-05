@@ -5,6 +5,9 @@ createTime: 2024/06/02 18:15:02
 permalink: /article/ejmlfxil/
 ---
 
-```typescript
-console.log("Hello world!");
+```typescript twoslash
+console.log("Hello world!"); // [!code ++]
+//      ^?
 ```
+
+<!-- more -->
