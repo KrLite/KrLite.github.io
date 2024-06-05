@@ -11,10 +11,64 @@ This is a ==highlighted text.==
 
 Th==is is a te==xt with high==lighted secti==ons.
 
+==[Highlighted link](https://www.google.com)==
+
+::: note
+[Link within a note block](https://www.google.com)
+
+`Code within a note block.`
+
+==Highlighted text within a note block.==
+
+==[Highlighted link within a note block](https://www.google.com)==
+:::
+
+::: info
+[Link within a info block](https://www.google.com)
+
+`Code within a info block.`
+
+==Highlighted text within a info block.==
+
+==[Highlighted link within a info block](https://www.google.com)==
+:::
+
+::: tip
+[Link within a tip block](https://www.google.com)
+
+`Code within a tip block.`
+
+==Highlighted text within a tip block.==
+
+==[Highlighted link within a tip block](https://www.google.com)==
+:::
+
+::: warning
+[Link within a warning block](https://www.google.com)
+
+`Code within a warning block.`
+
+==Highlighted text within a warning block.==
+
+==[Highlighted link within a warning block](https://www.google.com)==
+:::
+
+::: caution
+[Link within a caution block](https://www.google.com)
+
+`Code within a caution block.`
+
+==Highlighted text within a caution block.==
+
+==[Highlighted link within a caution block](https://www.google.com)==
+:::
+
 ---
 
 ::: details Details Block
 This is the content of the details block.
+
+==Highlighted text within a details block.==
 :::
 
 ::: details Details Code Block
@@ -28,7 +82,7 @@ function add(a: number, b: number): number {
 ---
 
 ::: tip
-This is a tip with `:::` syntax.
+This is a tip with `::: tip` syntax.
 :::
 
 > [!TIP]
