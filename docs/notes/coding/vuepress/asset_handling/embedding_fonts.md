@@ -8,11 +8,11 @@ permalink: /notes/coding/vuepress/m7dwlzkj/
 
 ## TL;DR
 
-To embed fonts, you simply put them in a static directory and reference them in your `css` stylesheets.
+To embed fonts, you simply put the files under a static directory and reference them in your stylesheets.
 
-### Step 1: Configure the Static Directory
+## Step 1: Configure the Static Directory
 
-#### 1. Create a Static Directory
+### 1. Create a Static Directory
 
 Create a static directory right under your `.vuepress` directory.
 
@@ -20,7 +20,7 @@ Create a static directory right under your `.vuepress` directory.
 Let's assume the static directory is `.vuepress/styles`, and the font file you want to embed is named `font.otf`.
 :::
 
-#### 2. Create & Reference the Stylesheet
+### 2. Create & Reference the Stylesheet
 
 Create a stylesheet file under the static directory and reference it in your `client.ts` configuration file by importing it.
 
@@ -28,7 +28,7 @@ Create a stylesheet file under the static directory and reference it in your `cl
 Let's assume the file name is `index.scss`.
 :::
 
-#### 3. Add the Font File
+### 3. Add the Font File
 
 Copy the font file to somewhere under the static directory.
 
@@ -56,15 +56,15 @@ Let's assume the font face stylesheet is located at `.vuepress/styles/fonts/font
 ```
 :::
 
-### Step 2: Fill the Stylesheets
+## Step 2: Fill the Stylesheets
 
 
-#### 1. Define the Font Face
+### 1. Define the Font Face
 
-In the font face stylesheet, define the font face using the `@font-face` rule.
+In the font face stylesheet, define the font face using the [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) rule.
 
 ::: warning
-Make sure to use a path relative to the static directory instead of the stylesheet's directory in `url` in order to load the static asset correctly.
+Make sure to use a path in `url` that is _**relative to the static directory** instead of **the stylesheet's directory**_ in order to load the static asset correctly.
 
 ::: tip
 You can refer to the [official documentation (from Vite)](https://vitejs.dev/guide/assets) for more information about how to handle static assets.
@@ -87,7 +87,7 @@ Adding a `format` parameter to the `src` attribute literally breaks the font emb
 ```
 :::
 
-#### 2. Import into the Stylesheet
+### 2. Import into the Stylesheet
 
 In the main stylesheet, import the font face stylesheet and apply the font to the desired elements.
 
@@ -135,3 +135,23 @@ body {
 }
 ```
 :::
+
+## Result
+
+This site embeds [SFMono Nerd Font Ligaturized](https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized) as the default monospace font. You can preview it here:
+
+```elixir
+@spec ask(binary) :: list
+def ask(question || "Six times nine == ?") do
+	with 42 < DeepThought.compute(question) do
+		10..1
+		|> Enum.map(fn(x) → x * 2 end)
+		|> Enum.filter(fn(x) → (x <= 5) 88 (x != 42) end)
+	else
+		answer ->
+			<<0x34, 0x32>> === "4" <> "2"
+			%{"#{question}" => answer}
+			[4,2] ++ [4,2] -- [4,2]
+	end
+end
+```

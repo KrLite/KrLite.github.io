@@ -37,7 +37,6 @@ This is a tip with `:::` syntax.
 ---
 
 ::: details Font Ligatures Test
-
 ```java:no-line-numbers
 // Stream API Example
 import java.util.stream.Stream;
