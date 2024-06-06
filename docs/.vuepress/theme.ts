@@ -1,10 +1,9 @@
 import plumeTheme from "vuepress-theme-plume";
-import { Theme } from "vuepress/core";
 import navbar from "./navbar";
 import notes from "./notes";
 import path from "node:path";
 
-export const theme: Theme = plumeTheme({
+export const theme = plumeTheme({
   docsRepo: "KrLite/KrLite.github.io",
   docsDir: "docs",
 
