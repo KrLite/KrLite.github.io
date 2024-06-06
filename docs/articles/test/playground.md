@@ -7,6 +7,7 @@ tags:
   - test
 ---
 
+::: md-demo Markdown Demo
 This is a ==highlighted text.==
 
 Th==is is a te==xt with high==lighted secti==ons.
@@ -26,6 +27,7 @@ _[Italic link](https://www.google.com)_
 ==[Highlighted link](https://www.google.com)==
 
 [Highlighted ==link text==](https://www.google.com)
+:::
 
 ::: note
 [Link within a note block](https://www.google.com)
