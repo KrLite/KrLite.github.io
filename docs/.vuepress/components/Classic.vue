@@ -1,11 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  title?: string;
-  content?: string;
-  description?: string;
   link?: string;
-
-  author?: string;
   authorLink?: string;
 }
 withDefaults(defineProps<Props>(), {});
@@ -13,36 +8,28 @@ withDefaults(defineProps<Props>(), {});
 
 <template>
   <div class="hint-container classic font-classic">
-    <div class="header">
-      <span class="title">
-        <component :is="link ? 'a' : 'p'" href="{{ link }}" target="_blank">
-          <slot name="title">
-            <p>{{ title }}</p>
-          </slot>
-        </component>
+    <div v-if="$slots.title || $slots.author" class="header">
+      <span v-if="$slots.title" class="title">
+        <a v-if="link" :href="link" target="_blank">
+          <slot name="title" />
+        </a>
+        <slot v-else name="title" />
       </span>
-      <span class="author">
-        <component
-          :is="link ? 'a' : 'p'"
-          href="{{ authorLink }}"
-          target="_blank"
-        >
-          <slot name="author">
-            <p>{{ author }}</p>
-          </slot>
-        </component>
+      <span v-if="$slots.author" class="author">
+        <a v-if="authorLink" :href="authorLink" target="_blank">
+          <slot name="author" />
+        </a>
+        <slot v-else name="author" />
       </span>
     </div>
-    <span class="content">
-      <slot>
-        <p>{{ content }}</p>
-      </slot>
-    </span>
-    <span class="description">
-      <slot name="description">
-        <p>{{ description }}</p>
-      </slot>
-    </span>
+
+    <div v-if="$slots.default" class="content">
+      <slot />
+    </div>
+
+    <div v-if="$slots.description" class="description">
+      <slot name="description" />
+    </div>
   </div>
 </template>
 
@@ -53,8 +40,7 @@ withDefaults(defineProps<Props>(), {});
   .title,
   .author,
   .description {
-    margin: 0;
-    font-size: 1rem;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
 
@@ -67,23 +53,37 @@ withDefaults(defineProps<Props>(), {});
       line-height: normal;
     }
 
+    a::after {
+      display: none;
+    }
+
     & + span {
       padding-left: 1em;
     }
   }
 
   .title,
+  .author,
   .description {
     opacity: 0.45;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   .content {
     font-size: 1.45rem;
+    padding: 2px 0;
   }
 
   .header {
     display: flex;
-    margin: 2px;
+  }
+
+  div + div {
+    margin-top: 1.25rem;
   }
 }
 </style>

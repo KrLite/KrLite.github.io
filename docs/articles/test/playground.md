@@ -102,7 +102,6 @@ public class StreamExample {
 ---
 
 <Classic>
-<!-- Will be invisible -->
 </Classic>
 
 <Classic>
@@ -110,32 +109,28 @@ public class StreamExample {
 </Classic>
 
 <Classic link="https://so.gushiwen.cn/mingju/juv_f9df0045bd8d.aspx" authorLink="https://so.gushiwen.cn/authorv_00ea9cc9fdbf.aspx">
+春潮带雨晚来急，野渡无人舟自横。
+
 <template #title>
 《滁州西涧》
 </template>
 
 <template #author>
-唐·韦应物
-</template>
-
-春潮带雨晚来急，野渡无人舟自横。
-
-<template #description>
-此句写荒津野渡之景，在水急舟横的悠闲景象中，蕴含着诗人不在位、不得其用的无奈、忧虑、悲伤的情怀。
+〔唐〕韦应物
 </template>
 </Classic>
 
 ::: center
 <Classic link="https://so.gushiwen.cn/mingju/juv_f9df0045bd8d.aspx" authorLink="https://so.gushiwen.cn/authorv_00ea9cc9fdbf.aspx">
+春潮带雨晚来急，野渡无人舟自横。
+
 <template #title>
 《滁州西涧》
 </template>
 
 <template #author>
-唐·韦应物
+〔唐〕韦应物
 </template>
-
-春潮带雨晚来急，野渡无人舟自横。
 
 <template #description>
 此句写荒津野渡之景，在水急舟横的悠闲景象中，蕴含着诗人不在位、不得其用的无奈、忧虑、悲伤的情怀。
@@ -145,22 +140,18 @@ public class StreamExample {
 
 ::: right
 <Classic link="https://so.gushiwen.cn/mingju/juv_f9df0045bd8d.aspx" authorLink="https://so.gushiwen.cn/authorv_00ea9cc9fdbf.aspx">
+春潮带雨晚来急，野渡无人舟自横。
+
 <template #title>
 《滁州西涧》
 </template>
 
 <template #author>
-唐·韦应物
+〔唐〕韦应物
 </template>
-
-春潮带雨晚来急，野渡无人舟自横。
 
 <template #description>
 此句写荒津野渡之景，在水急舟横的悠闲景象中，蕴含着诗人不在位、不得其用的无奈、忧虑、悲伤的情怀。
 </template>
 </Classic>
 :::
-
-<script setup lang="ts">
-import Classic from "@components/Classic.vue";
-</script>
