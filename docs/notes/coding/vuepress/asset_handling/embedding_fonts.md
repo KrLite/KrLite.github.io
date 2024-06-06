@@ -11,7 +11,7 @@ This article is a tutorial for **embedding local font files** into your VuePress
 :::
 
 ::: warning
-`ttf (truetype)` files may appear to be broken in some cases, while `otf (opentype)` files work fine. Other types are untested.
+`ttf (truetype)` files may appear to be broken in some cases (e.g., in Visual Studio Code Simple Browser), while `otf (opentype)` files work fine. Other types are untested.
 
 **It is suggeseted to use `otf` files for better compatibility.**
 :::
@@ -45,6 +45,7 @@ As our static directory is `.vuepress/styles`, we can consider adding an alias `
 
 ::: code-tabs
 @tab `.vuepress/config.ts`
+
 ```typescript
 export default defineUserConfig({
   ...
@@ -54,6 +55,7 @@ export default defineUserConfig({
   ...
 });
 ```
+
 :::
 
 ### 3. Create & Reference the Stylesheet
@@ -82,6 +84,7 @@ Let's assume the font face stylesheet is located at `.vuepress/styles/fonts/font
 
 ::: code-tabs#example
 @tab Current File Structure
+
 ```:no-line-numbers
 .vuepress/
 ├── styles/
@@ -90,10 +93,10 @@ Let's assume the font face stylesheet is located at `.vuepress/styles/fonts/font
 │   │   ├── font.scss // [!code ++]
 │   │   └── font.otf // [!code ++]
 ```
+
 :::
 
 ## Step 2: Fill the Stylesheets
-
 
 ### 1. Define the Font Face
 
@@ -113,6 +116,7 @@ Adding a `format` parameter to the `src` attribute literally breaks the font emb
 ::: info Example
 ::: code-tabs
 @tab `.vuepress/styles/fonts/font.scss`
+
 ```scss
 @font-face {
   font-family: "My Font";
@@ -121,6 +125,7 @@ Adding a `format` parameter to the `src` attribute literally breaks the font emb
   font-style: normal;
 }
 ```
+
 :::
 
 ### 2. Import into the Stylesheet
@@ -130,6 +135,7 @@ In the main stylesheet, import the font face stylesheet and apply the font to th
 ::: info Example
 ::: code-tabs
 @tab `.vuepress/styles/index.scss`
+
 ```scss
 @import "./fonts/font.scss";
 
@@ -137,12 +143,14 @@ body {
   font-family: "My Font";
 }
 ```
+
 :::
 
 ### Review
 
 ::: code-tabs#example
 @tab Current File Structure
+
 ```:no-line-numbers
 .vuepress/
 ├── styles/
@@ -153,6 +161,7 @@ body {
 ```
 
 @tab `index.scss`
+
 ```scss
 @import "./fonts/font.scss";
 
@@ -162,6 +171,7 @@ body {
 ```
 
 @tab `font.scss`
+
 ```scss
 @font-face {
   font-family: "My Font";
@@ -170,6 +180,7 @@ body {
   font-style: normal;
 }
 ```
+
 :::
 
 ## Result

@@ -9,7 +9,7 @@
   }
 }
 
-.plume-content .hint-container {
+.plume-content.excerpt .hint-container {
   p:last-of-type {
     margin-bottom: 8px !important; // Fix last paragraph margin in <!-- more --> contents
   }
