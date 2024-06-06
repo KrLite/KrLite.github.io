@@ -2,6 +2,7 @@ import plumeTheme from "vuepress-theme-plume";
 import { Theme } from "vuepress/core";
 import navbar from "./navbar";
 import notes from "./notes";
+import path from "node:path";
 
 export const theme: Theme = plumeTheme({
   docsRepo: "KrLite/KrLite.github.io",
@@ -24,7 +25,7 @@ export const theme: Theme = plumeTheme({
 
   notFound: {
     title: "少女祈祷中",
-    quote: "你正在寻找的页面也许去了幻想乡"
+    quote: "你正在寻找的页面也许去了幻想乡",
   },
 
   notes: notes,
@@ -36,7 +37,14 @@ export const theme: Theme = plumeTheme({
 
     markdownEnhance: {
       demo: true,
-      include: true,
+      include: {
+        resolvePath: (file) => {
+          if (file.startsWith("@src"))
+            return file.replace("@src", path.resolve(__dirname, ".."));
+
+          return file;
+        },
+      },
       chart: true,
       echarts: true,
       mermaid: true,

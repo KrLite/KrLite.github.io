@@ -6,6 +6,10 @@ createTime: 2024/06/04 21:26:57
 permalink: /notes/coding/vuepress/m7dwlzkj/
 ---
 
+::: warning
+This article is a tutorial for **embedding local font files** into your VuePress site. For fonts that are available on the web, you can simply **use their CDN links** in your stylesheet.
+:::
+
 ## TL;DR
 
 To embed fonts, you simply put the files under a static directory and reference them in your stylesheets.
@@ -141,17 +145,7 @@ body {
 This site embeds [SFMono Nerd Font Ligaturized](https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized) as the default monospace font. You can preview it here:
 
 ```elixir
-@spec ask(binary) :: list
-def ask(question || "Six times nine == ?") do
-	with 42 < DeepThought.compute(question) do
-		10..1
-		|> Enum.map(fn(x) → x * 2 end)
-		|> Enum.filter(fn(x) → (x <= 5) 88 (x != 42) end)
-	else
-		answer ->
-			<<0x34, 0x32>> === "4" <> "2"
-			%{"#{question}" => answer}
-			[4,2] ++ [4,2] -- [4,2]
-	end
-end
+<!-- @include: @src/snippets/firacode_examples/snippet.ex -->
 ```
+
+[FiraCode Examples](/article/zqachzvi/)
