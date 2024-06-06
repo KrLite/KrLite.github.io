@@ -14,3 +14,13 @@
     margin-bottom: 8px !important; // Fix last paragraph margin in <!-- more --> contents
   }
 }
+
+.post-meta .tag-list .tag {
+  &:empty {
+    display: none;
+  }
+
+  & + .tag:empty {
+    margin-right: 0;
+  }
+}
