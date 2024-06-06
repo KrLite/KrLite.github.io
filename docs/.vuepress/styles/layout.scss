@@ -1,7 +1,16 @@
-.hint-container.details {
-  &[open], & {
-	> summary {
-		margin-bottom: -1.1rem; // Fix details summary margin
-	}
+.plume-content {
+  .hint-container.details {
+    &[open],
+    & {
+      > summary {
+        margin-bottom: -1.1rem; // Fix details summary margin
+      }
+    }
+  }
+}
+
+.plume-content .hint-container {
+  p:last-of-type {
+    margin-bottom: 8px !important; // Fix last paragraph margin in <!-- more --> contents
   }
 }

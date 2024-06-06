@@ -6,8 +6,12 @@ permalink: /article/zqachzvi/
 ---
 
 ::: info
+This article is a collection of example code snippets originally used in [FiraCode](https://github.com/tonsky/FiraCode).
+
 The code are extracted and improved from [FiraCode Example](https://github.com/tonsky/FiraCode/tree/master#how-does-it-look).
 :::
+
+<!-- more -->
 
 ::: code-tabs
 @tab `javascript`
