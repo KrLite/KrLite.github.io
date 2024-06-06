@@ -20,7 +20,7 @@
     display: none;
   }
 
-  & + .tag:empty {
+  &:has(+ .tag:empty) {
     margin-right: 0;
   }
 }

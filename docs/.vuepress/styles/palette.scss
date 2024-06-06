@@ -27,8 +27,26 @@
     color: var(--vp-c-bg) !important;
   }
 
-  // Sticky post background
-  &:has(.sticky) {
-    background-color: var(--vp-c-brand-soft-bg) !important;
+  @media (width >= 768px) {
+    // Sticky post background
+    &:has(.sticky) {
+      background-color: var(--vp-c-brand-soft-bg);
+    }
+  }
+
+  &:has(.post-meta .tag-list .tag:empty) {
+    background-color: transparent;
+    box-shadow: none;
+
+    @media (width < 768px) {
+      :is(.post-meta, .plume-content) {
+        opacity: 0.5 !important;
+      }
+    }
+
+    .sticky {
+      background-color: var(--vp-c-brand-soft) !important;
+      color: var(--vp-c-text-1) !important;
+    }
   }
 }

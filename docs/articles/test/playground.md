@@ -5,6 +5,7 @@ createTime: 2024/06/04 19:10:05
 permalink: /article/79bmqa5b/
 tags:
   - test
+sticky: 1
 ---
 
 ::: md-demo Markdown Demo
