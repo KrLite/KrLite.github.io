@@ -1,5 +1,6 @@
 ---
 home: true
+backToTop: false
 config:
   -
     type: hero
@@ -18,4 +19,12 @@ config:
     hero:
       name: 一些可有可无的故事
       text: KrLite的碎碎念、笔记和杂谈
+  -
+    type: features
+    features:
+      -
+        title: 碎碎念
+        icon: 📔
+        link: /blog/
+        details: 时间的位面
 ---

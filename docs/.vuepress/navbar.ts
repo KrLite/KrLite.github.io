@@ -14,6 +14,6 @@ export default defineNavbarConfig([
       },
     ],
   },
-  { text: "碎碎念", icon: "solar:document-text-bold", link: "/blog/", activeMatch: "^/blog/" },
+  { text: "碎碎念", icon: "solar:document-bold", link: "/blog/", activeMatch: "^/blog/" },
   { text: "朋友们", icon: "solar:compass-bold", link: "/friends/" },
 ]);
