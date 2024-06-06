@@ -121,3 +121,11 @@ public class StreamExample {
 }
 ```
 :::
+
+<Classic>
+野渡无人舟自横。
+</Classic>
+
+<script setup lang="ts">
+import Classic from "@components/Classic.vue";
+</script>

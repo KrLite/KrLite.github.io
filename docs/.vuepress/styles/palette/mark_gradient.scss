@@ -1,13 +1,13 @@
 // Marked text in gradient
 
 :root {
-  --vp-c-mark-gradient-1: linear-gradient(
+  --mark-gradient-1: linear-gradient(
     158deg,
     rgba(255, 169, 0, 1) 0%,
     rgba(226, 25, 125, 1) 59%,
     rgba(185, 36, 255, 1) 100%
   );
-  --vp-c-mark-gradient-2: linear-gradient(
+  --mark-gradient-2: linear-gradient(
     158deg,
     rgb(255, 198, 28) 0%,
     rgba(249, 79, 255, 1) 51%,
@@ -18,7 +18,7 @@
 .plume-content {
   mark {
     background: rgb(208, 80, 255);
-    background: var(--vp-c-mark-gradient-2);
+    background: var(--mark-gradient-2);
     background-clip: text;
     color: transparent !important;
 

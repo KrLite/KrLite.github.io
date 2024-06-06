@@ -2,6 +2,7 @@ import { defineUserConfig } from "vuepress";
 import { viteBundler } from "@vuepress/bundler-vite";
 import { baseUrl } from "./helper";
 import { theme } from "./theme";
+import path from "path";
 
 export default defineUserConfig({
   base: baseUrl,
@@ -14,6 +15,12 @@ export default defineUserConfig({
 
   pagePatterns: ["**/*.md", "!**/*.snippet.md", "!.vuepress", "!node_modules"],
   head: [],
+
+  alias: {
+    "@source": path.resolve(__dirname),
+    "@components": path.resolve(__dirname, "./components"),
+    "@styles": path.resolve(__dirname, "./styles")
+  },
 
   bundler: viteBundler(),
 });

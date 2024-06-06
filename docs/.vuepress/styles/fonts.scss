@@ -1,8 +1,13 @@
 @import "./fonts/ligasfmono/index.scss";
+@import "./fonts/classic/index.scss";
 
 pre,
 code,
 kbd,
 samp {
   font-family: "Liga SFMono Nerd Font (Embedded)";
+}
+
+.font-classic {
+  font-family: "滕王阁序";
 }

@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: url("./fonts/ligasfmono/LigaSFMonoNerdFont-Light.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-Light.otf");
   font-weight: 100;
   font-style: normal;
   font-display: auto;
@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: url("./fonts/ligasfmono/LigaSFMonoNerdFont-Regular.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-Regular.otf");
   font-weight: 300;
   font-style: normal;
   font-display: auto;
@@ -18,7 +18,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: url("./fonts/ligasfmono/LigaSFMonoNerdFont-Medium.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-Medium.otf");
   font-weight: 450;
   font-style: normal;
   font-display: auto;
@@ -26,7 +26,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: url("./fonts/ligasfmono/LigaSFMonoNerdFont-Semibold.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-Semibold.otf");
   font-weight: 600;
   font-style: normal;
   font-display: auto;
@@ -34,7 +34,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: url("./fonts/ligasfmono/LigaSFMonoNerdFont-Bold.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-Bold.otf");
   font-weight: 750;
   font-style: normal;
   font-display: auto;
@@ -42,7 +42,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: url("./fonts/ligasfmono/LigaSFMonoNerdFont-Heavy.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-Heavy.otf");
   font-weight: 900;
   font-style: normal;
   font-display: auto;
@@ -52,7 +52,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: local("Liga SFMono Nerd Font (Embedded) Italic") url("./fonts/ligasfmono/LigaSFMonoNerdFont-LightItalic.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-LightItalic.otf");
   font-weight: 100;
   font-style: italic;
   font-display: auto;
@@ -60,7 +60,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: local("Liga SFMono Nerd Font (Embedded) Italic") url("./fonts/ligasfmono/LigaSFMonoNerdFont-Italic.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-Italic.otf");
   font-weight: 300;
   font-style: italic;
   font-display: auto;
@@ -68,7 +68,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: local("Liga SFMono Nerd Font (Embedded) Italic") url("./fonts/ligasfmono/LigaSFMonoNerdFont-MediumItalic.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-MediumItalic.otf");
   font-weight: 450;
   font-style: italic;
   font-display: auto;
@@ -76,7 +76,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: local("Liga SFMono Nerd Font (Embedded) Italic") url("./fonts/ligasfmono/LigaSFMonoNerdFont-SemiboldItalic.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-SemiboldItalic.otf");
   font-weight: 600;
   font-style: italic;
   font-display: auto;
@@ -84,7 +84,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: local("Liga SFMono Nerd Font (Embedded) Italic") url("./fonts/ligasfmono/LigaSFMonoNerdFont-BoldItalic.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-BoldItalic.otf");
   font-weight: 750;
   font-style: italic;
   font-display: auto;
@@ -92,7 +92,7 @@
 
 @font-face {
   font-family: "Liga SFMono Nerd Font (Embedded)";
-  src: local("Liga SFMono Nerd Font (Embedded) Italic") url("./fonts/ligasfmono/LigaSFMonoNerdFont-HeavyItalic.otf");
+  src: url("@styles/fonts/ligasfmono/LigaSFMonoNerdFont-HeavyItalic.otf");
   font-weight: 900;
   font-style: italic;
   font-display: auto;

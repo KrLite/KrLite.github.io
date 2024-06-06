@@ -10,9 +10,17 @@ permalink: /notes/coding/vuepress/m7dwlzkj/
 This article is a tutorial for **embedding local font files** into your VuePress site. For fonts that are available on the web, you can simply **use their CDN links** in your stylesheet.
 :::
 
+::: warning
+`ttf (truetype)` files may appear to be broken in some cases, while `otf (opentype)` files work fine. Other types are untested.
+
+**It is suggeseted to use `otf` files for better compatibility.**
+:::
+
 ## TL;DR
 
 To embed fonts, you simply put the files under a static directory and reference them in your stylesheets.
+
+The static reference takes effort in [configuring an alias](#alias) for the static directory in your `config.ts` configuration file.
 
 ## Step 1: Configure the Static Directory
 
@@ -24,7 +32,31 @@ Create a static directory right under your `.vuepress` directory.
 Let's assume the static directory is `.vuepress/styles`, and the font file you want to embed is named `font.otf`.
 :::
 
-### 2. Create & Reference the Stylesheet
+::: tip
+You can refer to the [official documentation (from theme Hope)](https://theme-hope.vuejs.press/guide/component/sfc.html) for more information about aliases.
+:::
+
+### 2. Create an Alias {#alias}
+
+In your `config.ts`, add an alias for the static directory.
+
+::: info Example
+As our static directory is `.vuepress/styles`, we can consider adding an alias `@styles` for it.
+
+::: code-tabs
+@tab `.vuepress/config.ts`
+```typescript
+export default defineUserConfig({
+  ...
+  alias: {
+    "@styles": path.resolve(__dirname, "./styles")
+  },
+  ...
+});
+```
+:::
+
+### 3. Create & Reference the Stylesheet
 
 Create a stylesheet file under the static directory and reference it in your `client.ts` configuration file by importing it.
 
@@ -32,7 +64,7 @@ Create a stylesheet file under the static directory and reference it in your `cl
 Let's assume the file name is `index.scss`.
 :::
 
-### 3. Add the Font File
+### 4. Add the Font File
 
 Copy the font file to somewhere under the static directory.
 
@@ -68,14 +100,14 @@ Let's assume the font face stylesheet is located at `.vuepress/styles/fonts/font
 In the font face stylesheet, define the font face using the [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) rule.
 
 ::: warning
-Make sure to use a path in `url` that is _**relative to the static directory** instead of **the stylesheet's directory**_ in order to load the static asset correctly.
+Make sure to use a path in `url` that is _**relative to the static directory from the [alias](#alias)** instead of **the stylesheet's directory**_ in order to load the static asset correctly.
 
 ::: tip
 You can refer to the [official documentation (from Vite)](https://vitejs.dev/guide/assets) for more information about how to handle static assets.
 :::
 
 ::: caution
-Adding a `format` parameter to the `src` attribute literally breaks the font embedding.
+Adding a `format` parameter to the `src` attribute literally breaks the font embedding for no reason, **unless the file format is `otf` and the parameter is `format("opentype")`.**
 :::
 
 ::: info Example
@@ -84,7 +116,7 @@ Adding a `format` parameter to the `src` attribute literally breaks the font emb
 ```scss
 @font-face {
   font-family: "My Font";
-  src: url("./fonts/font.otf"); // Relative path to the static directory // [!code warning]
+  src: url("@styles/fonts/font.otf"); // [!code warning]
   font-weight: normal;
   font-style: normal;
 }
@@ -99,7 +131,7 @@ In the main stylesheet, import the font face stylesheet and apply the font to th
 ::: code-tabs
 @tab `.vuepress/styles/index.scss`
 ```scss
-@import "./fonts/font";
+@import "./fonts/font.scss";
 
 body {
   font-family: "My Font";
@@ -122,7 +154,7 @@ body {
 
 @tab `index.scss`
 ```scss
-@import "./fonts/font";
+@import "./fonts/font.scss";
 
 body {
   font-family: "My Font";
@@ -133,7 +165,7 @@ body {
 ```scss
 @font-face {
   font-family: "My Font";
-  src: url("./fonts/font.otf");
+  src: url("@styles/fonts/font.otf");
   font-weight: normal;
   font-style: normal;
 }
@@ -148,4 +180,4 @@ This site embeds [SFMono Nerd Font Ligaturized](https://github.com/shaunsingh/SF
 <!-- @include: @src/snippets/firacode_examples/snippet.ex -->
 ```
 
-[FiraCode Examples](/article/zqachzvi/)
+Related: [FiraCode Examples](/article/zqachzvi/)

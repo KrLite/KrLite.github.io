@@ -1,29 +1,29 @@
 // Marked text with a solid background color and border
 
 :root {
-  --vp-c-mark-padding-horizontal: 0.06em;
-  --vp-c-mark-padding-vertical: 0.06em;
-  --vp-c-mark-border-radius: 4px;
-  --vp-c-mark-border-width: 2px;
+  --mark-padding-horizontal: 0.06em;
+  --mark-padding-vertical: 0.06em;
+  --mark-border-radius: 4px;
+  --mark-border-width: 2px;
 }
 
 .plume-content {
   mark {
     background-color: var(--vp-c-brand-1);
-    border: var(--vp-c-mark-border-width) solid rgba(0, 0, 0, 0.15);
+    border: var(--mark-border-width) solid rgba(0, 0, 0, 0.15);
     color: #fff;
 
     .dark & {
       color: #000;
     }
 
-    border-radius: var(--vp-c-mark-border-radius);
+    border-radius: var(--mark-border-radius);
     padding: calc(
-        var(--vp-c-mark-padding-vertical) - var(--vp-c-mark-border-width)
+        var(--mark-padding-vertical) - var(--mark-border-width)
       )
-      calc(var(--vp-c-mark-padding-horizontal) - var(--vp-c-mark-border-width));
-    margin: calc(-1 * (var(--vp-c-mark-padding-vertical)))
-      calc(-1 * (var(--vp-c-mark-padding-horizontal)));
+      calc(var(--mark-padding-horizontal) - var(--mark-border-width));
+    margin: calc(-1 * (var(--mark-padding-vertical)))
+      calc(-1 * (var(--mark-padding-horizontal)));
 
     a {
       color: #fff !important;

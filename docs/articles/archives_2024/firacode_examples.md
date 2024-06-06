@@ -8,6 +8,8 @@ permalink: /article/zqachzvi/
 ::: info
 This article is a collection of example code snippets originally used in [FiraCode](https://github.com/tonsky/FiraCode).
 
+The font used here is [SFMono Nerd Font Ligaturized](https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized), which integrates [Apple's SF Mono](https://developer.apple.com/fonts/) with ligatures from [FiraCode](https://github.com/tonsky/FiraCode).
+
 The code are extracted and improved from [FiraCode Example](https://github.com/tonsky/FiraCode/tree/master#how-does-it-look).
 :::
 
