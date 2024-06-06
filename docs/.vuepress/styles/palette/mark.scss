@@ -1,0 +1,60 @@
+// Marked text with a solid background color and border
+
+:root {
+  --vp-c-mark-padding-horizontal: 0.06em;
+  --vp-c-mark-padding-vertical: 0.06em;
+  --vp-c-mark-border-radius: 4px;
+  --vp-c-mark-border-width: 2px;
+}
+
+.plume-content {
+  mark {
+    background-color: var(--vp-c-brand-1);
+    border: var(--vp-c-mark-border-width) solid rgba(0, 0, 0, 0.15);
+    color: #fff;
+
+    .dark & {
+      color: #000;
+    }
+
+    border-radius: var(--vp-c-mark-border-radius);
+    padding: calc(
+        var(--vp-c-mark-padding-vertical) - var(--vp-c-mark-border-width)
+      )
+      calc(var(--vp-c-mark-padding-horizontal) - var(--vp-c-mark-border-width));
+    margin: calc(-1 * (var(--vp-c-mark-padding-vertical)))
+      calc(-1 * (var(--vp-c-mark-padding-horizontal)));
+
+    a {
+      color: #fff !important;
+
+      .dark & {
+        color: #000 !important;
+      }
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.5) !important;
+      }
+    }
+  }
+
+  .hint-container {
+    &.tip {
+      mark {
+        background-color: var(--vp-c-tip-1);
+      }
+    }
+
+    &.warning {
+      mark {
+        background-color: var(--vp-c-warning-1);
+      }
+    }
+
+    &.caution {
+      mark {
+        background-color: var(--vp-c-danger-1);
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+// Marked text in gradient
+
+:root {
+  --vp-c-mark-gradient-1: linear-gradient(
+    158deg,
+    rgba(255, 169, 0, 1) 0%,
+    rgba(226, 25, 125, 1) 59%,
+    rgba(185, 36, 255, 1) 100%
+  );
+  --vp-c-mark-gradient-2: linear-gradient(
+    158deg,
+    rgba(255, 235, 64, 1) 0%,
+    rgba(249, 79, 255, 1) 51%,
+    rgba(123, 155, 255, 1) 100%
+  );
+}
+
+.plume-content {
+  mark {
+    background: rgb(208, 80, 255);
+    background: var(--vp-c-mark-gradient-2);
+    background-clip: text;
+    color: transparent !important;
+
+    a {
+      color: rgba(0, 0, 0, 0.1);
+
+      .dark & {
+        color: rgba(255, 255, 255, 0.25);
+      }
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.25);
+
+        .dark & {
+          color: rgba(255, 255, 255, 0.35);
+        }
+      }
+    }
+  }
+}

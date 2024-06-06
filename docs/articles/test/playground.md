@@ -11,7 +11,21 @@ This is a ==highlighted text.==
 
 Th==is is a te==xt with high==lighted secti==ons.
 
+**==Highlighted text in bold.==**
+
+_==Highlighted text in italic.==_
+
+_**==Highlighted text in bold and italic.==**_
+
+[Link](https://www.google.com)
+
+**[Bold link](https://www.google.com)**
+
+_[Italic link](https://www.google.com)_
+
 ==[Highlighted link](https://www.google.com)==
+
+[Highlighted ==link text==](https://www.google.com)
 
 ::: note
 [Link within a note block](https://www.google.com)

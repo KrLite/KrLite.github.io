@@ -12,5 +12,8 @@ export default defineUserConfig({
 
   theme: theme,
 
+  pagePatterns: ["**/*.md", "!**/*.snippet.md", "!.vuepress", "!node_modules"],
+  head: [],
+
   bundler: viteBundler(),
 });
