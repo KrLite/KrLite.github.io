@@ -1,19 +1,10 @@
 import { defineNavbarConfig } from "vuepress-theme-plume";
+import coding from "./navbar/coding";
+import learning from "./navbar/learning";
 
 export default defineNavbarConfig([
-  {
-    text: "Coding",
-    icon: "solar:code-circle-bold",
-    activeMatch: "^/notes/coding/",
-    items: [
-      {
-        text: "VuePress",
-        icon: "bxl:vuejs",
-        link: "/notes/coding/vuepress/",
-        activeMatch: "^/notes/coding/vuepress/",
-      },
-    ],
-  },
+  ...coding,
+  //...learning,
   {
     text: "涂鸦",
     icon: "mdi:art",

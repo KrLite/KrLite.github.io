@@ -107,8 +107,25 @@ h6,
 
 // Fix code block overflow within markdown demos in 640px or narrower layouts
 .vp-md-demo-display {
-  div[class*=language-] {
+  div[class*="language-"] {
     margin: 0;
     border-radius: 6px;
+  }
+}
+
+// Improve code tints
+.plume-content {
+  .header-anchor code {
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
+  }
+
+  :not(h1, h2, h3, h4, h5, h6) code {
+    color: inherit;
+  }
+
+  .hint-container.info code {
+    color: inherit;
   }
 }

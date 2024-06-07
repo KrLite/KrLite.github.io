@@ -100,3 +100,8 @@
     transition: opacity var(--vp-ct);
   }
 }
+
+// Antialias code blocks
+code, pre, kbd, samp {
+  -webkit-font-smoothing: antialiased;
+}

@@ -198,6 +198,8 @@ function hello_world() {
 
 ::: details Font Ligature Test
 
+`a -> b -> c`
+
 ```java:no-line-numbers
 // Stream API Example
 import java.util.stream.Stream;
