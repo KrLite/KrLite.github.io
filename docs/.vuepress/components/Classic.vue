@@ -77,7 +77,7 @@ withDefaults(defineProps<Props>(), {});
     font-size: 1.45rem;
     padding: 16px 0;
 
-    text-shadow: 0 0.25em 1.5em var(--vp-c-classic-1);
+    text-shadow: 0 2.5px 1em var(--vp-c-classic-2);
   }
 
   .header {

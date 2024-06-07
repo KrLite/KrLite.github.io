@@ -102,6 +102,27 @@
 }
 
 // Antialias code blocks
-code, pre, kbd, samp {
+code,
+pre,
+kbd,
+samp {
   -webkit-font-smoothing: antialiased;
+}
+
+// Improve code tints
+.plume-content {
+  :not(h1, h2, h3, h4, h5, h6) code {
+    color: inherit;
+  }
+
+  .hint-container.info code {
+    color: inherit;
+  }
+}
+
+// Improve heading tints
+.plume-content {
+  .header-anchor {
+    color: var(--vp-c-brand-1);
+  }
 }

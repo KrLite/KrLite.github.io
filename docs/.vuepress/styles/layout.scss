@@ -9,10 +9,6 @@ h6,
   font-weight: 750 !important;
 }
 
-.plume-content :is(h1, h2, h3, h4, h5, h6) > a:hover {
-  color: inherit;
-}
-
 // Fix footer issues
 .plume-footer {
   margin: 0 !important;
@@ -110,22 +106,5 @@ h6,
   div[class*="language-"] {
     margin: 0;
     border-radius: 6px;
-  }
-}
-
-// Improve code tints
-.plume-content {
-  .header-anchor code {
-    background-color: transparent;
-    color: inherit;
-    font-size: inherit;
-  }
-
-  :not(h1, h2, h3, h4, h5, h6) code {
-    color: inherit;
-  }
-
-  .hint-container.info code {
-    color: inherit;
   }
 }
