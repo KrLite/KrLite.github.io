@@ -123,7 +123,7 @@ public @Silent void method() {
 <!-- @include: annotation/test/Test.java#main -->
 ```
 
-[`流式处理 ↗`](stream.md) [`Lambda 表达式 ↗`](lambda.md)
+[`流式处理 ↗`](../syntax/stream.md) [`Lambda 表达式 ↗`](../syntax/lambda.md)
 
 在 `iteratorAnnotations` 方法中，我们对方法或字段进行遍历，然后获取其注解，最后进行解析。
 

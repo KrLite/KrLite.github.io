@@ -131,11 +131,11 @@ public class Calculator {
         Operation add = new Operation() {
             @Override
             public int calculate(int a, int b) {
-                return a + b;    // 实现 calculate 抽象方法，并完成加法操作
+                return a + b; // 实现 calculate 抽象方法，并完成加法操作
             }
         };
 
-        System.out.println(add.calculate(1, 2));    // 结果为：3
+        System.out.println(add.calculate(1, 2)); // 结果为：3
     }
 }
 ```
@@ -146,10 +146,10 @@ public class Calculator {
 public class Calculator {
     public static void main(String[] args) {
         Operation add = (int a, int b) -> {
-            return a + b;    // 同样实现了 calculate 抽象方法，并完成加法操作
+            return a + b; // 同样实现了 calculate 抽象方法，并完成加法操作
         };
 
-        System.out.println(add.calculate(1, 2));    // 结果为：3
+        System.out.println(add.calculate(1, 2)); // 结果为：3
     }
 }
 ```
@@ -162,10 +162,10 @@ public class Calculator {
 public class Calculator {
     public static void main(String[] args) {
         Operation add = (a, b) -> {
-            return a + b;    // 省略了 a 和 b 的参数类型，因为编译器可以推断出来，他们只可能是整型
+            return a + b; // 省略了 a 和 b 的参数类型，因为编译器可以推断出来，他们只可能是整型
         };
 
-        System.out.println(add.calculate(1, 2));    // 结果为：3
+        System.out.println(add.calculate(1, 2)); // 结果为：3
     }
 }
 ```
@@ -175,9 +175,9 @@ public class Calculator {
 ```java
 public class Calculator {
     public static void main(String[] args) {
-        Operation add = (a, b) -> a + b;    // 省略了 return 和大括号，因为方法体只有一行代码，可以省略大括号
+        Operation add = (a, b) -> a + b; // 省略了 return 和大括号，因为方法体只有一行代码，可以省略大括号
 
-        System.out.println(add.calculate(1, 2));    // 结果为：3
+        System.out.println(add.calculate(1, 2)); // 结果为：3
     }
 }
 ```

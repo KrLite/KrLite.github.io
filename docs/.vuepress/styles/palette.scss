@@ -123,6 +123,10 @@ samp {
 // Improve heading tints
 .plume-content {
   .header-anchor {
+    color: inherit;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) > a:hover {
     color: var(--vp-c-brand-1);
   }
 }
