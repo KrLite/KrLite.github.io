@@ -1,17 +1,34 @@
+// Improve headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.header-anchor {
+  font-weight: 750 !important;
+}
+
+.plume-content :is(h1, h2, h3, h4, h5, h6) > a:hover {
+  color: inherit;
+}
+
+// Fix details summary margin
 .plume-content {
   .hint-container.details {
     &[open],
     & {
       > summary {
-        margin-bottom: -1.1rem; // Fix details summary margin
+        margin-bottom: -1.1rem;
       }
     }
   }
 }
 
+// Fix last paragraph margin in <!-- more --> contents
 .plume-content.excerpt .hint-container {
   p:last-of-type {
-    margin-bottom: 8px !important; // Fix last paragraph margin in <!-- more --> contents
+    margin-bottom: 8px !important;
   }
 }
 
