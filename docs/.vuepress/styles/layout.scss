@@ -44,3 +44,8 @@
     background-color: var(--vp-c-gray-1);
   }
 }
+
+// Allow line wrapping in feature card details
+.home-feature .details {
+  white-space: pre-wrap;
+}
