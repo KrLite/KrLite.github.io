@@ -1,5 +1,5 @@
 ---
-title: 注解 Annotation
+title: 注解 | Annotation
 author: KrLite
 createTime: 2024/06/07 17:06:54
 permalink: /notes/coding/java/annotation/8a7hjjvl/
@@ -7,9 +7,9 @@ tags:
   - JDK 5.0
 ---
 
-注解[^1]是Java中的一种特殊接口。类、方法、变量、参数和包等都可以被注解，并可以通过反射获取注解内容。
+注解[^annotation]是Java中的一种特殊接口。类、方法、变量、参数和包等都可以被注解，并可以通过反射获取注解内容。
 
-[^1]: Annotation，又称标注。
+[^annotation]: Annotation，又称标注。
 
 ## 一、定义
 
@@ -18,15 +18,14 @@ tags:
 ```java
 import java.lang.annotation.*;
 
-@Documented                            // 使接口在 Javadoc 中显示；若无，则不显示。
-@Inherited                             // 允许子类继承父类的注解；若无，则不允许。
-@Target(ElementType.TYPE)              // 类型属性；若无，则可以用于任何地方。
-@Retention(RetentionPolicy.RUNTIME)    // 策略属性；若无，则默认为 RetentionPolicy.CLASS 。
+@Documented                         // 使接口在 Javadoc 中显示；若无，则不显示
+@Inherited                          // 允许子类继承父类的注解；若无，则不允许
+@Target(ElementType.TYPE)           // 类型属性；若无，则可以用于任何地方
+@Retention(RetentionPolicy.RUNTIME) // 策略属性；若无，则默认为 RetentionPolicy.CLASS
 
-public @interface
-// 这个类被 @interface 定义，即实现了 java.lang.annotation.Annotation 接口。
+public @interface // 这个类被 @interface 定义，即实现了 java.lang.annotation.Annotation 接口
 AnnotationClass {
-	// 很多注解类并不需要具体的内容，只需要作为一个标记即可。
+		// 很多注解类并不需要具体的内容，只需要作为一个标记即可
 }
 ```
 
@@ -58,9 +57,9 @@ AnnotationClass {
 
 ```java
 public class MyClass {
-	@Deprecated                       // 标注这个方法被弃用了，即不建议调用此方法。
-	@SuppressWarnings("unchecked")    // 隐藏"unchecked"错误。
-	public static void method() {     // 假设这个方法会报"unchecked"错误，那么这个错误会被隐藏。
+	@Deprecated                    // 标注这个方法被弃用了，即集成开发环境应在调用此方法时给出警告，但不影响实际运行
+	@SuppressWarnings("unchecked") // 隐藏"unchecked"错误
+	public static void method() {  // 假设这个方法会报"unchecked"错误，那么这个错误会被隐藏
 		foo.bar1();
 		foo.bar2();
     }
