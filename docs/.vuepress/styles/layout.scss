@@ -15,6 +15,7 @@
   }
 }
 
+// Hide null tags in post meta
 .post-meta .tag-list .tag {
   &:empty {
     display: none;
@@ -22,5 +23,24 @@
 
   &:has(+ .tag:empty) {
     margin-right: 0;
+  }
+}
+
+// Add rotate transition to markdown demo toggle buttons
+.plume-content .vp-md-demo {
+  .vp-md-demo-toggle-button {
+    transition: background-color var(--vp-ct), transform var(--vp-tt);
+  }
+}
+
+// Add background transition to toggle buttons
+.hint-container.details summary {
+  &::before {
+    background: transparent;
+    background-color: var(--vp-c-gray-2);
+  }
+
+  &:hover::before {
+    background-color: var(--vp-c-gray-1);
   }
 }
