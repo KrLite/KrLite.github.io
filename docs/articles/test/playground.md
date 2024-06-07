@@ -96,7 +96,7 @@ def with_linenums_starting_at_2():
 
 Line text `inline code` line text `#!python def inline_code_block()`[^inline_syntax_highlight] line text
 
-[^inline_syntax_highlight]: Not supported yet.
+[^inline_syntax_highlight]: Inline syntax highlighting is not supported yet.
 
 $E = mc^2$
 
@@ -131,6 +131,18 @@ _[Italic link](https://www.google.com)_
 
 [Highlighted ==link text==](https://www.google.com)
 :::
+
+---
+
+```typescript:no-line-numbers
+function hello_world() {
+  console.log("Hello, world!");
+}
+```
+
+> A simple code block with no line numbers.
+
+---
 
 ::: note
 [Link within a note block](https://www.google.com)

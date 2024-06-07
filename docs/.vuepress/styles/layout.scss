@@ -99,3 +99,11 @@ h6,
     }
   }
 }
+
+// Fix code block overflow within markdown demo in 640px or less layouts
+.vp-md-demo-display {
+  div[class*=language-] {
+    margin: 0;
+    border-radius: 6px;
+  }
+}
