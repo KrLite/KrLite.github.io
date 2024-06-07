@@ -50,3 +50,26 @@
     }
   }
 }
+
+.tags-nav .tags {
+  .tag {
+    border-width: 2px;
+
+    &.active {
+      background-color: var(--vp-tag-color);
+    }
+
+    &:not(.active) {
+      background-color: var(--vp-c-bg);
+
+      .tag-name {
+        color: var(--vp-tag-color);
+      }
+
+      .tag-count {
+        color: var(--vp-tag-color);
+        border-color: var(--vp-tag-color);
+      }
+    }
+  }
+}
