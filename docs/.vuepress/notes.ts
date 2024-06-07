@@ -5,6 +5,11 @@ export default definePlumeNotesConfig({
   link: "/notes/",
   notes: [
     {
+      dir: "doddles",
+      link: "/doddles/",
+      sidebar: "auto"
+    },
+    {
       dir: "coding/vuepress",
       link: "/coding/vuepress/",
       sidebar: [

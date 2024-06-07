@@ -13,6 +13,11 @@ h6,
   color: inherit;
 }
 
+// Fix footer issues
+.plume-footer {
+  margin: 0 !important;
+}
+
 // Fix details summary margin
 .plume-content {
   .hint-container.details {
@@ -100,7 +105,7 @@ h6,
   }
 }
 
-// Fix code block overflow within markdown demo in 640px or less layouts
+// Fix code block overflow within markdown demos in 640px or narrower layouts
 .vp-md-demo-display {
   div[class*=language-] {
     margin: 0;

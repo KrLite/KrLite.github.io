@@ -3,7 +3,7 @@ title: Embedding Fonts
 icon: gravity-ui:font-case
 author: KrLite
 createTime: 2024/06/04 21:26:57
-permalink: /notes/coding/vuepress/m7dwlzkj/
+permalink: /notes/coding/vuepress/asset_handling/m7dwlzkj/
 ---
 
 ::: warning
