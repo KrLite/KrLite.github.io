@@ -19,7 +19,6 @@
     "chart.js": "^4.4.3",
     "echarts": "^5.5.0",
     "flowchart.ts": "^3.0.0",
-    "heti": "^0.9.4",
     "mermaid": "^10.9.1",
     "vue": "^3.4.27",
     "vuepress": "2.0.0-rc.13",
