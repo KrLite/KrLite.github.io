@@ -66,7 +66,7 @@ withDefaults(defineProps<Props>(), {});
   .author,
   .description {
     opacity: 0.45;
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity var(--vp-ct);
 
     &:hover {
       opacity: 1;

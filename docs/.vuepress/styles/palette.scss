@@ -83,7 +83,16 @@
 
 // Dim unfocused categories
 .page-category-wrapper {
-  .category:not(:last-of-type), .dot {
+  .category:not(:last-of-type),
+  .dot {
     opacity: 0.5;
+  }
+}
+
+// Dim the icon of note container titles in dark mode
+.dark {
+  .hint-container.note > .hint-container-title::before {
+    opacity: 0.35;
+    transition: opacity var(--vp-ct);
   }
 }
