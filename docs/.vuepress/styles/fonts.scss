@@ -14,6 +14,8 @@
 .category-list,
 .create-time,
 .post-time,
-.last-updated-time {
+.last-updated-time,
+.page-category-wrapper {
   font-family: var(--vp-font-family-mono);
+  letter-spacing: -0.025em;
 }
