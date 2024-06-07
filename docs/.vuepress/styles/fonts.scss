@@ -1,13 +1,19 @@
 @import "./fonts/ligasfmono/index.scss";
 @import "./fonts/classic/index.scss";
 
-pre,
-code,
-kbd,
-samp {
-  font-family: "Liga SFMono Nerd Font (Embedded)";
+:root {
+  --vp-font-family-mono: "Liga SFMono Nerd Font (Embedded)";
+  --vp-font-family-classic: "滕王阁序";
 }
 
 .font-classic {
-  font-family: "滕王阁序";
+  font-family: var(--vp-font-family-classic);
+}
+
+.tag,
+.category-list,
+.create-time,
+.post-time,
+.last-updated-time {
+  font-family: var(--vp-font-family-mono);
 }

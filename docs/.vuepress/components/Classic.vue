@@ -45,7 +45,7 @@ withDefaults(defineProps<Props>(), {});
     align-items: center;
 
     * {
-      margin: 2px;
+      margin: 0 2px;
     }
 
     p {
@@ -75,15 +75,18 @@ withDefaults(defineProps<Props>(), {});
 
   .content {
     font-size: 1.45rem;
-    padding: 2px 0;
+    padding: 16px 0;
+
+    text-shadow: 0 0.25em 1.5em var(--vp-c-classic-1);
   }
 
   .header {
+    padding-top: 10px;
     display: flex;
   }
 
-  div + div {
-    margin-top: 1.25rem;
+  .description {
+    padding-bottom: 10px;
   }
 }
 </style>
