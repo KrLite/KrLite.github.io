@@ -210,9 +210,15 @@ Operation add = (a, b) -> a + b;
 如果你的方法没有返回值，你也可以是用同样的方法书写。如下，我们打印出 `a + b` 的结果，而不是返回它：
 
 ```java
+@FunctionalInterface
+public interface Operation {
+    int calculate(int a, int b); // [!code --]
+    int calculate(int a, int b); // [!code ++]
+}
+
 public class Calculator {
     public static void main(String[] args) {
-        Operation add = (a, b) -> System.out.println(a + b); // 结构相同
+        Operation add = (a, b) -> System.out.println(a + b); // 结构相同 // [!code highlight]
 
         add.calculate(1, 2); // 打印结果为：3
     }
