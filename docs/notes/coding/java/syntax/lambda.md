@@ -1,5 +1,5 @@
 ---
-title: Lambda 表达式 | Lambda Expressions
+title: Lambda 表达式
 author: KrLite
 createTime: 2024/06/07 17:07:16
 permalink: /notes/coding/java/syntax/sxgfwvnj/
@@ -128,12 +128,12 @@ public interface Operation {
 ```java
 public class Calculator {
     public static void main(String[] args) {
-        Operation add = new Operation() {
-            @Override
-            public int calculate(int a, int b) {
-                return a + b; // 实现 calculate 抽象方法，并完成加法操作
-            }
-        };
+        Operation add = new Operation() { // [!code focus]
+            @Override // [!code focus]
+            public int calculate(int a, int b) { // [!code focus]
+                return a + b; // 实现 calculate 抽象方法，并完成加法操作 // [!code focus]
+            } // [!code focus]
+        }; // [!code focus]
 
         System.out.println(add.calculate(1, 2)); // 结果为：3
     }
@@ -145,9 +145,9 @@ public class Calculator {
 ```java
 public class Calculator {
     public static void main(String[] args) {
-        Operation add = (int a, int b) -> {
-            return a + b; // 同样实现了 calculate 抽象方法，并完成加法操作
-        };
+        Operation add = (int a, int b) -> { // [!code focus]
+            return a + b; // 同样实现了 calculate 抽象方法，并完成加法操作 // [!code focus]
+        }; // [!code focus]
 
         System.out.println(add.calculate(1, 2)); // 结果为：3
     }
@@ -161,9 +161,9 @@ public class Calculator {
 ```java
 public class Calculator {
     public static void main(String[] args) {
-        Operation add = (a, b) -> {
-            return a + b; // 省略了 a 和 b 的参数类型，因为编译器可以推断出来，他们只可能是整型
-        };
+        Operation add = (a, b) -> { // [!code focus]
+            return a + b; // 省略了 a 和 b 的参数类型，因为编译器可以推断出来，他们只可能是整型 // [!code focus]
+        }; // [!code focus]
 
         System.out.println(add.calculate(1, 2)); // 结果为：3
     }
@@ -175,7 +175,7 @@ public class Calculator {
 ```java
 public class Calculator {
     public static void main(String[] args) {
-        Operation add = (a, b) -> a + b; // 省略了 return 和大括号，因为方法体只有一行代码，可以省略大括号
+        Operation add = (a, b) -> a + b; // 省略了 return 和大括号，因为方法体只有一行代码，可以省略大括号 // [!code focus]
 
         System.out.println(add.calculate(1, 2)); // 结果为：3
     }
@@ -242,13 +242,13 @@ public class Calculator {
         Operation div = (a, b) -> a / b;
 
         // 使用已定义的 Lambda 表达式
-        System.out.println(calculate(1, 2, add)); // 结果为：3
-        System.out.println(calculate(1, 2, sub)); // 结果为：-1
-        System.out.println(calculate(1, 2, mul)); // 结果为：2
-        System.out.println(calculate(1, 2, div)); // 结果为：0
+        System.out.println(calculate(4, 2, add)); // 结果为：6
+        System.out.println(calculate(4, 2, sub)); // 结果为：2
+        System.out.println(calculate(4, 2, mul)); // 结果为：8
+        System.out.println(calculate(4, 2, div)); // 结果为：2
 
         // 传递一个新的 Lambda 表达式
-        System.out.println(calculate(1, 2, (a, b) -> Math.pow(a, b))); // 结果为：3
+        System.out.println(calculate(4, 2, (a, b) -> Math.pow(a, b))); // 结果为：16
     }
 
     public static int calculate(int a, int b, Operation operation) {
@@ -279,15 +279,15 @@ Consumer<String> printer = (s) -> System.out.println(s);
 
 方法引用总共支持这些语法：
 
-```java
+```java:no-line-numbers
 对象::实例方法
 ```
 
-```java
+```java:no-line-numbers
 类::静态方法
 ```
 
-```java
+```java:no-line-numbers
 类::实例方法
 ```
 
@@ -314,7 +314,7 @@ public class Calculator {
 因为 `forEach` 和 `println` 方法的参数列表相同，且都无返回值，所以我们可以使用 `System.out::println` 来引用 `println` 方法，省去了传递参数的中间过程。
 
 ::: tip
-如果你还不了解什么是 `forEach`，可以去看看我的[`流式处理 ↗`](stream.md)笔记。
+如果你还不了解什么是 `forEach`，可以去看看我的 [`流式处理`](stream.md) 笔记。
 :::
 
 #### `类::静态方法`
@@ -325,7 +325,7 @@ public class Calculator {
 public class Calculator {
     public static void main(String[] args) {
         Operation pow = Math::pow;
-        System.out.println(pow.calculate(2, 3)); // 结果为：8
+        System.out.println(pow.calculate(4, 2)); // 结果为：16
     }
 }
 ```

@@ -1,5 +1,5 @@
 ---
-title: 注解 | Annotation
+title: 注解
 author: KrLite
 createTime: 2024/06/07 17:06:54
 permalink: /notes/coding/java/annotation/8a7hjjvl/
