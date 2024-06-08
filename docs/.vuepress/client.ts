@@ -17,7 +17,7 @@ export default defineClientConfig({
         }
 
         // Override back to top button
-        overrideBackToTopButton()
+        overrideBackToTopButton();
       },
     });
   },
