@@ -3,6 +3,7 @@ import "./styles/index.scss";
 import { defineClientConfig } from "vuepress/client";
 import Classic from "./components/Classic.vue";
 import { filterTagElements } from "./public/scripts/tags_filter";
+import { overrideBackToTopButton } from "./public/scripts/back_to_top";
 
 export default defineClientConfig({
   enhance: ({ app, router, siteData }) => {
@@ -14,6 +15,9 @@ export default defineClientConfig({
         if (router.currentRoute.value.path.endsWith("/blog/tags/")) {
           filterTagElements();
         }
+
+        // Override back to top button
+        overrideBackToTopButton()
       },
     });
   },
