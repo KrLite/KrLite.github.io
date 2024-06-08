@@ -1,3 +1,15 @@
+// Fix scroll and overscroll issues on Safari
+// This also breaks current back to top button functionality
+html {
+  overflow: hidden;
+}
+
+body {
+  overflow: auto;
+  height: 100vh;
+  overscroll-behavior: contain;
+}
+
 // Improve headings
 h1,
 h2,
@@ -119,5 +131,22 @@ h6,
 
   img {
     margin-bottom: -10px;
+  }
+}
+
+// Improve back to top button
+.back-to-top-button {
+  font-family: var(--vp-font-family-mono);
+  color: var(--vp-c-text-3);
+
+  svg circle {
+    stroke-linecap: round;
+    r: 16px;
+
+    @media (min-width: 768px) {
+      & {
+        r: 22px;
+      }
+    }
   }
 }
