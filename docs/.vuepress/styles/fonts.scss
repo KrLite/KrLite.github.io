@@ -2,8 +2,11 @@
 @import "./fonts/classic/index.scss";
 
 :root {
-  --vp-font-family-mono: "Liga SFMono Nerd Font (Embedded)";
-  --vp-font-family-classic: "滕王阁序";
+  --vp-font-family-mono: "Liga SFMono Nerd Font (Embedded)" ui-monospace,
+    sfmono-regular, menlo, monaco, consolas, "Liberation Mono", "Courier New",
+    monospace;
+  --vp-font-family-classic: "滕王阁序" "Chinese Quotes", inter, ui-sans-serif,
+    system-ui, sans-serif;
 }
 
 .font-classic {
