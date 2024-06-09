@@ -1,6 +1,7 @@
 import jQuery from "jquery";
+import { Router } from "vuepress/client";
 
-export default function (...elements: string[]) {
+export default function (router: Router, ...elements: string[]) {
   jQuery(function ($) {
     for (const element of elements) {
       $(element)
@@ -13,13 +14,28 @@ export default function (...elements: string[]) {
           const link = wrapper.find("a");
           wrapper.data("extended", true);
 
-          console.log("Extending link for", wrapper, link);
+          //console.log("Extending link for", wrapper, link);
 
-          wrapper.on("click", function (event) {
-            event.preventDefault();
-            window.open(link.attr("href"), link.attr("target") ?? "_self");
-          });
-          wrapper.css("cursor", "pointer");
+          const href = link.attr("href");
+          const isExternal = link.attr("target") === "_blank";
+          const isValidRoute = href !== undefined;
+
+          if (isExternal || isValidRoute) {
+            wrapper.on("click", function (event) {
+              event.preventDefault();
+              if (isExternal) {
+                window.open(link.attr("href"));
+              } else {
+                if (isValidRoute) {
+                  router.push(router.resolve(href));
+                } else {
+                  console.log(`Link ${link} is not a valid route!`);
+                }
+              }
+            });
+
+            wrapper.css("cursor", "pointer");
+          }
         });
     }
   });

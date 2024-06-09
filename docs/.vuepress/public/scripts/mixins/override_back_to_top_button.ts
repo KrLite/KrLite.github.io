@@ -42,8 +42,8 @@ export default function () {
             </svg>
             `
           )
-          .children("svg");
-        const circle = svg.children("circle");
+          .children("svg:last-child");
+        const circle = svg.children("circle:last-child");
 
         $(window).on("scroll", update);
       });

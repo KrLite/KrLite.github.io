@@ -1,5 +1,7 @@
 // Improve post items
 .post-item {
+  transition: all var(--t-color) !important;
+
   h3 {
     margin-bottom: 0.25rem !important;
   }

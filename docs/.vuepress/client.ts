@@ -6,6 +6,7 @@ import filterTags from "./public/scripts/mixins/filter_tags";
 import overrideBackToTopButton from "./public/scripts/mixins/override_back_to_top_button";
 import overrideEditButton from "./public/scripts/mixins/override_edit_button";
 import extendLinks from "./public/scripts/mixins/extend_links";
+import reduceTagCount from "./public/scripts/mixins/reduce_tag_count";
 
 export default defineClientConfig({
   enhance: ({ app, router, siteData }) => {
@@ -14,23 +15,32 @@ export default defineClientConfig({
     app.mixin({
       mounted() {
         const path = router.currentRoute.value.path;
+        const blogPaths = ["/blog/", "/blog/tags/", "/blog/archives/"];
 
-        if (path.endsWith("/blog/tags/")) {
-          // Filter tag elements on tag page load
+        if (blogPaths.includes(path)) {
+          // Manually reduce tag count by 1
+          reduceTagCount();
+        }
+
+        if (path === "/blog/") {
+          // Extend post item links
+          extendLinks(router, "div.post-item");
+        } else if (blogPaths.includes(path)) {
+          // Extend post list links
+          extendLinks(router, ".post-list > li");
+        }
+
+        if (path === "/blog/tags/") {
+          // Filter tag elements in tags page
           filterTags();
         }
 
-        if (path.endsWith("/blog/")) {
-          // Extend post card links
-          extendLinks("div.post-item");
-        }
-
-        if (path.endsWith("/friends/")) {
+        if (path === "/friends/") {
           // Override edit button text
           overrideEditButton("申请友链");
 
           // Extend friend card links
-          extendLinks("div.friend");
+          extendLinks(router, "div.friend");
         }
 
         // Override back to top button

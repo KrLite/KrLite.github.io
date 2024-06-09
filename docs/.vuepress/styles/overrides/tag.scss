@@ -18,6 +18,10 @@
         color: var(--vp-tag-color);
         border-color: var(--vp-tag-color);
       }
+
+      &:hover {
+        background-color: var(--vp-c-bg-alt);
+      }
     }
   }
 }
