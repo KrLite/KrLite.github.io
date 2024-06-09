@@ -43,6 +43,11 @@ list:
   - name: Oganesson897的小窝
     link: https://oganesson897.github.io
     avatar: https://github.com/Oganesson897.png
+
+  - name: TexTrue (TexBlock)
+    link: https://github.com/TexBlock
+    avatar: https://github.com/TexBlock.png
+    desc: 一生存在証明 永遠(トワ)を超えていけ/一生全身全霊 限界を超えていけ
 groups:
   - title: 其它平台
     list:
