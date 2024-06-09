@@ -1,7 +1,7 @@
 import jQuery from "jquery";
 import { wrapNaN } from "../helper";
 
-export function overrideBackToTopButton() {
+export default function() {
   jQuery(function ($) {
     const button = $("button.back-to-top-button");
     const text = button.children(".percent");
@@ -21,9 +21,9 @@ export function overrideBackToTopButton() {
       }
     }
 
-    if (!button.data("initialized")) {
-      button.data("initialized", true);
-      console.log("Initializing back to top button");
+    if (!button.data("overridden")) {
+      button.data("overridden", true);
+      console.log("Overriding back to top button");
 
       button.children().remove("svg");
       const svg = button

@@ -1,6 +1,6 @@
 import jQuery from "jquery";
 
-export function filterTagElements() {
+export default function() {
   jQuery(function ($) {
     const tagsNav = $("div.tags-nav");
     if (!tagsNav.data("data-filtered")) {

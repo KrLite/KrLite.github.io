@@ -1,0 +1,36 @@
+// Improve friend cards
+.friends-wrapper {
+  background-color: var(--vp-c-bg-alt);
+
+  max-width: none !important;
+
+  $padding: max(2rem, calc(calc(100vw - 784px) / 2));
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+.friends-list {
+  .friend {
+    border-radius: 8px;
+    border: transparent;
+
+    .content {
+      padding: 8px;
+
+      a {
+        border-bottom: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      * + * {
+        margin-top: 4px !important;
+      }
+    }
+  }
+}
