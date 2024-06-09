@@ -15,6 +15,9 @@ list:
     link: https://wolf.snowlyicewolf.club
     avatar: https://github.com/AmarokIce.png
     desc: I'm just a little wolf in this bigger world.
+  - name: Oganesson897的小窝
+    link: https://oganesson897.github.io
+    avatar: https://github.com/Oganesson897.png
 groups:
   - title: 其它平台
     list:
