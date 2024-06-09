@@ -11,6 +11,10 @@ list:
     backgroundColor: rgb(0, 255, 255)
     color: rgba(0, 0, 0, 0.2)
     nameColor: rgba(0, 0, 0, 0.35)
+  - name: AmarokIce
+    link: https://wolf.snowlyicewolf.club
+    avatar: https://github.com/AmarokIce.png
+    desc: I'm just a little wolf in this bigger world.
 groups:
   - title: 其它平台
     list:
