@@ -16,3 +16,35 @@
     }
   }
 }
+
+// Improve sticky post items
+.post-item {
+  // Sticky post badge
+  .sticky {
+    background-color: var(--vp-c-brand-1) !important;
+    color: var(--vp-c-bg) !important;
+  }
+
+  @media (width >= 768px) {
+    // Sticky post background
+    &:has(.sticky) {
+      background-color: var(--vp-c-bg-tinted);
+    }
+  }
+
+  &:has(.post-meta .tag-list .tag:empty) {
+    background-color: transparent;
+    box-shadow: none;
+
+    @media (width < 768px) {
+      :is(.post-meta, .plume-content) {
+        opacity: 0.5 !important;
+      }
+    }
+
+    .sticky {
+      background-color: var(--vp-c-brand-soft) !important;
+      color: var(--vp-c-text-1) !important;
+    }
+  }
+}

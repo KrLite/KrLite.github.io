@@ -5,6 +5,7 @@ createTime: 2024/06/02 18:15:02
 permalink: /article/ejmlfxil/
 tags:
   - test
+sticky: 1
 ---
 
 ```typescript twoslash
