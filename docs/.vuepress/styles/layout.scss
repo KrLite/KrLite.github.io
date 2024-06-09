@@ -151,6 +151,10 @@ h6,
     }
   }
 
+  &.reached-bottom {
+    background-color: var(--vp-c-brand-2);
+  }
+
   svg {
     width: 100%;
     height: 100%;
@@ -172,12 +176,29 @@ h6,
       stroke-linecap: round;
       stroke-dasharray: calc(var(--r) * 2 * 3.14159 * var(--percent))
         calc(var(--r) * 2 * 3.14159 * calc(1 - var(--percent)));
-        transition: stroke-dasharray 0.1s ease, opacity 0.2s ease;
+      transition: stroke-dasharray 0.1s ease, opacity 0.2s ease;
     }
   }
 
   .percent {
     font-family: var(--vp-font-family-mono);
     color: var(--vp-c-text-3);
+  }
+}
+
+// Improve post item margins
+.post-item {
+  h3 {
+    margin-bottom: 0.25rem !important;
+  }
+
+  .excerpt {
+    margin-top: 1.25rem !important;
+  }
+
+  .post-meta .category-list {
+    :first-child {
+      margin-left: 0;
+    }
   }
 }

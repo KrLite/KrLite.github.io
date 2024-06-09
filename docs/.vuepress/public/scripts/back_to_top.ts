@@ -20,6 +20,12 @@ export function overrideBackToTopButton() {
         const percent = Math.min(1, Math.max(0, scrollTop / scrollableHeight));
 
         button.css("--percent", percent);
+
+        if (percent > 0.99) {
+          button.addClass("reached-bottom");
+        } else {
+          button.removeClass("reached-bottom");
+        }
       });
     }
   });
