@@ -1,0 +1,59 @@
+@import "./overrides/icon.scss";
+@import "./overrides/sticky_post.scss";
+@import "./overrides/tag.scss";
+@import "./overrides/unfocused_category.scss";
+@import "./overrides/friend.scss";
+@import "./overrides/hint_container.scss";
+@import "./overrides/heading.scss";
+@import "./overrides/markdown_demo.scss";
+@import "./overrides/tabs.scss";
+@import "./overrides/back_to_top_button.scss";
+@import "./overrides/container.scss";
+@import "./overrides/post_item.scss";
+
+// Fix scroll and overscroll issues on Safari
+// This also breaks current back to top button functionality
+html {
+  overscroll-behavior: none;
+}
+
+/*
+html {
+  overflow: hidden;
+}
+
+body {
+  overflow: auto;
+  height: 100vh;
+  overscroll-behavior: contain;
+}
+*/
+
+// Fix footer issues
+.plume-footer {
+  margin: 0 !important;
+}
+
+// Fix details summary margin
+.plume-content {
+  .hint-container.details {
+    &[open],
+    & {
+      > summary {
+        margin-bottom: -1.1rem;
+      }
+    }
+  }
+}
+
+// Fix last paragraph margin in <!-- more --> contents
+.plume-content.excerpt .hint-container {
+  p:last-of-type {
+    margin-bottom: 8px !important;
+  }
+}
+
+// Allow line wrapping in feature card details
+.home-feature .details {
+  white-space: pre-wrap;
+}

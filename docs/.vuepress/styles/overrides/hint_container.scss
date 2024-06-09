@@ -1,0 +1,19 @@
+// Dim the icon of note container titles in dark mode
+.dark {
+  .hint-container.note > .hint-container-title::before {
+    opacity: 0.35;
+    transition: opacity var(--vp-ct);
+  }
+}
+
+// Add background transition to toggle buttons
+.hint-container.details summary {
+  &::before {
+    background: transparent;
+    background-color: var(--vp-c-gray-2);
+  }
+
+  &:hover::before {
+    background-color: var(--vp-c-gray-1);
+  }
+}

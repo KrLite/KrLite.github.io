@@ -1,0 +1,7 @@
+// Dim unfocused categories
+.page-category-wrapper {
+  .category:not(:last-of-type),
+  .dot {
+    opacity: 0.5;
+  }
+}

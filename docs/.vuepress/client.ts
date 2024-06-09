@@ -2,8 +2,8 @@ import "./styles/index.scss";
 
 import { defineClientConfig } from "vuepress/client";
 import Classic from "./components/Classic.vue";
-import { filterTagElements } from "./public/scripts/tags_filter";
-import { overrideBackToTopButton } from "./public/scripts/back_to_top";
+import { filterTagElements } from "./public/scripts/mixins/tags_filter";
+import { overrideBackToTopButton } from "./public/scripts/mixins/back_to_top_button";
 
 export default defineClientConfig({
   enhance: ({ app, router, siteData }) => {

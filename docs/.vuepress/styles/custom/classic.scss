@@ -1,0 +1,35 @@
+:root {
+  --classic-bg-color: rgba(171, 118, 241, 0.314);
+  --classic-border-color: transparent;
+
+  --vp-c-classic-1: #a55db4;
+  --vp-c-classic-2: #8d359f;
+}
+
+.dark {
+  --classic-bg-color: rgba(154, 117, 255, 0.314);
+  --classic-border-color: transparent;
+
+  --vp-c-classic-1: #cdaff4;
+  --vp-c-classic-2: #d1bbf0;
+}
+
+.hint-container.classic {
+  margin: 1rem 0;
+  padding: 0 16px;
+
+  background-color: var(--classic-bg-color);
+  color: var(--vp-c-classic-1);
+
+  p, a, code {
+    color: var(--vp-c-classic-1);
+  }
+
+  a:hover {
+    color: var(--vp-c-classic-1);
+  }
+
+  p {
+    margin: 16px 0;
+  }
+}

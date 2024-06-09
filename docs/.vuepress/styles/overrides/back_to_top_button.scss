@@ -1,0 +1,45 @@
+// Improve back to top button
+.back-to-top-button {
+  --r: 16px;
+  --percent: 0;
+
+  @media (min-width: 768px) {
+    & {
+      --r: 22px;
+    }
+  }
+
+  &.reached-bottom {
+    background-color: var(--vp-c-brand-2);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+
+    circle {
+      width: 100%;
+      height: 100%;
+
+      r: var(--r);
+      fill: none;
+      opacity: calc(var(--percent) * 100);
+
+      stroke: var(--vp-c-brand-2);
+      stroke-width: 4px;
+
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+
+      stroke-linecap: round;
+      stroke-dasharray: calc(var(--r) * 2 * 3.14159 * var(--percent))
+        calc(var(--r) * 2 * 3.14159 * calc(1 - var(--percent)));
+      transition: stroke-dasharray 0.1s ease, opacity 0.2s ease;
+    }
+  }
+
+  .percent {
+    font-family: var(--vp-font-family-mono);
+    color: var(--vp-c-text-3);
+  }
+}
