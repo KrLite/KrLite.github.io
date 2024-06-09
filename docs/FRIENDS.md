@@ -6,7 +6,7 @@ description: 来我家串门吧！
 list:
   - name: 化龙焚天（哔哩哔哩）
     link: https://space.bilibili.com/440157948
-    avatar: https://github.com/Chemiofiotr.png
+    avatar: https://github.com/chemiofitor.png
     desc: 莫言吾辈德行浅。
     backgroundColor: rgb(0, 255, 255)
     color: rgba(0, 0, 0, 0.2)
