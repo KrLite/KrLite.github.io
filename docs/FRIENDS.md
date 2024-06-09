@@ -28,4 +28,10 @@ groups:
         backgroundColor: rgb(15, 255, 159)
         color: rgba(0, 0, 0, 0.2)
         nameColor: rgba(0, 0, 0, 0.35)
+  - title: 组织
+    list:
+      - name: SubIT
+        link: https://subit.org.cn
+        avatar: https://github.com/subitlab.png
+        desc: 北大附中SubIT技术社团
 ---
