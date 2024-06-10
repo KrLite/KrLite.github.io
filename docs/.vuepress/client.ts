@@ -40,7 +40,7 @@ export default defineClientConfig({
           overrideEditButton("申请友链");
 
           // Extend friend card links
-          extendLinks(router, "div.friend");
+          extendLinks(router, "div.friend", "a.avatar-link", true);
         }
 
         // Override back to top button
