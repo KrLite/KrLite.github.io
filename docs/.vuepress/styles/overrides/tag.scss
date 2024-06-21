@@ -27,7 +27,7 @@
 }
 
 // Hide null tags in post meta
-.post-meta .tag-list .tag {
+:is(.post-meta .tag-list, .page-meta-wrapper) .tag {
   &:empty {
     display: none;
   }
