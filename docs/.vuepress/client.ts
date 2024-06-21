@@ -27,7 +27,7 @@ export default defineClientConfig({
           extendLinks(router, "div.post-item");
         } else if (blogPaths.includes(path)) {
           // Extend post list links
-          extendLinks(router, ".post-list > li");
+          extendLinks(router, ".post-list > li", "a.post-link", true);
         }
 
         if (path === "/blog/tags/") {
