@@ -25,7 +25,7 @@ export default function (
         const isValid = href !== null;
 
         // Add a new link that overlays the wrapper
-        const newLink = wrapper.append("<a></a>").find("a:last-child");
+        const newLink = wrapper.append("<a id='extended-link'></a>").find("a#extended-link");
 
         newLink.attr("href", href);
         newLink.text("");
