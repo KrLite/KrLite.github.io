@@ -1,20 +1,6 @@
 // Improve post items
-.post-item {
+.vp-blog-post-item {
   transition: all var(--t-color) !important;
-
-  h3 {
-    margin-bottom: 0.25rem !important;
-  }
-
-  .excerpt {
-    margin-top: 1.25rem !important;
-  }
-
-  .post-meta .category-list {
-    :first-child {
-      margin-left: 0;
-    }
-  }
 
   h3 a {
     transition: text-shadow var(--t-color);
@@ -34,7 +20,7 @@
 }
 
 // Improve sticky post items
-.post-item {
+.vp-blog-post-item {
   // Sticky post badge
   .sticky {
     background-color: var(--vp-c-brand-1) !important;
@@ -56,11 +42,6 @@
       :is(h3, .post-meta) {
         opacity: 0.5 !important;
       }
-    }
-
-    .sticky {
-      background-color: var(--vp-c-brand-soft) !important;
-      color: var(--vp-c-text-1) !important;
     }
   }
 }

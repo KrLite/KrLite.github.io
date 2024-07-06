@@ -6,7 +6,6 @@ permalink: /article/lkivvv0c/
 tags:
   - 杂谈
   - null
-sticky: 1
 ---
 
 在==人类对意义的探索==与==宇宙拒绝给出意义==之间所形成的张力，造就了人生的巨大荒诞。
