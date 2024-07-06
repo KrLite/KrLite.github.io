@@ -57,10 +57,15 @@ groups:
     title: 其它平台
     list:
       -
-        name: 哔哩哔哩
+        name: KrLite的哔哩哔哩空间
         link: https://space.bilibili.com/399487383
         avatar: https://github.com/KrLite.png
-        desc: 坚守此岸。
+        backgroundColor: rgb(232, 247, 255)
+      -
+        name: KrLite的网易云音乐
+        link: https://music.163.com/#/user/home?id=421232011
+        avatar: https://github.com/KrLite.png
+        backgroundColor: rgb(255, 240, 245)
   -
     title: 组织
     list:

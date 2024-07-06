@@ -1,5 +1,5 @@
 {
-  "name": "Press",
+  "name": "krlite.github.io",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,17 +12,17 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@iconify/json": "^2.2.215",
+    "@iconify/json": "^2.2.225",
     "@types/jquery": "^3.5.30",
-    "@vuepress/bundler-vite": "2.0.0-rc.13",
+    "@vuepress/bundler-vite": "2.0.0-rc.14",
     "@vuepress/client": "2.0.0-rc.2",
     "chart.js": "^4.4.3",
-    "echarts": "^5.5.0",
+    "echarts": "^5.5.1",
     "flowchart.ts": "^3.0.0",
     "mermaid": "^10.9.1",
-    "vue": "^3.4.27",
-    "vuepress": "2.0.0-rc.13",
-    "vuepress-theme-plume": "1.0.0-rc.61"
+    "vue": "^3.4.31",
+    "vuepress": "2.0.0-rc.14",
+    "vuepress-theme-plume": "1.0.0-rc.72"
   },
   "dependencies": {
     "jquery": "^3.7.1"

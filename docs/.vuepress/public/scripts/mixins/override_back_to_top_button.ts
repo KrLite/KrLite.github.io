@@ -3,7 +3,7 @@ import { wrapNaN } from "../helper";
 
 export default function () {
   jQuery(function ($) {
-    $("button.back-to-top-button")
+    $("button.vp-back-to-top")
       .filter(function () {
         return !$(this).data("overridden");
       })

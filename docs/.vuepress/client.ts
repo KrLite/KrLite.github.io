@@ -24,10 +24,10 @@ export default defineClientConfig({
 
         if (path === "/blog/") {
           // Extend post item links
-          extendLinks(router, "div.post-item");
+          extendLinks(router, "div.vp-blog-post-item");
         } else if (blogPaths.includes(path)) {
           // Extend post list links
-          extendLinks(router, ".post-list > li", "a.post-link", true);
+          extendLinks(router, ".vp-blog-short-post-list > li", "a.post-link", true);
         }
 
         if (path === "/blog/tags/") {
@@ -40,7 +40,7 @@ export default defineClientConfig({
           overrideEditButton("申请友链");
 
           // Extend friend card links
-          extendLinks(router, "div.friend", "a.avatar-link", true);
+          extendLinks(router, "div.vp-friend", "a.avatar-link", true);
         }
 
         // Override back to top button

@@ -1,5 +1,5 @@
 // Improve friend cards
-.friends-wrapper {
+.vp-friends {
   background-color: var(--vp-c-bg-alt);
 
   max-width: none !important;
@@ -9,8 +9,8 @@
   padding-right: $padding;
 }
 
-.friends-list {
-  .friend {
+.vp-friends {
+  .vp-friend {
     border-radius: 8px;
     border: transparent;
 

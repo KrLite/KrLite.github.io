@@ -18,7 +18,7 @@ export default function (
         const link = wrapper.find(a)[0];
         wrapper.data("extended", true);
 
-        //console.log("Extending link for", wrapper, link);
+        console.log("Extending link for", wrapper, link);
 
         const href = link.getAttribute("href");
         const isExternal = link.getAttribute("target") === "_blank";
