@@ -11,6 +11,10 @@
 
   &.reached-bottom {
     background-color: var(--vp-c-brand-2);
+
+    & > * {
+      color: var(--vp-c-black) !important;
+    }
   }
 
   svg {

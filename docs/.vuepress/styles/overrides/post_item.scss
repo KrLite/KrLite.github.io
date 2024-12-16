@@ -7,6 +7,8 @@
   }
 
   &:hover {
+    scale: 1.05;
+
     h3 a {
       text-shadow: 0 1px 7.5px var(--vp-c-text-3);
     }
@@ -43,5 +45,21 @@
         opacity: 0.5 !important;
       }
     }
+  }
+}
+
+.vp-blog-extract {
+  padding: 10px 16px !important;
+}
+
+.blog-modal-container {
+  margin: 16px !important;
+  border-radius: 16px !important;
+
+  width: calc(100% - 16px * 2) !important;
+  transform: translateY(calc(100% + 16px)) !important;
+
+  &.open {
+    transform: translateY(0) !important;
   }
 }

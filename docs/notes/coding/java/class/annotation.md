@@ -7,7 +7,7 @@ tags:
   - JDK 5.0
 ---
 
-注解[^annotation]是Java中的一种特殊接口。类、方法、变量、参数和包等都可以被注解，并可以通过反射获取注解内容。
+注解[^annotation]是 Java 中的一种特殊接口。类、方法、变量、参数和包等都可以被注解，并可以通过反射获取注解内容。
 
 [^annotation]: Annotation，又称标注。
 
@@ -31,7 +31,7 @@ AnnotationClass {
 
 ### `@Documented`
 
-`@Documented` 注解用于指定注解类是否被Javadoc显示。若注解类没有被 `@Documented` 注解，则在Javadoc中不会显示该注解类。
+`@Documented` 注解用于指定注解类是否被 Javadoc 显示。若注解类没有被 `@Documented` 注解，则在 Javadoc 中不会显示该注解类。
 
 ### `@Inherited`
 
@@ -77,7 +77,7 @@ public class MyClass {
 其中 [`FieldInfo.java`](annotation/test/annotation/FieldInfo.java.md) 用于标注字段，解释如下：
 
 ```java:no-line-numbers
-<!-- @include: annotation/test/annotation/FieldInfo.java#code -->
+<!-- @use: annotation/test/annotation/FieldInfo.java#code -->
 ```
 
 其中 [`MethodInfo.java`](annotation/test/annotation/MethodInfo.java.md) 用于标注方法，其构造方式和 [`FieldInfo.java`](annotation/test/annotation/FieldInfo.java.md) 一样，不作解释。
@@ -85,7 +85,7 @@ public class MyClass {
 其中 [`Silent.java`](annotation/test/annotation/Silent.java.md) 较为特殊，既可以标注方法，也可以标注字段。解释如下：
 
 ```java:no-line-numbers
-<!-- @include: annotation/test/annotation/Silent.java#code -->
+<!-- @use: annotation/test/annotation/Silent.java#code -->
 ```
 
 要在字段和方法前使用注解，只需要在字段或方法前引用注解即可，如下：
@@ -114,13 +114,13 @@ public @Silent void method() {
 首先，创建一个 `TestObj` 类，并在其中写入一些方法和注解。
 
 ```java
-<!-- @include: annotation/test/Test.java#TestObj -->
+<!-- @use: annotation/test/Test.java#TestObj -->
 ```
 
 接下来，我们可以在 `main` 方法中获取 `TestObj` 中的方法和字段，然后进行反射。
 
 ```java
-<!-- @include: annotation/test/Test.java#main -->
+<!-- @use: annotation/test/Test.java#main -->
 ```
 
 [`流式处理 ↗`](../syntax/stream.md) [`Lambda 表达式 ↗`](../syntax/lambda.md)
@@ -130,13 +130,13 @@ public @Silent void method() {
 对方法进行遍历的代码如下：
 
 ```java
-<!-- @include: annotation/test/Test.java#iteratorAnnotations-Method -->
+<!-- @use: annotation/test/Test.java#iteratorAnnotations-Method -->
 ```
 
 可见，使用反射获取注解中的字段值还是比较简单的。下面是对字段进行遍历的代码：
 
 ```java
-<!-- @include: annotation/test/Test.java#iteratorAnnotations-Field -->
+<!-- @use: annotation/test/Test.java#iteratorAnnotations-Field -->
 ```
 
 你可以动手运行一下，看看效果。正确的输出如下：

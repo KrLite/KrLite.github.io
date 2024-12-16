@@ -188,7 +188,7 @@ body {
 This site embeds [SFMono Nerd Font Ligaturized](https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized) as the default monospace font. You can preview it here:
 
 ```elixir
-<!-- @include: @src/snippets/firacode_examples/snippet.ex -->
+<!-- @use: @src/snippets/firacode_examples/snippet.ex -->
 ```
 
 Related: [FiraCode Examples](/article/zqachzvi/)

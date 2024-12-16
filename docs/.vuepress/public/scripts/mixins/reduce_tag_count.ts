@@ -2,7 +2,7 @@ import jQuery from "jquery";
 
 export default function () {
   jQuery(function ($) {
-    $(".blog-nav a[href='/blog/tags/']")
+    $(".vp-blog-nav a[href='/blog/tags/']")
       .filter(function () {
         return !$(this).data("reduced");
       })

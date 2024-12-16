@@ -1,14 +1,14 @@
-@import "./overrides/icon.scss";
-@import "./overrides/tag.scss";
-@import "./overrides/unfocused_category.scss";
-//@import "./overrides/friends.scss";
-@import "./overrides/hint_container.scss";
-@import "./overrides/heading.scss";
-@import "./overrides/markdown_demo.scss";
-@import "./overrides/tabs.scss";
-@import "./overrides/back_to_top_button.scss";
-@import "./overrides/container.scss";
-@import "./overrides/post_item.scss";
+@use "overrides/icon.scss";
+@use "overrides/tag.scss";
+@use "overrides/unfocused_category.scss";
+@use "overrides/friends.scss";
+@use "overrides/hint_container.scss";
+@use "overrides/heading.scss";
+@use "overrides/markdown_demo.scss";
+@use "overrides/tabs.scss";
+@use "overrides/back_to_top_button.scss";
+@use "overrides/container.scss";
+@use "overrides/post_item.scss";
 
 /*
 // Fix scroll and overscroll issues on Safari
@@ -17,7 +17,6 @@ html {
   overscroll-behavior: none;
 }
 
-/*
 html {
   overflow: hidden;
 }
