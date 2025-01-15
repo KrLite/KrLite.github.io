@@ -20,7 +20,7 @@ export const theme = plumeTheme({
   ],
   navbarSocialInclude: ["github", "bilibili"],
 
-  footer: { message: "坚守此岸", copyright: "©2024→未来　KrLite" },
+  footer: { message: "坚守此岸", copyright: "© 2024→未来　KrLite" },
 
   notFound: {
     title: "少女祈祷中",
@@ -29,7 +29,7 @@ export const theme = plumeTheme({
 
   notes: notes,
   navbar: navbar,
-  hostname: "https://krlite.github.io/Press/", // SEO
+  hostname: "https://krlite.github.io/", // SEO
 
   plugins: {
     shiki: { twoslash: true },
