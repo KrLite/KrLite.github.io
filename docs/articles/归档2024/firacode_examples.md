@@ -16,57 +16,58 @@ The code are extracted and improved from [FiraCode Example](https://github.com/t
 <!-- more -->
 
 ::: code-tabs
-@tab `javascript`
+@tab JavaScript
 
 ```javascript
-<!-- @use: @src/snippets/firacode_examples/snippet.js -->
+<!-- @include: @src/snippets/firacode_examples/snippet.js -->
 ```
 
-@tab `php`
+@tab PHP
 
 ```php
-<!-- @use: @src/snippets/firacode_examples/snippet.php -->
+<!-- @include: @src/snippets/firacode_examples/snippet.php -->
 ```
 
-@tab `ruby`
+@tab Ruby
 
 ```ruby
-<!-- @use: @src/snippets/firacode_examples/snippet.rb -->
+<!-- @include: @src/snippets/firacode_examples/snippet.rb -->
 ```
 
-@tab `go`
+@tab Go
 
 ```go
-<!-- @use: @src/snippets/firacode_examples/snippet.go -->
+<!-- @include: @src/snippets/firacode_examples/snippet.go -->
 ```
 
-@tab `swift`
+@tab Swift
 
 ```swift
-<!-- @use: @src/snippets/firacode_examples/snippet.swift -->
+<!-- @include: @src/snippets/firacode_examples/snippet.swift -->
 ```
 
-@tab `erlang`
+@tab Erlang
 
 ```erlang
-<!-- @use: @src/snippets/firacode_examples/snippet.erl -->
+<!-- @include: @src/snippets/firacode_examples/snippet.erl -->
 ```
 
-@tab `elixir`
+@tab Elixir
 
 ```elixir
-<!-- @use: @src/snippets/firacode_examples/snippet.ex -->
+<!-- @include: @src/snippets/firacode_examples/snippet.ex -->
 ```
 
-@tab `clojure`
+@tab Clojure
 
 ```clojure
-<!-- @use: @src/snippets/firacode_examples/snippet.clj -->
+<!-- @include: @src/snippets/firacode_examples/snippet.clj -->
 ```
 
-@tab `livescript`
+@tab Livescript
 
 ```livescript
-<!-- @use: @src/snippets/firacode_examples/snippet.ls -->
-:::
+<!-- @include: @src/snippets/firacode_examples/snippet.ls -->
 ```
+
+:::

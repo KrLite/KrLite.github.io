@@ -9,6 +9,13 @@ export default defineNavbarConfig([
 
     items: [
       {
+        text: "Tips",
+        icon: "bxs:note",
+        link: "tips/",
+        activeMatch: "^/notes/coding/tips/",
+      },
+
+      {
         text: "VuePress",
         icon: "bxl:vuejs",
         link: "vuepress/",

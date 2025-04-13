@@ -1,7 +1,7 @@
 ---
 title: Embedding Fonts
-icon: gravity-ui:font-case
 author: KrLite
+icon: gravity-ui:font-case
 createTime: 2024/06/04 21:26:57
 permalink: /notes/coding/vuepress/asset_handling/m7dwlzkj/
 ---
@@ -82,17 +82,14 @@ Let's assume the font face stylesheet is located at `.vuepress/styles/fonts/font
 
 ### Review
 
-::: code-tabs#example
-@tab Current File Structure
+::: file-tree
 
-```:no-line-numbers
-.vuepress/
-├── styles/
-│   ├── index.scss // [!code ++]
-│   ├── fonts/
-│   │   ├── font.scss // [!code ++]
-│   │   └── font.otf // [!code ++]
-```
+- .vuepress
+  - styles
+    - **index.scss**
+  - fonts
+    - **font.scss**
+    - **font.otf**
 
 :::
 
@@ -148,18 +145,18 @@ body {
 
 ### Review
 
+::: file-tree
+
+- vuepress
+  - styles
+    - **index.scss**
+  - fonts
+    - **font.scss**
+    - font.otf
+
+:::
+
 ::: code-tabs#example
-@tab Current File Structure
-
-```:no-line-numbers
-.vuepress/
-├── styles/
-│   ├── index.scss // [!code warning]
-│   ├── fonts/
-│   │   ├── font.scss // [!code warning]
-│   │   └── font.otf
-```
-
 @tab `index.scss`
 
 ```scss
@@ -188,7 +185,7 @@ body {
 This site embeds [SFMono Nerd Font Ligaturized](https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized) as the default monospace font. You can preview it here:
 
 ```elixir
-<!-- @use: @src/snippets/firacode_examples/snippet.ex -->
+<!-- @include: @src/snippets/firacode_examples/snippet.ex -->
 ```
 
 Related: [FiraCode Examples](/article/zqachzvi/)

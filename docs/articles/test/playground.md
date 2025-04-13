@@ -150,9 +150,9 @@ function hello_world() {
 
 `Code within a note block.`
 
-==Highlighted text within a note block.==
+==Highlighted text within a note block.=={.note}
 
-==[Highlighted link within a note block](https://www.google.com)==
+==[Highlighted link within a note block](https://www.google.com)=={.note}
 :::
 
 ::: info
@@ -160,9 +160,9 @@ function hello_world() {
 
 `Code within a info block.`
 
-==Highlighted text within a info block.==
+==Highlighted text within a info block.=={.info}
 
-==[Highlighted link within a info block](https://www.google.com)==
+==[Highlighted link within a info block](https://www.google.com)=={.info}
 :::
 
 ::: tip
@@ -170,9 +170,9 @@ function hello_world() {
 
 `Code within a tip block.`
 
-==Highlighted text within a tip block.==
+==Highlighted text within a tip block.=={.tip}
 
-==[Highlighted link within a tip block](https://www.google.com)==
+==[Highlighted link within a tip block](https://www.google.com)=={.tip}
 :::
 
 ::: warning
@@ -180,9 +180,9 @@ function hello_world() {
 
 `Code within a warning block.`
 
-==Highlighted text within a warning block.==
+==Highlighted text within a warning block.=={.warning}
 
-==[Highlighted link within a warning block](https://www.google.com)==
+==[Highlighted link within a warning block](https://www.google.com)=={.warning}
 :::
 
 ::: caution
@@ -190,9 +190,9 @@ function hello_world() {
 
 `Code within a caution block.`
 
-==Highlighted text within a caution block.==
+==Highlighted text within a caution block.=={.caution}
 
-==[Highlighted link within a caution block](https://www.google.com)==
+==[Highlighted link within a caution block](https://www.google.com)=={.caution}
 :::
 
 ---

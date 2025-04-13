@@ -1,7 +1,7 @@
 ---
 title: GitHub Pages Integration
-icon: bxl:github
 author: KrLite
+icon: bxl:github
 createTime: 2024/06/02 20:06:25
 permalink: /notes/coding/vuepress/deploying/wqervoc2/
 ---
@@ -17,7 +17,7 @@ Currently, this site is deployed to GitHub Pages through the workflow defined be
 ::: details
 ::: code-tabs
 @tab `.github/workflows/deploy.yml`
-@[code](deploy.yml)
+@[code](../Deploying/deploy.yml)
 :::
 
 ## The Configuration

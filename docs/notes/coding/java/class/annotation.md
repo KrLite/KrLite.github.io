@@ -77,7 +77,7 @@ public class MyClass {
 其中 [`FieldInfo.java`](annotation/test/annotation/FieldInfo.java.md) 用于标注字段，解释如下：
 
 ```java:no-line-numbers
-<!-- @use: annotation/test/annotation/FieldInfo.java#code -->
+<!-- @include: annotation/test/annotation/FieldInfo.java#code -->
 ```
 
 其中 [`MethodInfo.java`](annotation/test/annotation/MethodInfo.java.md) 用于标注方法，其构造方式和 [`FieldInfo.java`](annotation/test/annotation/FieldInfo.java.md) 一样，不作解释。
@@ -85,7 +85,7 @@ public class MyClass {
 其中 [`Silent.java`](annotation/test/annotation/Silent.java.md) 较为特殊，既可以标注方法，也可以标注字段。解释如下：
 
 ```java:no-line-numbers
-<!-- @use: annotation/test/annotation/Silent.java#code -->
+<!-- @include: annotation/test/annotation/Silent.java#code -->
 ```
 
 要在字段和方法前使用注解，只需要在字段或方法前引用注解即可，如下：
@@ -114,13 +114,13 @@ public @Silent void method() {
 首先，创建一个 `TestObj` 类，并在其中写入一些方法和注解。
 
 ```java
-<!-- @use: annotation/test/Test.java#TestObj -->
+<!-- @include: annotation/test/Test.java#TestObj -->
 ```
 
 接下来，我们可以在 `main` 方法中获取 `TestObj` 中的方法和字段，然后进行反射。
 
 ```java
-<!-- @use: annotation/test/Test.java#main -->
+<!-- @include: annotation/test/Test.java#main -->
 ```
 
 [`流式处理 ↗`](../syntax/stream.md) [`Lambda 表达式 ↗`](../syntax/lambda.md)
@@ -130,13 +130,13 @@ public @Silent void method() {
 对方法进行遍历的代码如下：
 
 ```java
-<!-- @use: annotation/test/Test.java#iteratorAnnotations-Method -->
+<!-- @include: annotation/test/Test.java#iteratorAnnotations-Method -->
 ```
 
 可见，使用反射获取注解中的字段值还是比较简单的。下面是对字段进行遍历的代码：
 
 ```java
-<!-- @use: annotation/test/Test.java#iteratorAnnotations-Field -->
+<!-- @include: annotation/test/Test.java#iteratorAnnotations-Field -->
 ```
 
 你可以动手运行一下，看看效果。正确的输出如下：
