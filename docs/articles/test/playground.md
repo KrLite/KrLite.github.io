@@ -22,7 +22,7 @@ sticky: 1
 
 ---
 
-::: demo md Cheatsheet
+:::details Cheatsheet
 
 # Heading 1
 
@@ -111,7 +111,7 @@ This cheatsheet is migrated from [the deprecated site](https://github.com/KrLite
 
 ---
 
-::: demo md title="Markdown Demo"
+::: details Markdown Demo
 This is a ==highlighted text.==
 
 Th==is is a te==xt with high==lighted secti==ons.

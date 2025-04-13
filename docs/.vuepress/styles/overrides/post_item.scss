@@ -1,6 +1,6 @@
 // Improve post items
 .vp-blog-post-item {
-  transition: all 0.2s !important;
+  transition: all var(--vp-t-color) !important;
 
   &:hover {
     scale: 1.025;

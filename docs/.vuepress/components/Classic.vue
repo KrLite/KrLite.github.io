@@ -66,7 +66,7 @@ withDefaults(defineProps<Props>(), {});
   .author,
   .description {
     opacity: 0.45;
-    transition: opacity var(--vp-ct);
+    transition: opacity var(--vp-t-color);
 
     &:hover {
       opacity: 1;
@@ -77,7 +77,7 @@ withDefaults(defineProps<Props>(), {});
     font-size: 1.45rem;
     padding: 16px 0;
 
-    text-shadow: 0 2.5px 1em var(--vp-c-classic-2);
+    text-shadow: 0 2.5px 1.75em var(--vp-c-classic-2);
   }
 
   .header {
