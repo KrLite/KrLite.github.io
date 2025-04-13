@@ -27,7 +27,12 @@ export default defineClientConfig({
           extendLinks(router, "div.vp-blog-post-item");
         } else if (blogPaths.includes(path)) {
           // Extend post list links
-          extendLinks(router, ".vp-blog-short-post-list > li", "a.post-link", true);
+          extendLinks(
+            router,
+            ".vp-blog-short-post-list > li",
+            "a.post-link",
+            true
+          );
         }
 
         if (path === "/blog/tags/") {

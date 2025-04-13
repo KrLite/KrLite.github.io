@@ -1,11 +1,9 @@
-import {
-  NotesItemOptions,
-} from "vuepress-theme-plume";
+import { defineNoteConfig } from "vuepress-theme-plume";
 
 export default [
-  {
+  defineNoteConfig({
     dir: "coding/vuepress",
-    link: "/coding/vuepress/",
+    link: "coding/vuepress/",
     sidebar: [
       "README",
 
@@ -14,7 +12,8 @@ export default [
         icon: "none",
         collapsed: false,
 
-        dir: "deploying",
+        link: "deploying",
+        prefix: "deploying",
         items: ["github_pages_integration"],
       },
 
@@ -23,13 +22,14 @@ export default [
         icon: "none",
         collapsed: false,
 
-        dir: "asset_handling",
+        link: "asset_handling",
+        prefix: "asset_handling",
         items: ["embedding_fonts"],
       },
     ],
-  },
+  }),
 
-  {
+  defineNoteConfig({
     dir: "coding/java",
     link: "/coding/java/",
     sidebar: [
@@ -62,5 +62,5 @@ export default [
         items: [],
       },
     ],
-  },
-] satisfies NotesItemOptions[];
+  }),
+];

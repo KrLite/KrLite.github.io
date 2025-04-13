@@ -4,7 +4,6 @@ import learning from "./navbar/learning";
 
 export default defineNavbarConfig([
   ...coding,
-  //...learning,
   {
     text: "涂鸦",
     icon: "mdi:art",

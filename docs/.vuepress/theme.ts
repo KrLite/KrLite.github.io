@@ -31,20 +31,23 @@ export const theme = plumeTheme({
   navbar: navbar,
   hostname: "https://krlite.github.io/", // SEO
 
+  markdown: {
+    demo: true,
+  },
+
   plugins: {
     shiki: { twoslash: true },
 
     markdownEnhance: {
-      demo: true,
-      include: {
-        resolvePath: (file) => {
-          if (file.startsWith("@src"))
-            return file.replace("@src", path.resolve(__dirname, ".."));
+      // include: {
+      //   resolvePath: (file) => {
+      //     if (file.startsWith("@src"))
+      //       return file.replace("@src", path.resolve(__dirname, ".."));
 
-          return file;
-        },
-      },
-      chart: true,
+      //     return file;
+      //   },
+      // },
+      chartjs: true,
       echarts: true,
       mermaid: true,
       flowchart: true,
