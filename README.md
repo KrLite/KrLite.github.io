@@ -24,15 +24,15 @@ Check the [demo](https://astro-chiri.netlify.app/) for more details.
 
 2. Run the following commands:
 
-```bash
-git clone <your-repo-url>
+   ```bash
+   git clone <your-repo-url>
 
-cd <your-repo-name>
+   cd <your-repo-name>
 
-pnpm install
+   pnpm install
 
-pnpm dev
-```
+   pnpm dev
+   ```
 
 3. Edit `src/config.ts` and `src/content/about/about.md` to your liking.
 
