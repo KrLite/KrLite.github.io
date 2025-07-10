@@ -1,0 +1,89 @@
+---
+import { SITE } from '@/config'
+import type { TransitionProps } from '@/types'
+
+type Props = TransitionProps
+
+const { type, class: className = '' } = Astro.props
+const transitionName = type === 'post' ? 'post-content' : 'page-content'
+---
+
+{
+  SITE.fadeAnimation ? (
+    <div transition:name={transitionName} transition:animate="initial" class={className}>
+      <slot />
+    </div>
+  ) : (
+    <div class={className}>
+      <slot />
+    </div>
+  )
+}
+
+<style is:global>
+  @supports (view-transition-name: none) {
+    @media not (prefers-reduced-motion: reduce) {
+      ::view-transition-old(post-content),
+      ::view-transition-old(page-content) {
+        animation: fade-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      ::view-transition-new(post-content),
+      ::view-transition-new(page-content) {
+        opacity: 0;
+        animation: fade-in 0.4s ease 0.2s forwards;
+      }
+    }
+  }
+
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      filter: blur(8px);
+    }
+    30% {
+      opacity: 0.5;
+      filter: blur(4px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  .no-fade ::view-transition-old(post-content),
+  .no-fade ::view-transition-new(post-content),
+  .no-fade ::view-transition-old(page-content),
+  .no-fade ::view-transition-new(page-content),
+  .disable-transitions ::view-transition-old(post-content),
+  .disable-transitions ::view-transition-new(post-content),
+  .disable-transitions ::view-transition-old(page-content),
+  .disable-transitions ::view-transition-new(page-content) {
+    animation: none !important;
+  }
+
+  .reduce-motion ::view-transition-old(post-content),
+  .reduce-motion ::view-transition-new(post-content),
+  .reduce-motion ::view-transition-old(page-content),
+  .reduce-motion ::view-transition-new(page-content) {
+    animation: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>

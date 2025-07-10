@@ -1,0 +1,23 @@
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const footnoteLinks = document.querySelectorAll('[data-footnote-ref], [data-footnote-backref]')
+
+    footnoteLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault()
+        const href = link.getAttribute('href')
+        if (!href) return
+
+        const target = document.querySelector(href)
+        if (!target) return
+
+        // Calculate scroll position with offset (6 * 16px = 96px from top)
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - 6 * 16
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        })
+      })
+    })
+  })
+</script>

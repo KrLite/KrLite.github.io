@@ -1,0 +1,51 @@
+---
+import { SITE } from '@/config'
+import TransitionWrapper from '@/components/layout/TransitionWrapper.astro'
+import type { LayoutProps } from '@/types'
+
+type Props = LayoutProps
+
+const { type = 'page' } = Astro.props
+const contentWidth = SITE.contentWidth
+const widthValue = Math.min(parseFloat(contentWidth), 50)
+const shouldUseCustomWidth = widthValue > 25
+const finalWidth = shouldUseCustomWidth ? `${widthValue}rem` : '25rem'
+
+const language = SITE.language || 'en-US'
+---
+
+<html
+  lang={language}
+  class={SITE.fadeAnimation ? 'view-transitions-enabled' : 'view-transitions-disabled'}
+  {...SITE.fadeAnimation ? { 'transition:animate': 'initial' } : {}}
+>
+  <head>
+    <slot name="head" />
+  </head>
+  <body
+    data-centered={SITE.centeredLayout}
+    class={!SITE.fadeAnimation ? 'no-fade' : ''}
+    style={`
+      max-width: ${finalWidth};
+      ${shouldUseCustomWidth ? `--content-width: ${widthValue}rem;` : ''}
+    `}
+  >
+    <TransitionWrapper type={type} class="layout-wrapper">
+      <slot />
+    </TransitionWrapper>
+  </body>
+</html>
+
+<style is:global>
+  .layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 7.5rem);
+  }
+
+  @media (max-width: 768px) {
+    .layout-wrapper {
+      min-height: calc(100vh - 5.5rem);
+    }
+  }
+</style>

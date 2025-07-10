@@ -1,0 +1,105 @@
+---
+import FormattedDate from '@/components/features/FormattedDate.astro'
+import type { CollectionEntry } from 'astro:content'
+import { SITE } from '@/config'
+
+interface Props {
+  posts: CollectionEntry<'posts'>[]
+}
+
+const { posts } = Astro.props
+---
+
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        <a href={`/${post.id}/`}>
+          <div class={`post-item ${!SITE.dateOnRight ? 'date-left' : ''}`}>
+            {!SITE.dateOnRight && (
+              <p class="date font-features">
+                <FormattedDate date={post.data.pubDate} />
+              </p>
+            )}
+            <p class="title">{post.data.title}</p>
+            {SITE.dateOnRight && <div class="divider" />}
+            {SITE.dateOnRight && (
+              <p class="date font-features">
+                <FormattedDate date={post.data.pubDate} />
+              </p>
+            )}
+          </div>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+<div class="placeholder"></div>
+
+<style>
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  a {
+    color: var(--text-primary);
+    display: block;
+    text-decoration: none;
+    transition: opacity 0.15s ease-out;
+  }
+
+  ul:hover a {
+    opacity: 0.4;
+  }
+
+  ul:hover a:hover {
+    opacity: 1;
+  }
+
+  .post-item {
+    height: 2.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .post-item.date-left {
+    justify-content: flex-start;
+  }
+
+  .post-item.date-left .title {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .title {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .date {
+    margin: 0;
+    color: var(--text-secondary);
+    letter-spacing: var(--spacing-s);
+    flex-shrink: 0;
+  }
+
+  .divider {
+    flex: 1;
+    min-width: 24px;
+    height: 0.5px;
+    background-color: var(--border);
+  }
+
+  .placeholder {
+    height: 3rem;
+  }
+</style>

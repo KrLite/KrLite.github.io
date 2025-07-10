@@ -1,0 +1,29 @@
+---
+import { formatDate } from '@/utils/date'
+import { SITE } from '@/config'
+
+interface Props {
+  date: Date
+  format?: string
+}
+
+const { date, format } = Astro.props
+---
+
+<time
+  datetime={date.toISOString()}
+  class={!SITE.dateOnRight &&
+  (SITE.dateFormat === 'MONTH DAY YYYY' || SITE.dateFormat === 'DAY MONTH YYYY')
+    ? 'date-left'
+    : ''}
+>
+  <Fragment set:html={formatDate(date, format)} />
+</time>
+
+<style>
+  .date-left {
+    display: inline-block;
+    min-width: 86px;
+    text-align: right;
+  }
+</style>

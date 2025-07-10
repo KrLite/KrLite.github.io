@@ -1,0 +1,127 @@
+[build]
+  publish = "dist"
+  command = "pnpm run build"
+
+# Redirects for Astro static assets
+[[redirects]]
+  from = "/_astro/*"
+  to = "/_astro/:splat"
+  status = 200
+
+# Enable Brotli Compression
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = true
+  minify = true
+[build.processing.js]
+  bundle = true
+  minify = true
+[build.processing.html]
+  pretty_urls = true
+
+# Global headers for performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), fullscreen=(self)"
+    Content-Security-Policy = '''
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https:;
+      style-src 'self' 'unsafe-inline' https:;
+      img-src 'self' data: https: blob:;
+      font-src 'self' data: https:;
+      frame-src https:;
+      connect-src 'self' https:;
+      object-src 'none';
+      worker-src 'self' blob:;
+      child-src 'self' blob:;
+    '''
+
+# Static assets caching
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+# HTML caching with revalidation
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300, s-maxage=3600"
+    Vary = "Accept-Encoding"
+
+# Image optimization
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+# Homepage with resource hints
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = "</fonts/Inter.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous, </fonts/Besley-Italic.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous"
+    Cache-Control = "public, max-age=300, s-maxage=3600"
+    Vary = "Accept-Encoding"
+
+# Article page optimization
+[[headers]]
+  for = "/posts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=600, s-maxage=3600"
+    Vary = "Accept-Encoding"
+
+# Enable compression
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Vary = "Accept-Encoding"
+
+
+
+
+
+
+
