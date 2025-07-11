@@ -18,6 +18,7 @@
       viewer?.classList.add('active')
       document.body.classList.add('image-viewer-open')
       document.body.style.overflow = 'hidden'
+      document.body.dataset.scrollY = window.scrollY.toString()
       if (viewer) {
         viewer.style.cursor = 'auto'
         setTimeout(() => {
@@ -58,6 +59,17 @@
     }
 
     viewer?.addEventListener('click', hideImage)
+
+    // Prevent touch scroll in image viewer
+    viewer?.addEventListener(
+      'touchmove',
+      (e) => {
+        if (viewer.classList.contains('active')) {
+          e.preventDefault()
+        }
+      },
+      { passive: false }
+    )
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && viewer.classList.contains('active')) {
