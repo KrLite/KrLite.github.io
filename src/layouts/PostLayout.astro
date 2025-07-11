@@ -6,6 +6,7 @@ import FootnoteScroll from '@/components/features/FootnoteScroll.astro'
 import BaseHead from '@/components/layout/BaseHead.astro'
 import Footer from '@/components/layout/Footer.astro'
 import BackButton from '@/components/ui/BackButton.astro'
+import TableOfContents from '@/components/ui/TableOfContents.astro'
 import GradientMask from '@/components/ui/GradientMask.astro'
 import ImageViewer from '@/components/ui/ImageViewer.astro'
 import GitHubCard from '@/components/ui/GitHubCard.astro'
@@ -34,6 +35,7 @@ const { title, pubDate, readingTime } = Astro.props
       <div class="prose">
         <GradientMask />
         <BackButton />
+        {SITE.toc && <TableOfContents />}
         <div class="title">
           <h1>{title}</h1>
           <div class="date">

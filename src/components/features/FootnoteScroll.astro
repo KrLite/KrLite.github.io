@@ -1,5 +1,5 @@
 <script>
-  document.addEventListener('astro:page-load', () => {
+  function bindFootnoteEvents() {
     const footnoteLinks = document.querySelectorAll('[data-footnote-ref], [data-footnote-backref]')
 
     footnoteLinks.forEach((link) => {
@@ -11,13 +11,23 @@
         const target = document.querySelector(href)
         if (!target) return
 
-        // Calculate scroll position with offset (6 * 16px = 96px from top)
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY - 6 * 16
+        // Use fixed offset of 128px
+        const offset = 128
+
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset
+
         window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
+          top: targetPosition
         })
       })
     })
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    bindFootnoteEvents()
+  })
+
+  document.addEventListener('DOMContentLoaded', () => {
+    bindFootnoteEvents()
   })
 </script>

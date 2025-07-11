@@ -21,6 +21,7 @@ export const SITE = {
 
   // POST SETTINGS ///////////////////////////////////////////////////////////////////////////////////////
   readingTime: false, // Show reading time in posts
+  toc: true, // Show table of contents
   imageViewer: true, // Enable image viewer
   copyCode: false // Enable copy button in code blocks
 }

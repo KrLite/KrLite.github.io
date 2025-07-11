@@ -53,6 +53,8 @@ export const SITE = {
 
   // Show reading time in posts
   readingTime: false,
+  // Show table of contents
+  toc: true,
   // Enable image viewer
   imageViewer: true,
   // Enable copy button in code blocks

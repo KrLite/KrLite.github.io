@@ -1,0 +1,304 @@
+---
+import { SITE } from '@/config'
+---
+
+<div class="toc-container" id="toc">
+  <nav class="toc-nav">
+    <ul class="toc-list" id="toc-list"></ul>
+  </nav>
+</div>
+
+<script
+  is:inline
+  define:vars={{ contentWidth: SITE.contentWidth, centeredLayout: SITE.centeredLayout }}
+>
+  ;(function () {
+    // TOC positioning logic (similar to BackButton)
+    function adjustTOCPosition() {
+      const toc = document.querySelector('.toc-container')
+      if (!toc) return
+
+      // If not using centered layout, hide TOC
+      if (!centeredLayout) {
+        toc.style.display = 'none'
+        return
+      }
+
+      // Calculate available margin space for positioning
+      const pageWidth = window.innerWidth
+      const contentWidthValue = parseFloat(contentWidth)
+      const margin = (pageWidth - contentWidthValue * 16) / 2
+      const minSpace = 11 * 16 // Minimum space needed
+
+      // Show and position TOC fixed on the left if there's enough space
+      if (margin >= minSpace) {
+        toc.style.display = 'block'
+        toc.classList.add('fixed-position')
+        toc.style.left = `${margin - minSpace}px`
+      } else {
+        toc.style.display = 'none'
+        toc.classList.remove('fixed-position')
+        toc.style.left = ''
+      }
+    }
+
+    // Extract headings and paragraphs and create TOC
+    function createTOC() {
+      const tocList = document.getElementById('toc-list')
+      if (!tocList) return
+
+      const tocItems = []
+
+      // Get all content elements in document order
+      const allElements = Array.from(document.querySelectorAll('h1, h2, h3'))
+
+      // Process elements in document order
+      allElements.forEach((element, index) => {
+        if (element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'H3') {
+          // Skip the main title (first h1)
+          if (index === 0 && element.tagName === 'H1') return
+
+          const level = parseInt(element.tagName.charAt(1))
+          if (level > 3) return // Only include h1, h2, h3
+
+          const text = element.textContent || ''
+          const id = element.id || `heading-${index}`
+          element.id = id
+
+          tocItems.push({
+            level,
+            text,
+            id,
+            element
+          })
+        }
+      })
+
+      // Clear existing TOC
+      tocList.innerHTML = ''
+
+      // Add title link at the top
+      const titleLi = document.createElement('li')
+      titleLi.className = 'toc-item toc-level-0'
+
+      const titleLink = document.createElement('a')
+      titleLink.href = '#'
+      titleLink.className = 'toc-link toc-title'
+      titleLink.setAttribute('title', 'Back to top')
+      titleLink.setAttribute('data-text', 'Back to top')
+
+      // Add click handler to scroll to top
+      titleLink.addEventListener('click', (e) => {
+        e.preventDefault()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        // Update URL without page jump
+        history.pushState(null, null, '#')
+      })
+
+      titleLi.appendChild(titleLink)
+      tocList.appendChild(titleLi)
+
+      // Create TOC items
+      tocItems.forEach((item) => {
+        const li = document.createElement('li')
+        li.className = `toc-item toc-level-${item.level}`
+
+        const link = document.createElement('a')
+        link.href = `#${item.id}`
+        link.className = 'toc-link'
+        link.setAttribute('title', item.text) // Add title for accessibility
+        link.setAttribute('data-text', item.text) // Add data-text for CSS content
+        link.textContent = item.text // Add text content for hover display
+
+        link.addEventListener('click', (e) => {
+          e.preventDefault()
+          const target = document.getElementById(item.id)
+          if (target) {
+            const rect = target.getBoundingClientRect()
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+            const offset = rect.top + scrollTop - 96 // 6rem = 96px
+            window.scrollTo({ top: offset, behavior: 'smooth' })
+            history.pushState(null, null, `#${item.id}`)
+          }
+        })
+
+        li.appendChild(link)
+        tocList.appendChild(li)
+      })
+
+      updateActiveTOCItem()
+    }
+
+    // Update active TOC item based on scroll position
+    function updateActiveTOCItem() {
+      const tocLinks = document.querySelectorAll('.toc-link')
+      const headings = document.querySelectorAll('h1, h2, h3')
+
+      let currentActive = null
+      const scrollTop = window.pageYOffset + 100 // Offset for better detection
+
+      // Check headings
+      headings.forEach((heading, index) => {
+        if (index === 0 && heading.tagName === 'H1') return
+
+        const rect = heading.getBoundingClientRect()
+        const offsetTop = rect.top + window.pageYOffset
+
+        if (scrollTop >= offsetTop) {
+          currentActive = heading.id
+        }
+      })
+
+      tocLinks.forEach((link) => {
+        link.classList.remove('active')
+        if (link.getAttribute('href') === `#${currentActive}`) {
+          link.classList.add('active')
+        }
+      })
+
+      // If no active item found and we're at the top, activate the title link
+      if (!currentActive && window.pageYOffset < 200) {
+        const titleLink = document.querySelector('.toc-link.toc-title')
+        if (titleLink) {
+          titleLink.classList.add('active')
+        }
+      }
+    }
+
+    function initTOC() {
+      adjustTOCPosition()
+      createTOC()
+    }
+
+    document.addEventListener('astro:page-load', () => {
+      initTOC()
+    })
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initTOC()
+    })
+
+    window.addEventListener('resize', adjustTOCPosition)
+    window.addEventListener('scroll', updateActiveTOCItem)
+  })()
+</script>
+
+<style is:global>
+  .toc-container {
+    width: 128px;
+    position: relative;
+    left: -0.175em;
+  }
+
+  .toc-nav {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-s);
+    line-height: 1.5;
+  }
+
+  .toc-list {
+    list-style: none;
+    list-style-type: none;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .toc-list li {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .toc-item {
+    list-style: none;
+    list-style-type: none;
+  }
+
+  .toc-item::before {
+    display: none;
+  }
+
+  .toc-item::marker {
+    display: none;
+  }
+
+  .toc-link {
+    display: block;
+    color: transparent;
+    text-decoration: none;
+    transition: all 0.2s ease-out;
+    position: relative;
+    padding-left: 0;
+    height: 1.125rem;
+    width: 100%;
+    min-height: 1rem;
+    font-size: 0;
+    line-height: 1.125rem;
+    text-indent: 2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .toc-link:hover {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-s);
+    letter-spacing: var(--spacing-m);
+    text-indent: 1.125rem;
+    text-decoration: none;
+  }
+
+  .toc-level-1 .toc-link:hover::before,
+  .toc-level-2 .toc-link:hover::before,
+  .toc-level-3 .toc-link:hover::before {
+    width: 0.75rem;
+  }
+
+  .toc-level-0 .toc-link:hover::after,
+  .toc-level-1 .toc-link:hover::after,
+  .toc-level-2 .toc-link:hover::after,
+  .toc-level-3 .toc-link:hover::after {
+    opacity: 1;
+  }
+
+  .toc-link.active {
+    color: var(--text-primary);
+  }
+
+  /* Horizontal line indicators */
+  .toc-level-0 .toc-link::before,
+  .toc-level-1 .toc-link::before,
+  .toc-level-2 .toc-link::before,
+  .toc-level-3 .toc-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 2.5rem;
+    height: 1px;
+    background-color: var(--text-tertiary);
+    transform: translateY(-50%);
+    opacity: 0.4;
+  }
+
+  .toc-link:hover::before,
+  .toc-link.active::before {
+    opacity: 0.8;
+    background-color: var(--text-primary);
+  }
+
+  /* Fixed positioning */
+  .toc-container.fixed-position {
+    position: fixed;
+    top: 12rem; /* Position below BackButton */
+    margin-top: 0;
+    padding-left: 1rem;
+    z-index: 10;
+  }
+
+  /* Hide on mobile and when space is limited */
+  @media (max-width: 768px) {
+    .toc-container {
+      display: none !important;
+    }
+  }
+</style>
