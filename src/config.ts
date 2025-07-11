@@ -10,7 +10,7 @@ export const SITE = {
   contentWidth: '35rem', // Content area width
   centeredLayout: true, // Use centered layout (false for left-aligned)
   favicon: false, // Show favicon on index page
-  themeToggle: false, // Show theme toggle button
+  themeToggle: false, // Show theme toggle button (uses system theme by default)
   footer: true, // Show footer
   fadeAnimation: true, // Enable fade animations
 
