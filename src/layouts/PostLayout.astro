@@ -1,6 +1,6 @@
 ---
 import '@/styles/global.css'
-import type { CollectionEntry } from 'astro:content'
+import type { PostLayoutProps } from '@/types'
 import FormattedDate from '@/components/features/FormattedDate.astro'
 import FootnoteScroll from '@/components/features/FootnoteScroll.astro'
 import BaseHead from '@/components/layout/BaseHead.astro'
@@ -16,16 +16,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 
 import { SITE } from '@/config'
 
-type Props = CollectionEntry<'posts'>['data'] & {
-  readingTime?: {
-    text: string
-    minutes: number
-    time: number
-    words: number
-  }
-}
-
-const { title, pubDate, readingTime } = Astro.props
+const { title, pubDate, readingTime, toc } = Astro.props as PostLayoutProps
 ---
 
 <BaseLayout title={`${title} · ${SITE.title}`} description={SITE.description} type="post">
@@ -35,7 +26,7 @@ const { title, pubDate, readingTime } = Astro.props
       <div class="prose">
         <GradientMask />
         <BackButton />
-        {SITE.toc && <TableOfContents />}
+        {SITE.toc && <TableOfContents toc={toc} />}
         <div class="title">
           <h1>{title}</h1>
           <div class="date">

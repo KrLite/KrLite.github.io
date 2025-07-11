@@ -18,8 +18,9 @@ const post = Astro.props
 const { Content, remarkPluginFrontmatter } = await render(post)
 
 const readingTime = remarkPluginFrontmatter.readingTime
+const toc = remarkPluginFrontmatter.toc || []
 ---
 
-<PostLayout {...post.data} readingTime={readingTime}>
+<PostLayout {...post.data} readingTime={readingTime} toc={toc}>
   <Content />
 </PostLayout>

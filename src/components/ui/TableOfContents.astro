@@ -1,10 +1,37 @@
 ---
 import { SITE } from '@/config'
+import type { TOCProps } from '@/types'
+
+const { toc = [] }: TOCProps = Astro.props
 ---
 
 <div class="toc-container" id="toc">
   <nav class="toc-nav">
-    <ul class="toc-list" id="toc-list"></ul>
+    <ul class="toc-list" id="toc-list">
+      <!-- Back to top link -->
+      <li class="toc-item toc-level-0">
+        <a href="#" class="toc-link toc-title" title="Back to top" data-text="Back to top">
+          Back to top
+        </a>
+      </li>
+
+      <!-- TOC items -->
+      {
+        toc.map((item) => (
+          <li class={`toc-item toc-level-${item.level}`}>
+            <a
+              href={`#${item.id}`}
+              class="toc-link"
+              title={item.text}
+              data-text={item.text}
+              data-heading-id={item.id}
+            >
+              {item.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </nav>
 </div>
 
@@ -17,6 +44,8 @@ import { SITE } from '@/config'
   }}
 >
   ;(function () {
+    let isInitialized = false
+
     // TOC positioning logic (similar to BackButton)
     function adjustTOCPosition() {
       const tocContainer = document.querySelector('.toc-container')
@@ -51,98 +80,48 @@ import { SITE } from '@/config'
       }
     }
 
-    // Extract headings and paragraphs and create TOC
-    function createTOC() {
-      const tocList = document.getElementById('toc-list')
-      if (!tocList) return
+    // Hide TOC if there are no headings (only title)
+    function checkTOCVisibility() {
+      const tocContainer = document.querySelector('.toc-container')
+      const tocItems = document.querySelectorAll('.toc-item:not(.toc-level-0)')
 
-      const tocItems = []
+      if (tocContainer && tocItems.length === 0) {
+        tocContainer.style.display = 'none'
+      }
+    }
 
-      // Get all content elements in document order
-      const allElements = Array.from(document.querySelectorAll('h1, h2, h3'))
+    // Add click handlers to TOC links using event delegation
+    function addTOCEventListeners() {
+      const tocContainer = document.querySelector('.toc-container')
+      if (!tocContainer) return
 
-      // Process elements in document order
-      allElements.forEach((element, index) => {
-        if (element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'H3') {
-          // Skip the main title (first h1)
-          if (index === 0 && element.tagName === 'H1') return
+      // Use event delegation for better performance and reliability
+      tocContainer.addEventListener('click', function (e) {
+        const link = e.target.closest('.toc-link')
+        if (!link) return
 
-          const level = parseInt(element.tagName.charAt(1))
-          if (level > 3) return // Only include h1, h2, h3
+        e.preventDefault()
 
-          const text = element.textContent || ''
-          const id = element.id || `heading-${index}`
-          element.id = id
-
-          tocItems.push({
-            level,
-            text,
-            id,
-            element
-          })
+        if (link.classList.contains('toc-title')) {
+          // Back to top
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+          history.pushState(null, null, '#')
+        } else {
+          // TOC item
+          const href = link.getAttribute('href')
+          if (href && href.startsWith('#')) {
+            const targetId = href.substring(1)
+            const target = document.getElementById(targetId)
+            if (target) {
+              const rect = target.getBoundingClientRect()
+              const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+              const offset = rect.top + scrollTop - 96 // 6rem = 96px
+              window.scrollTo({ top: offset, behavior: 'smooth' })
+              history.pushState(null, null, href)
+            }
+          }
         }
       })
-
-      // Hide TOC if there are no headings (only title)
-      const tocContainerElement = document.querySelector('.toc-container')
-      if (tocContainerElement && tocItems.length === 0) {
-        tocContainerElement.style.display = 'none'
-        return
-      }
-
-      // Clear existing TOC
-      tocList.innerHTML = ''
-
-      // Add title link at the top
-      const titleLi = document.createElement('li')
-      titleLi.className = 'toc-item toc-level-0'
-
-      const titleLink = document.createElement('a')
-      titleLink.href = '#'
-      titleLink.className = 'toc-link toc-title'
-      titleLink.setAttribute('title', 'Back to top')
-      titleLink.setAttribute('data-text', 'Back to top')
-
-      // Add click handler to scroll to top
-      titleLink.addEventListener('click', (e) => {
-        e.preventDefault()
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-        // Update URL without page jump
-        history.pushState(null, null, '#')
-      })
-
-      titleLi.appendChild(titleLink)
-      tocList.appendChild(titleLi)
-
-      // Create TOC items
-      tocItems.forEach((item) => {
-        const li = document.createElement('li')
-        li.className = `toc-item toc-level-${item.level}`
-
-        const link = document.createElement('a')
-        link.href = `#${item.id}`
-        link.className = 'toc-link'
-        link.setAttribute('title', item.text) // Add title for accessibility
-        link.setAttribute('data-text', item.text) // Add data-text for CSS content
-        link.textContent = item.text // Add text content for hover display
-
-        link.addEventListener('click', (e) => {
-          e.preventDefault()
-          const target = document.getElementById(item.id)
-          if (target) {
-            const rect = target.getBoundingClientRect()
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-            const offset = rect.top + scrollTop - 96 // 6rem = 96px
-            window.scrollTo({ top: offset, behavior: 'smooth' })
-            history.pushState(null, null, `#${item.id}`)
-          }
-        })
-
-        li.appendChild(link)
-        tocList.appendChild(li)
-      })
-
-      updateActiveTOCItem()
     }
 
     // Update active TOC item based on scroll position
@@ -182,18 +161,33 @@ import { SITE } from '@/config'
     }
 
     function initTOC() {
+      if (isInitialized) return
+
       adjustTOCPosition()
-      createTOC()
+      checkTOCVisibility()
+      addTOCEventListeners()
+      updateActiveTOCItem() // Initial active state
+
+      isInitialized = true
     }
 
-    document.addEventListener('astro:page-load', () => {
+    // Initialize on page load
+    function handlePageLoad() {
       initTOC()
-    })
+    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      initTOC()
-    })
+    // Listen for various page load events
+    document.addEventListener('astro:page-load', handlePageLoad)
+    document.addEventListener('DOMContentLoaded', handlePageLoad)
 
+    // Also initialize immediately if DOM is already loaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handlePageLoad)
+    } else {
+      handlePageLoad()
+    }
+
+    // Re-initialize on resize and scroll
     window.addEventListener('resize', adjustTOCPosition)
     window.addEventListener('scroll', updateActiveTOCItem)
   })()
@@ -256,6 +250,7 @@ import { SITE } from '@/config'
       color 0.2s ease-out,
       font-size 0.2s ease-out,
       text-indent 0.2s ease-out;
+    cursor: pointer;
   }
 
   .toc-link::after {
