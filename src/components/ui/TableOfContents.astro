@@ -10,17 +10,21 @@ import { SITE } from '@/config'
 
 <script
   is:inline
-  define:vars={{ contentWidth: SITE.contentWidth, centeredLayout: SITE.centeredLayout }}
+  define:vars={{
+    contentWidth: SITE.contentWidth,
+    centeredLayout: SITE.centeredLayout,
+    toc: SITE.toc
+  }}
 >
   ;(function () {
     // TOC positioning logic (similar to BackButton)
     function adjustTOCPosition() {
-      const toc = document.querySelector('.toc-container')
-      if (!toc) return
+      const tocContainer = document.querySelector('.toc-container')
+      if (!tocContainer) return
 
       // If not using centered layout, hide TOC
       if (!centeredLayout) {
-        toc.style.display = 'none'
+        tocContainer.style.display = 'none'
         return
       }
 
@@ -28,17 +32,22 @@ import { SITE } from '@/config'
       const pageWidth = window.innerWidth
       const contentWidthValue = parseFloat(contentWidth)
       const margin = (pageWidth - contentWidthValue * 16) / 2
-      const minSpace = 11 * 16 // Minimum space needed
+      const baseMinSpace = 11 * 16 // Base minimum space needed
+      // If toc is enabled, need additional 2.5rem (40px) space
+      const minSpace = toc ? baseMinSpace + 40 : baseMinSpace
 
       // Show and position TOC fixed on the left if there's enough space
       if (margin >= minSpace) {
-        toc.style.display = 'block'
-        toc.classList.add('fixed-position')
-        toc.style.left = `${margin - minSpace}px`
+        tocContainer.style.display = 'block'
+        tocContainer.classList.add('fixed-position')
+        const basePosition = margin - baseMinSpace
+        // If toc is enabled, move 2.5rem (40px) further left
+        const leftPosition = toc ? basePosition - 40 : basePosition
+        tocContainer.style.left = `${leftPosition}px`
       } else {
-        toc.style.display = 'none'
-        toc.classList.remove('fixed-position')
-        toc.style.left = ''
+        tocContainer.style.display = 'none'
+        tocContainer.classList.remove('fixed-position')
+        tocContainer.style.left = ''
       }
     }
 
@@ -75,9 +84,9 @@ import { SITE } from '@/config'
       })
 
       // Hide TOC if there are no headings (only title)
-      const tocContainer = document.querySelector('.toc-container')
-      if (tocContainer && tocItems.length === 0) {
-        tocContainer.style.display = 'none'
+      const tocContainerElement = document.querySelector('.toc-container')
+      if (tocContainerElement && tocItems.length === 0) {
+        tocContainerElement.style.display = 'none'
         return
       }
 
@@ -192,7 +201,7 @@ import { SITE } from '@/config'
 
 <style is:global>
   .toc-container {
-    width: 128px;
+    width: 12rem;
     position: relative;
     left: -0.175em;
   }

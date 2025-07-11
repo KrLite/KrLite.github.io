@@ -16,7 +16,11 @@ import { SITE } from '@/config'
 
 <script
   is:inline
-  define:vars={{ contentWidth: SITE.contentWidth, centeredLayout: SITE.centeredLayout }}
+  define:vars={{
+    contentWidth: SITE.contentWidth,
+    centeredLayout: SITE.centeredLayout,
+    toc: SITE.toc
+  }}
 >
   ;(function () {
     // Adjust back button position based on layout and screen size
@@ -35,12 +39,17 @@ import { SITE } from '@/config'
       const pageWidth = window.innerWidth
       const contentWidthValue = parseFloat(contentWidth)
       const margin = (pageWidth - contentWidthValue * 16) / 2
-      const minSpace = 11 * 16 // Minimum space needed
+      const baseMinSpace = 11 * 16 // Base minimum space needed
+      // If toc is enabled, need additional 2.5rem (40px) space
+      const minSpace = toc ? baseMinSpace + 40 : baseMinSpace
 
       // Position button fixed on the left if there's enough space
       if (margin >= minSpace) {
         button.classList.add('fixed-position')
-        button.style.left = `${margin - minSpace}px`
+        const basePosition = margin - baseMinSpace
+        // If toc is enabled, move 2.5rem (40px) further left
+        const leftPosition = toc ? basePosition - 40 : basePosition
+        button.style.left = `${leftPosition}px`
       } else {
         button.classList.remove('fixed-position')
         button.style.left = ''
@@ -61,7 +70,7 @@ import { SITE } from '@/config'
 
 <style>
   .back-button {
-    width: 128px;
+    width: 8rem;
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
