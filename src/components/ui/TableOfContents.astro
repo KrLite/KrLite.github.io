@@ -163,8 +163,8 @@ import { SITE } from '@/config'
         }
       })
 
-      // If no active item found and we're at the top, activate the title link
-      if (!currentActive && window.pageYOffset < 200) {
+      // Always highlight the first item ("Back to top") unless another TOC item is active
+      if (!currentActive) {
         const titleLink = document.querySelector('.toc-link.toc-title')
         if (titleLink) {
           titleLink.classList.add('active')
@@ -232,7 +232,6 @@ import { SITE } from '@/config'
     display: block;
     color: transparent;
     text-decoration: none;
-    transition: all 0.2s ease-out;
     position: relative;
     padding-left: 0;
     height: 1.125rem;
@@ -244,27 +243,47 @@ import { SITE } from '@/config'
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    transition:
+      color 0.2s ease-out,
+      font-size 0.2s ease-out,
+      text-indent 0.2s ease-out;
   }
 
-  .toc-link:hover {
+  .toc-link::after {
+    content: attr(data-text);
+    position: absolute;
+    left: -0.5rem;
+    top: 0;
     font-family: var(--font-sans);
     font-size: var(--font-size-s);
     letter-spacing: var(--spacing-m);
-    text-indent: 1.125rem;
-    text-decoration: none;
+    line-height: 1.125rem;
+    color: var(--text-primary);
+    opacity: 0;
+    transition:
+      opacity 0.2s ease-out,
+      left 0.2s ease-out;
+    pointer-events: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .toc-link:hover::after {
+    opacity: 1;
+    left: -0.75rem;
+  }
+
+  .toc-level-0 .toc-link:hover::after {
+    opacity: 0;
   }
 
   .toc-level-1 .toc-link:hover::before,
   .toc-level-2 .toc-link:hover::before,
   .toc-level-3 .toc-link:hover::before {
     width: 0.75rem;
-  }
-
-  .toc-level-0 .toc-link:hover::after,
-  .toc-level-1 .toc-link:hover::after,
-  .toc-level-2 .toc-link:hover::after,
-  .toc-level-3 .toc-link:hover::after {
-    opacity: 1;
+    transition: width 0.1s ease-out;
   }
 
   .toc-link.active {
@@ -285,6 +304,7 @@ import { SITE } from '@/config'
     background-color: var(--text-tertiary);
     transform: translateY(-50%);
     opacity: 0.4;
+    transition: all 0.1s ease-out;
   }
 
   .toc-link:hover::before,
@@ -293,7 +313,6 @@ import { SITE } from '@/config'
     background-color: var(--text-primary);
   }
 
-  /* Fixed positioning */
   .toc-container.fixed-position {
     position: fixed;
     top: 12rem; /* Position below BackButton */
