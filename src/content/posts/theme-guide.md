@@ -81,7 +81,7 @@ pubDate: '2025-07-10'
 
 ![_Theme Toggle Button](./_assets/theme-toggle.png)
 
-- Date Position Options
+- Date on Left Side
 
 ![_Date on Left Side](./_assets/date-on-left.png)
 
