@@ -72,3 +72,27 @@ title: 'Post Title'
 pubDate: '2025-07-10'
 ---
 ```
+
+---
+
+## Preview of Some Features
+
+- Theme Toggle
+
+![_Theme Toggle Button](./_assets/theme-toggle.png)
+
+- Date Position Options
+
+![_Date on Left Side](./_assets/date-on-left.png)
+
+- Table of Contents
+
+![_Table of Contents](./_assets/toc.png)
+
+- Reading Time
+
+![_Reading Time Display](./_assets/reading-time.png)
+
+- Copy Code Button
+
+![_Copy Code Button](./_assets/copy-code.png)

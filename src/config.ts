@@ -23,5 +23,5 @@ export const SITE = {
   readingTime: false, // Show reading time in posts
   toc: true, // Show the table of contents when there is enough page width
   imageViewer: true, // Enable image viewer
-  copyCode: false // Enable copy button in code blocks
+  copyCode: true // Enable copy button in code blocks
 }
