@@ -74,6 +74,13 @@ import { SITE } from '@/config'
         }
       })
 
+      // Hide TOC if there are no headings (only title)
+      const tocContainer = document.querySelector('.toc-container')
+      if (tocContainer && tocItems.length === 0) {
+        tocContainer.style.display = 'none'
+        return
+      }
+
       // Clear existing TOC
       tocList.innerHTML = ''
 
