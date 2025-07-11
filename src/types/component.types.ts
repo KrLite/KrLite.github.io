@@ -25,3 +25,9 @@ export interface LayoutProps extends TransitionProps {
   title?: string
   description?: string
 }
+
+// BaseHead component props interface
+export interface BaseHeadProps {
+  title: string
+  description: string
+}

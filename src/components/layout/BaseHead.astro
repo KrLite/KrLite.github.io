@@ -1,17 +1,13 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import 'katex/dist/katex.min.css'
 import { SITE } from '@/config'
-
-interface Props {
-  title: string
-  description: string
-}
+import type { BaseHeadProps } from '@/types/component.types'
+import 'katex/dist/katex.min.css'
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
-const { title, description } = Astro.props
+const { title, description } = Astro.props as BaseHeadProps
 ---
 
 <!-- Global Metadata -->
