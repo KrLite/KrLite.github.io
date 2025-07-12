@@ -166,8 +166,8 @@
 /* Blockquotes */
 .prose blockquote {
   border-left: 1.5px solid var(--border);
-  margin: 0 0 1.25em 0;
-  padding: 0 0 0 1.25em;
+  margin: 0 0 1.25em 0.125em;
+  padding: 0 0 0 1.5em;
   text-align: left;
 }
 
@@ -190,14 +190,14 @@
 }
 
 .prose ul ul {
-  margin-left: 0.75rem;
+  margin-left: 0.625rem;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
 
 .prose ul li {
   position: relative;
-  padding-left: 0.25rem;
+  padding-left: 0.5rem;
   margin-bottom: 0.5em;
 }
 
@@ -213,7 +213,7 @@
 .prose ul li::before {
   content: '•';
   position: absolute;
-  left: -1.375rem;
+  left: -1.25rem;
   top: -0.05em;
   width: 1.5rem;
   text-align: center;
@@ -232,6 +232,7 @@
 .prose ol li {
   display: block;
   position: relative;
+  padding-left: 0.25rem;
   margin-bottom: 0.5em;
 }
 
@@ -281,7 +282,7 @@
 
 /* Task list checkboxes */
 .prose ul.contains-task-list li.task-list-item input[type='checkbox'] {
-  margin-right: 0.375em;
+  margin-right: 0.5em;
   position: relative;
   top: 0.175em;
   width: 1em;
