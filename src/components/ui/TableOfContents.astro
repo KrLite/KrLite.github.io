@@ -44,9 +44,20 @@ const { toc = [] }: TOCProps = Astro.props
   }}
 >
   ;(function () {
+    let tocContainer = null
+    let tocLinks = null
+    let headings = null
+    let titleLink = null
+
+    function initDOMCache() {
+      tocContainer = document.querySelector('.toc-container')
+      tocLinks = document.querySelectorAll('.toc-link')
+      headings = document.querySelectorAll('h1, h2, h3')
+      titleLink = document.querySelector('.toc-link.toc-title')
+    }
+
     // TOC positioning logic (similar to BackButton)
     function adjustTOCPosition() {
-      const tocContainer = document.querySelector('.toc-container')
       if (!tocContainer) return
 
       // If not using centered layout, hide TOC
@@ -87,7 +98,6 @@ const { toc = [] }: TOCProps = Astro.props
 
     // Hide TOC if there are no headings (only title)
     function checkTOCVisibility() {
-      const tocContainer = document.querySelector('.toc-container')
       const tocItems = document.querySelectorAll('.toc-item:not(.toc-level-0)')
 
       if (tocContainer && tocItems.length === 0) {
@@ -97,42 +107,53 @@ const { toc = [] }: TOCProps = Astro.props
 
     // Add click handlers to TOC links using event delegation
     function addTOCEventListeners() {
-      const tocContainer = document.querySelector('.toc-container')
       if (!tocContainer) return
 
+      // Remove existing event listener to prevent duplicates
+      tocContainer.removeEventListener('click', handleTOCClick)
+
       // Use event delegation for better performance and reliability
-      tocContainer.addEventListener('click', function (e) {
-        const link = e.target.closest('.toc-link')
-        if (!link) return
+      tocContainer.addEventListener('click', handleTOCClick)
+    }
 
-        e.preventDefault()
+    // Handle TOC click events
+    function handleTOCClick(e) {
+      const link = e.target.closest('.toc-link')
+      if (!link) return
 
-        if (link.classList.contains('toc-title')) {
-          // Back to top
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-          history.pushState(null, null, '#')
-        } else {
-          // TOC item
-          const href = link.getAttribute('href')
-          if (href && href.startsWith('#')) {
-            const targetId = href.substring(1)
-            const target = document.getElementById(targetId)
-            if (target) {
-              const rect = target.getBoundingClientRect()
-              const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-              const offset = rect.top + scrollTop - 96 // 6rem = 96px
-              window.scrollTo({ top: offset, behavior: 'smooth' })
-              history.pushState(null, null, href)
-            }
+      e.preventDefault()
+
+      if (link.classList.contains('toc-title')) {
+        // Back to top
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        history.pushState(null, null, '#')
+      } else {
+        // TOC item
+        const href = link.getAttribute('href')
+        if (href && href.startsWith('#')) {
+          const targetId = href.substring(1)
+          const target = document.getElementById(targetId)
+          if (target) {
+            const rect = target.getBoundingClientRect()
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+            const offset = rect.top + scrollTop - 96 // 6rem = 96px
+            window.scrollTo({ top: offset, behavior: 'smooth' })
+            history.pushState(null, null, href)
           }
         }
-      })
+      }
     }
 
     // Update active TOC item based on scroll position
     function updateActiveTOCItem() {
-      const tocLinks = document.querySelectorAll('.toc-link')
-      const headings = document.querySelectorAll('h1, h2, h3')
+      // Check if cache is valid, if not, re-fetch
+      if (!tocLinks || !headings || tocLinks.length === 0 || headings.length === 0) {
+        tocLinks = document.querySelectorAll('.toc-link')
+        headings = document.querySelectorAll('h1, h2, h3')
+        titleLink = document.querySelector('.toc-link.toc-title')
+      }
+
+      if (!tocLinks || !headings) return
 
       let currentActive = null
       const scrollTop = window.pageYOffset + 100 // Offset for better detection
@@ -156,16 +177,14 @@ const { toc = [] }: TOCProps = Astro.props
         }
       })
 
-      // Always highlight the first item ("Back to top") unless another TOC item is active
-      if (!currentActive) {
-        const titleLink = document.querySelector('.toc-link.toc-title')
-        if (titleLink) {
-          titleLink.classList.add('active')
-        }
+      // Highlight "Back to top" if no other item is active
+      if (!currentActive && titleLink) {
+        titleLink.classList.add('active')
       }
     }
 
     // Initialize immediately to prevent layout shift
+    initDOMCache()
     adjustTOCPosition()
     checkTOCVisibility()
     addTOCEventListeners()
@@ -173,19 +192,26 @@ const { toc = [] }: TOCProps = Astro.props
 
     // Listen for various page load events
     document.addEventListener('astro:page-load', () => {
+      initDOMCache()
       adjustTOCPosition()
       addTOCEventListeners()
       updateActiveTOCItem() // Update active state after page load
     })
     document.addEventListener('DOMContentLoaded', () => {
-      adjustTOCPosition()
-      addTOCEventListeners()
-      updateActiveTOCItem() // Update active state after DOM ready
+      // Only initialize if not already done by astro:page-load
+      if (!tocContainer) {
+        initDOMCache()
+        adjustTOCPosition()
+        addTOCEventListeners()
+        updateActiveTOCItem() // Update active state after DOM ready
+      }
     })
 
     // Re-initialize on resize and scroll
     window.addEventListener('resize', adjustTOCPosition)
-    window.addEventListener('scroll', updateActiveTOCItem)
+    window.addEventListener('scroll', () => {
+      updateActiveTOCItem()
+    })
   })()
 </script>
 
@@ -200,6 +226,12 @@ const { toc = [] }: TOCProps = Astro.props
 
   .toc-container.fixed-position {
     opacity: 1;
+    position: fixed;
+    top: 12rem; /* Position below BackButton */
+    margin-top: 0;
+    padding-left: 1rem;
+    z-index: 10;
+    left: auto;
   }
 
   .toc-nav {
@@ -208,27 +240,24 @@ const { toc = [] }: TOCProps = Astro.props
     line-height: 1.5;
   }
 
-  .toc-list {
-    list-style: none;
-    list-style-type: none;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .toc-list li {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
+  .toc-list,
+  .toc-list li,
   .toc-item {
     list-style: none;
-    list-style-type: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .toc-item::before {
-    display: none;
+  .prose .toc-container .toc-list {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+  .prose .toc-container .toc-list li {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
+  .toc-item::before,
   .toc-item::marker {
     display: none;
   }
@@ -317,14 +346,6 @@ const { toc = [] }: TOCProps = Astro.props
   .toc-link.active::before {
     opacity: 0.8;
     background-color: var(--text-primary);
-  }
-
-  .toc-container.fixed-position {
-    position: fixed;
-    top: 12rem; /* Position below BackButton */
-    margin-top: 0;
-    padding-left: 1rem;
-    z-index: 10;
   }
 
   /* Hide on mobile and when space is limited */
