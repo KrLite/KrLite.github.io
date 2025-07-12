@@ -97,7 +97,7 @@
 
     setTimeout(() => {
       tagDisplay?.classList.add('active')
-      if (tagText) tagText.textContent = tagValue
+      if (tagText) tagText.textContent = truncateText(tagValue)
     }, 300)
   }
 
@@ -128,11 +128,28 @@
     }
   }
 
+  // Truncate text to max 24 characters
+  function truncateText(text: string, maxLength: number = 24): string {
+    if (text.length <= maxLength) {
+      return text
+    }
+    return text.substring(0, maxLength) + '...'
+  }
+
   addButton?.addEventListener('click', switchToInput)
 
   tagInput?.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement
-    tagValue = target.value
+    const inputValue = target.value
+
+    // Limit input to 24 characters
+    if (inputValue.length > 24) {
+      target.value = inputValue.substring(0, 24)
+      tagValue = inputValue // Keep original value for display truncation
+    } else {
+      tagValue = inputValue
+    }
+
     updateConfirmButton()
   })
 
@@ -182,6 +199,7 @@
     gap: 0.5rem;
     position: relative;
     width: 100%;
+    min-height: 40px;
   }
 
   .add-button {
@@ -205,6 +223,12 @@
     z-index: 1;
     opacity: 1;
     visibility: visible;
+    overflow: visible;
+    will-change: transform;
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
   }
 
   .add-button.hidden {
@@ -224,10 +248,15 @@
     fill: currentColor;
     width: 1rem;
     height: 1rem;
+    position: relative;
+    display: block;
+    transform: translateZ(0);
   }
 
   .add-button:hover {
     opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1);
+    -webkit-transform: translate(-50%, -50%) scale(1);
   }
 
   .input-state {
@@ -369,6 +398,7 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.25s ease-out;
+    will-change: transform, opacity;
   }
 
   .tag-display > * {
