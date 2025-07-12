@@ -69,7 +69,7 @@ date: {
 
 - Post Settings
 
-```text
+```ts
 post: {
   // Show reading time in posts
   readingTime: false,
