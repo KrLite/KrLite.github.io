@@ -1,5 +1,5 @@
 ---
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 ---
 
 <a href="/" class="back-button">
@@ -17,9 +17,9 @@ import { SITE } from '@/config'
 <script
   is:inline
   define:vars={{
-    contentWidth: SITE.contentWidth,
-    centeredLayout: SITE.centeredLayout,
-    toc: SITE.toc
+    contentWidth: themeConfig.general.contentWidth,
+    centeredLayout: themeConfig.general.centeredLayout,
+    toc: themeConfig.post.toc
   }}
 >
   ;(function () {
@@ -38,7 +38,11 @@ import { SITE } from '@/config'
       // Calculate available margin space for positioning
       const pageWidth = window.innerWidth
       const contentWidthValue = parseFloat(contentWidth)
-      const margin = (pageWidth - contentWidthValue * 16) / 2
+      // Apply the same minimum width logic as in BaseLayout
+      const widthValue = Math.min(contentWidthValue, 50)
+      const shouldUseCustomWidth = widthValue > 25
+      const finalWidthValue = shouldUseCustomWidth ? widthValue : 25
+      const margin = (pageWidth - finalWidthValue * 16) / 2
       const baseMinSpace = 11 * 16 // Base minimum space needed
       // If toc is enabled, need additional 2.5rem (40px) space
       const minSpace = toc ? baseMinSpace + 40 : baseMinSpace

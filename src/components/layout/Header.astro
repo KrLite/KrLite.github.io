@@ -1,13 +1,13 @@
 ---
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 import ThemeToggle from '@/components/ui/ThemeToggle.astro'
 ---
 
 <header>
   <nav>
     <div class="logo-container">
-      {SITE.favicon && <img src="/favicon.svg" alt="favicon" class="favicon" />}
-      <a href="/">{SITE.title}</a>
+      {themeConfig.general.favicon && <img src="/favicon.svg" alt="favicon" class="favicon" />}
+      <a href="/">{themeConfig.site.title}</a>
     </div>
     <ThemeToggle />
   </nav>

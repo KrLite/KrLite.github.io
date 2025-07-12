@@ -1,7 +1,7 @@
 ---
 import FormattedDate from '@/components/features/FormattedDate.astro'
 import type { CollectionEntry } from 'astro:content'
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 
 interface Props {
   posts: CollectionEntry<'posts'>[]
@@ -15,15 +15,15 @@ const { posts } = Astro.props
     posts.map((post) => (
       <li>
         <a href={`/${post.id}/`}>
-          <div class={`post-item ${!SITE.dateOnRight ? 'date-left' : ''}`}>
-            {!SITE.dateOnRight && (
+          <div class={`post-item ${!themeConfig.date.dateOnRight ? 'date-left' : ''}`}>
+            {!themeConfig.date.dateOnRight && (
               <p class="date font-features">
                 <FormattedDate date={post.data.pubDate} />
               </p>
             )}
             <p class="title">{post.data.title}</p>
-            {SITE.dateOnRight && <div class="divider" />}
-            {SITE.dateOnRight && (
+            {themeConfig.date.dateOnRight && <div class="divider" />}
+            {themeConfig.date.dateOnRight && (
               <p class="date font-features">
                 <FormattedDate date={post.data.pubDate} />
               </p>

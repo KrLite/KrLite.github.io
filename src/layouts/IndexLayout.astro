@@ -5,7 +5,7 @@ import Header from '@/components/layout/Header.astro'
 import Footer from '@/components/layout/Footer.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import GradientMask from '@/components/ui/GradientMask.astro'
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 
 const { title, description } = Astro.props
 ---
@@ -21,7 +21,7 @@ const { title, description } = Astro.props
       <slot />
     </main>
     {
-      SITE.footer && (
+      themeConfig.general.footer && (
         <div>
           <Footer />
         </div>

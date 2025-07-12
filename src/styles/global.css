@@ -133,17 +133,16 @@ html.view-transitions-enabled {
   view-transition-name: enabled;
 }
 
-@view-transition {
-  navigation: auto;
-}
-
 html.view-transitions-disabled {
   view-transition-name: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  @view-transition {
-    navigation: none;
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
 }
 

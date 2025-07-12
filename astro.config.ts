@@ -10,11 +10,12 @@ import rehypeCleanup from './src/plugins/rehype-cleanup.mjs'
 import rehypeImageProcessor from './src/plugins/rehype-image-processor.mjs'
 import rehypeCopyCode from './src/plugins/rehype-copy-code.mjs'
 import remarkTOC from './src/plugins/remark-toc.mjs'
-import { SITE } from './src/config'
+import { themeConfig } from './src/config'
+import { imageConfig } from './src/utils/image-config'
 import path from 'path'
 
 export default defineConfig({
-  site: SITE.website,
+  site: themeConfig.site.website,
   devToolbar: {
     enabled: false
   },
@@ -24,7 +25,8 @@ export default defineConfig({
   },
   image: {
     service: {
-      entrypoint: 'astro/assets/services/sharp'
+      entrypoint: 'astro/assets/services/sharp',
+      config: imageConfig
     }
   },
   markdown: {

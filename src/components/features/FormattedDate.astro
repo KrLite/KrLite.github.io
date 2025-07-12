@@ -1,6 +1,6 @@
 ---
+import { themeConfig } from '@/config'
 import { formatDate } from '@/utils/date'
-import { SITE } from '@/config'
 
 interface Props {
   date: Date
@@ -12,8 +12,9 @@ const { date, format } = Astro.props
 
 <time
   datetime={date.toISOString()}
-  class={!SITE.dateOnRight &&
-  (SITE.dateFormat === 'MONTH DAY YYYY' || SITE.dateFormat === 'DAY MONTH YYYY')
+  class={!themeConfig.date.dateOnRight &&
+  (themeConfig.date.dateFormat === 'MONTH DAY YYYY' ||
+    themeConfig.date.dateFormat === 'DAY MONTH YYYY')
     ? 'date-left'
     : ''}
 >

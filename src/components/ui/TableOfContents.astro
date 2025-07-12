@@ -1,5 +1,5 @@
 ---
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 import type { TOCProps } from '@/types'
 
 const { toc = [] }: TOCProps = Astro.props
@@ -38,14 +38,12 @@ const { toc = [] }: TOCProps = Astro.props
 <script
   is:inline
   define:vars={{
-    contentWidth: SITE.contentWidth,
-    centeredLayout: SITE.centeredLayout,
-    toc: SITE.toc
+    contentWidth: themeConfig.general.contentWidth,
+    centeredLayout: themeConfig.general.centeredLayout,
+    toc: themeConfig.post.toc
   }}
 >
   ;(function () {
-    let isInitialized = false
-
     // TOC positioning logic (similar to BackButton)
     function adjustTOCPosition() {
       const tocContainer = document.querySelector('.toc-container')
@@ -60,7 +58,11 @@ const { toc = [] }: TOCProps = Astro.props
       // Calculate available margin space for positioning
       const pageWidth = window.innerWidth
       const contentWidthValue = parseFloat(contentWidth)
-      const margin = (pageWidth - contentWidthValue * 16) / 2
+      // Apply the same minimum width logic as in BaseLayout
+      const widthValue = Math.min(contentWidthValue, 50)
+      const shouldUseCustomWidth = widthValue > 25
+      const finalWidthValue = shouldUseCustomWidth ? widthValue : 25
+      const margin = (pageWidth - finalWidthValue * 16) / 2
       const baseMinSpace = 11 * 16 // Base minimum space needed
       // If toc is enabled, need additional 2.5rem (40px) space
       const minSpace = toc ? baseMinSpace + 40 : baseMinSpace
@@ -73,6 +75,9 @@ const { toc = [] }: TOCProps = Astro.props
         // If toc is enabled, move 2.5rem (40px) further left
         const leftPosition = toc ? basePosition - 40 : basePosition
         tocContainer.style.left = `${leftPosition}px`
+
+        // Update active state after TOC becomes visible
+        setTimeout(() => updateActiveTOCItem(), 100)
       } else {
         tocContainer.style.display = 'none'
         tocContainer.classList.remove('fixed-position')
@@ -160,32 +165,23 @@ const { toc = [] }: TOCProps = Astro.props
       }
     }
 
-    function initTOC() {
-      if (isInitialized) return
-
-      adjustTOCPosition()
-      checkTOCVisibility()
-      addTOCEventListeners()
-      updateActiveTOCItem() // Initial active state
-
-      isInitialized = true
-    }
-
-    // Initialize on page load
-    function handlePageLoad() {
-      initTOC()
-    }
+    // Initialize immediately to prevent layout shift
+    adjustTOCPosition()
+    checkTOCVisibility()
+    addTOCEventListeners()
+    updateActiveTOCItem() // Set initial active state immediately
 
     // Listen for various page load events
-    document.addEventListener('astro:page-load', handlePageLoad)
-    document.addEventListener('DOMContentLoaded', handlePageLoad)
-
-    // Also initialize immediately if DOM is already loaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', handlePageLoad)
-    } else {
-      handlePageLoad()
-    }
+    document.addEventListener('astro:page-load', () => {
+      adjustTOCPosition()
+      addTOCEventListeners()
+      updateActiveTOCItem() // Update active state after page load
+    })
+    document.addEventListener('DOMContentLoaded', () => {
+      adjustTOCPosition()
+      addTOCEventListeners()
+      updateActiveTOCItem() // Update active state after DOM ready
+    })
 
     // Re-initialize on resize and scroll
     window.addEventListener('resize', adjustTOCPosition)
@@ -198,6 +194,12 @@ const { toc = [] }: TOCProps = Astro.props
     width: 12rem;
     position: relative;
     left: -0.175em;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+  }
+
+  .toc-container.fixed-position {
+    opacity: 1;
   }
 
   .toc-nav {

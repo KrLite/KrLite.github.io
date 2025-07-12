@@ -14,25 +14,33 @@ import XPOST from '@/components/ui/XPOST.astro'
 import CopyCode from '@/components/ui/CopyCode.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 
 const { title, pubDate, readingTime, toc } = Astro.props as PostLayoutProps
 ---
 
-<BaseLayout title={`${title} · ${SITE.title}`} description={SITE.description} type="post">
-  <BaseHead title={`${title} · ${SITE.title}`} description={SITE.description} slot="head" />
+<BaseLayout
+  title={`${title} · ${themeConfig.site.title}`}
+  description={themeConfig.site.description}
+  type="post"
+>
+  <BaseHead
+    title={`${title} · ${themeConfig.site.title}`}
+    description={themeConfig.site.description}
+    slot="head"
+  />
   <div class="post-container">
     <main>
       <div class="prose">
         <GradientMask />
         <BackButton />
-        {SITE.toc && <TableOfContents toc={toc} />}
+        {themeConfig.post.toc && <TableOfContents toc={toc} />}
         <div class="title">
           <h1>{title}</h1>
           <div class="date">
             <FormattedDate date={pubDate} />
             {
-              SITE.readingTime && readingTime && (
+              themeConfig.post.readingTime && readingTime && (
                 <span class="reading-time">
                   <span class="separator">·</span>
                   {readingTime.text}
@@ -48,8 +56,8 @@ const { title, pubDate, readingTime, toc } = Astro.props as PostLayoutProps
     <CopyCode />
     <GitHubCard />
     <XPOST />
-    {SITE.imageViewer && <ImageViewer />}
-    {SITE.footer && <Footer />}
+    {themeConfig.post.imageViewer && <ImageViewer />}
+    {themeConfig.general.footer && <Footer />}
   </div>
 </BaseLayout>
 

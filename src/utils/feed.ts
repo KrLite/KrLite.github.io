@@ -1,10 +1,10 @@
 import { getCollection, type CollectionEntry } from 'astro:content'
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 import type { APIContext } from 'astro'
 
 export async function generateRSS(context: APIContext) {
   const posts = await getCollection('posts')
-  const filteredPosts = posts.filter((post) => !post.id.startsWith('_'))
+  const filteredPosts = posts.filter((post: CollectionEntry<'posts'>) => !post.id.startsWith('_'))
   const sortedPosts = filteredPosts.sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) =>
       b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -13,9 +13,9 @@ export async function generateRSS(context: APIContext) {
   const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${SITE.title}</title>
+    <title>${themeConfig.site.title}</title>
     <link>${context.site}</link>
-    <description>${SITE.description}</description>
+    <description>${themeConfig.site.description}</description>
     <language>zh-CN</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${context.site}/rss.xml" rel="self" type="application/rss+xml" />
@@ -44,7 +44,7 @@ export async function generateRSS(context: APIContext) {
 
 export async function generateAtom(context: APIContext) {
   const posts = await getCollection('posts')
-  const filteredPosts = posts.filter((post) => !post.id.startsWith('_'))
+  const filteredPosts = posts.filter((post: CollectionEntry<'posts'>) => !post.id.startsWith('_'))
   const sortedPosts = filteredPosts.sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) =>
       b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -52,8 +52,8 @@ export async function generateAtom(context: APIContext) {
 
   const atom = `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>${SITE.title}</title>
-  <subtitle>${SITE.description}</subtitle>
+  <title>${themeConfig.site.title}</title>
+  <subtitle>${themeConfig.site.description}</subtitle>
   <link href="${context.site}/atom.xml" rel="self" type="application/atom+xml" />
   <link href="${context.site}" />
   <id>${context.site}</id>

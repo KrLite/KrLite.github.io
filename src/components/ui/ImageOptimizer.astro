@@ -1,0 +1,100 @@
+---
+import { Image } from 'astro:assets'
+import type { ImageOptimizerProps } from '../../types/component.types'
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  quality = 85,
+  format = 'webp',
+  loading = 'lazy',
+  decoding = 'async',
+  class: className,
+  caption,
+  priority = false
+} = Astro.props as ImageOptimizerProps
+
+// Use eager loading for priority images
+const actualLoading = priority ? 'eager' : loading
+
+// Generate responsive image sizes
+const sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+---
+
+<figure class={`optimized-image ${className || ''}`}>
+  {
+    typeof src === 'string' ? (
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading={actualLoading}
+        decoding={decoding}
+        fetchpriority={priority ? 'high' : 'auto'}
+        sizes={sizes}
+        class="responsive-image"
+      />
+    ) : (
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        quality={quality}
+        format={format}
+        loading={actualLoading}
+        decoding={decoding}
+        fetchpriority={priority ? 'high' : 'auto'}
+        sizes={sizes}
+        class="responsive-image"
+      />
+    )
+  }
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .optimized-image {
+    margin: 1.25em 0;
+    text-align: center;
+  }
+
+  .optimized-image .responsive-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+    background-color: var(--bg-secondary);
+  }
+
+  .optimized-image figcaption {
+    color: var(--text-secondary);
+    font-size: var(--font-size-s);
+    margin-top: 0.75em;
+    text-align: center;
+  }
+
+  /* Loading state */
+  .optimized-image .responsive-image[loading='lazy'] {
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Hover effect for interactive images */
+  .optimized-image .responsive-image:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+  }
+</style>

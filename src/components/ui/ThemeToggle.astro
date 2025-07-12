@@ -1,9 +1,9 @@
 ---
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 ---
 
 {
-  SITE.themeToggle && (
+  themeConfig.general.themeToggle && (
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
       <div class="theme-icon hollow-circle" />
       <div class="theme-icon solid-circle" />

@@ -1,30 +1,31 @@
 ---
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 import TransitionWrapper from '@/components/layout/TransitionWrapper.astro'
 import type { LayoutProps } from '@/types'
 
 type Props = LayoutProps
 
 const { type = 'page' } = Astro.props
-const contentWidth = SITE.contentWidth
+const language = themeConfig.site.language || 'en-US'
+const contentWidth = themeConfig.general.contentWidth
 const widthValue = Math.min(parseFloat(contentWidth), 50)
 const shouldUseCustomWidth = widthValue > 25
 const finalWidth = shouldUseCustomWidth ? `${widthValue}rem` : '25rem'
-
-const language = SITE.language || 'en-US'
 ---
 
 <html
   lang={language}
-  class={SITE.fadeAnimation ? 'view-transitions-enabled' : 'view-transitions-disabled'}
-  {...SITE.fadeAnimation ? { 'transition:animate': 'initial' } : {}}
+  class={themeConfig.general.fadeAnimation
+    ? 'view-transitions-enabled'
+    : 'view-transitions-disabled'}
+  {...themeConfig.general.fadeAnimation ? { 'transition:animate': 'initial' } : {}}
 >
   <head>
     <slot name="head" />
   </head>
   <body
-    data-centered={SITE.centeredLayout}
-    class={!SITE.fadeAnimation ? 'no-fade' : ''}
+    data-centered={themeConfig.general.centeredLayout}
+    class={!themeConfig.general.fadeAnimation ? 'no-fade' : ''}
     style={`
       max-width: ${finalWidth};
       ${shouldUseCustomWidth ? `--content-width: ${widthValue}rem;` : ''}

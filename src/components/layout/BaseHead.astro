@@ -1,7 +1,7 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 import type { BaseHeadProps } from '@/types/component.types'
 import 'katex/dist/katex.min.css'
 
@@ -13,7 +13,7 @@ const { title, description } = Astro.props as BaseHeadProps
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-{SITE.fadeAnimation && <meta name="view-transition" content="same-origin" />}
+{themeConfig.general.fadeAnimation && <meta name="view-transition" content="same-origin" />}
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -28,7 +28,7 @@ const { title, description } = Astro.props as BaseHeadProps
 <link
   rel="alternate"
   type="application/rss+xml"
-  title={SITE.title}
+  title={themeConfig.site.title}
   href={new URL('rss.xml', Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
@@ -38,7 +38,7 @@ const { title, description } = Astro.props as BaseHeadProps
 
 <!-- Primary Meta Tags -->
 <title>
-  {title || SITE.title}
+  {title || themeConfig.site.title}
 </title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
@@ -58,7 +58,7 @@ const { title, description } = Astro.props as BaseHeadProps
 <meta property="twitter:image" content={new URL('/chiri-og.png', Astro.url)} />
 
 <!-- Transitions Initialization -->
-<script is:inline define:vars={{ fadeAnimation: SITE.fadeAnimation }}>
+<script is:inline define:vars={{ fadeAnimation: themeConfig.general.fadeAnimation }}>
   function initMotionPref(doc = document) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const supportsViewTransitions = 'startViewTransition' in document
@@ -69,6 +69,24 @@ const { title, description } = Astro.props as BaseHeadProps
       'disable-transitions',
       !fadeAnimation || !supportsViewTransitions
     )
+
+    // Dynamically control view transition navigation behavior
+    let viewTransitionStyle = doc.getElementById('view-transition-style')
+
+    if (fadeAnimation && supportsViewTransitions && !prefersReducedMotion) {
+      // Enable view transition navigation
+      if (!viewTransitionStyle) {
+        viewTransitionStyle = doc.createElement('style')
+        viewTransitionStyle.id = 'view-transition-style'
+        viewTransitionStyle.textContent = '@view-transition { navigation: auto; }'
+        doc.head.appendChild(viewTransitionStyle)
+      }
+    } else {
+      // Disable view transition navigation
+      if (viewTransitionStyle) {
+        viewTransitionStyle.remove()
+      }
+    }
 
     doc.documentElement.classList.add('js')
   }

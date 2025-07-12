@@ -1,5 +1,5 @@
 ---
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 const today = new Date()
 ---
 
@@ -10,7 +10,7 @@ const today = new Date()
         &copy;
         {today.getFullYear()}
       </span>
-      {SITE.author}
+      {themeConfig.site.author}
     </div>
     <div class="powered-by">
       Powered by{' '}

@@ -1,5 +1,5 @@
 ---
-import { SITE } from '@/config'
+import { themeConfig } from '@/config'
 import type { TransitionProps } from '@/types'
 
 type Props = TransitionProps
@@ -9,7 +9,7 @@ const transitionName = type === 'post' ? 'post-content' : 'page-content'
 ---
 
 {
-  SITE.fadeAnimation ? (
+  themeConfig.general.fadeAnimation ? (
     <div transition:name={transitionName} transition:animate="initial" class={className}>
       <slot />
     </div>

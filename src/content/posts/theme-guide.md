@@ -14,12 +14,14 @@ Chiri is a minimal blog theme built with [Astro](https://astro.build), offering 
 
 ## Main Files & Directories
 
-- `src/content/about/about.md` - Edit the about section of the index page. Leave it empty if you don’t want any content.
+- `src/content/about/about.md` - Edit the about section of the index page. Leave it empty if you don't want any content.
 - `src/content/posts/` - All blog posts are stored here
 - `src/config.ts` - Configure main site info and settings ↓
 
+- Site Info
+
 ```ts
-export const SITE = {
+site: {
   // Site domain
   website: 'https://astro-chiri.netlify.app/',
   // Site title
@@ -29,36 +31,54 @@ export const SITE = {
   // Site description
   description: 'Minimal blog built by Astro',
   // Default language
-  language: 'en-US',
+  language: 'en-US'
+},
+```
 
+- General Settings
+
+```ts
+general: {
   // Content area width
   contentWidth: '35rem',
   // Use centered layout (false for left-aligned)
   centeredLayout: true,
   // Show favicon on index page
   favicon: false,
-  // Show theme toggle button
+  // Show theme toggle button (uses system theme by default)
   themeToggle: false,
   // Show footer
   footer: true,
   // Enable fade animations
-  fadeAnimation: true,
+  fadeAnimation: true
+},
+```
 
+- Date Settings
+
+```ts
+date: {
   // Date format: YYYY-MM-DD, MM-DD-YYYY, DD-MM-YYYY, MONTH DAY YYYY, DAY MONTH YYYY
   dateFormat: 'YYYY-MM-DD',
   // Date separator: . - / (except for MONTH DAY YYYY and DAY MONTH YYYY)
   dateSeparator: '.',
   // Date position in post list (true for right, false for left)
-  dateOnRight: true,
+  dateOnRight: true
+},
+```
 
+- Post Settings
+
+```text
+post: {
   // Show reading time in posts
   readingTime: false,
-  // Show table of contents
+  // Show the table of contents (when there is enough page width)
   toc: true,
   // Enable image viewer
   imageViewer: true,
   // Enable copy button in code blocks
-  copyCode: false
+  copyCode: true
 }
 ```
 
@@ -66,7 +86,7 @@ export const SITE = {
 
 Only `title` and `pubDate` are required fields
 
-```md
+```ts
 ---
 title: 'Post Title'
 pubDate: '2025-07-10'
