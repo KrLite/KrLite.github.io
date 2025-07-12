@@ -419,6 +419,7 @@
 .prose [data-footnote-ref],
 .prose [data-footnote-backref] {
   color: var(--text-secondary);
+  opacity: 0.875;
   text-decoration: none;
   transition: color 0.2s ease-out;
   padding-right: 0.5em;
