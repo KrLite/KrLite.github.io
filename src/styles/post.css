@@ -248,6 +248,7 @@
   width: 1.5rem;
   text-align: left;
   color: var(--text-secondary);
+  opacity: 0.75;
   font-variant-numeric: tabular-nums;
   font-feature-settings:
     'tnum' 1,
@@ -298,7 +299,7 @@
   position: relative;
   background: var(--code-bg);
   border: 1.35px solid var(--text-tertiary);
-  opacity: 0.75;
+  opacity: 0.5;
 }
 
 .prose ul.contains-task-list li.task-list-item input[type='checkbox']:checked::before {
