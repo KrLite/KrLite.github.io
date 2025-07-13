@@ -98,14 +98,14 @@ html.dark {
 }
 
 html {
+  background-color: var(--bg);
+  scroll-behavior: smooth;
   scrollbar-gutter: stable;
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg);
   font-family: var(--font-sans);
   font-feature-settings: 'ss03' 1;
   font-size: var(--font-size-m);
