@@ -8,7 +8,7 @@ const { toc = [] }: TOCProps = Astro.props
 <div class="toc-container" id="toc">
   <nav class="toc-nav">
     <ul class="toc-list" id="toc-list">
-      <!-- Back to top link - always available for navigation -->
+      <!-- Back to top link -->
       <li class="toc-item toc-level-0">
         <a href="#" class="toc-link toc-title" title="Back to top" data-text="Back to top">
           Back to top
@@ -19,13 +19,7 @@ const { toc = [] }: TOCProps = Astro.props
       {
         toc.map((item) => (
           <li class={`toc-item toc-level-${item.level}`}>
-            <a
-              href={`#${item.id}`}
-              class="toc-link"
-              title={item.text}
-              data-text={item.text}
-              data-heading-id={item.id}
-            >
+            <a href={`#${item.id}`} class="toc-link" title={item.text} data-text={item.text}>
               {item.text}
             </a>
           </li>
@@ -87,20 +81,15 @@ const { toc = [] }: TOCProps = Astro.props
       const pageWidth = window.innerWidth
       const contentWidthValue = parseFloat(contentWidth)
       const widthValue = Math.min(contentWidthValue, 50)
-      const shouldUseCustomWidth = widthValue > 25
-      const finalWidthValue = shouldUseCustomWidth ? widthValue : 25
+      const finalWidthValue = widthValue > 25 ? widthValue : 25
       const margin = (pageWidth - finalWidthValue * 16) / 2
-      const baseMinSpace = 11 * 16 // Base minimum space needed
-      const minSpace = toc ? baseMinSpace + 40 : baseMinSpace
+      const minSpace = toc ? 216 : 176 // 11rem + 40px if toc enabled
 
       if (margin >= minSpace) {
         tocContainer.style.display = 'block'
         tocContainer.classList.add('fixed-position')
-        const basePosition = margin - baseMinSpace
-        const leftPosition = toc ? basePosition - 40 : basePosition
+        const leftPosition = toc ? margin - 176 - 40 : margin - 176
         tocContainer.style.left = `${leftPosition}px`
-
-        // Update active state after TOC becomes visible
         setTimeout(updateActiveTOCItem, 100)
       } else {
         tocContainer.style.display = 'none'
@@ -127,11 +116,9 @@ const { toc = [] }: TOCProps = Astro.props
       e.preventDefault()
 
       if (link.classList.contains('toc-title')) {
-        // Back to top
         window.scrollTo({ top: 0, behavior: 'smooth' })
         history.pushState(null, null, '#')
       } else {
-        // TOC item
         const href = link.getAttribute('href')
         if (href && href.startsWith('#')) {
           const targetId = href.substring(1)
@@ -139,21 +126,12 @@ const { toc = [] }: TOCProps = Astro.props
           if (target) {
             const rect = target.getBoundingClientRect()
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-            const offset = rect.top + scrollTop - 96 // 6rem = 96px
+            const offset = rect.top + scrollTop - 96
             window.scrollTo({ top: offset, behavior: 'smooth' })
             history.pushState(null, null, href)
           }
         }
       }
-    }
-
-    // Add event listeners
-    function addTOCEventListeners() {
-      if (!tocContainer) return
-
-      // Remove existing event listener to prevent duplicates
-      tocContainer.removeEventListener('click', handleTOCClick)
-      tocContainer.addEventListener('click', handleTOCClick)
     }
 
     // Update active TOC item based on scroll position
@@ -163,9 +141,8 @@ const { toc = [] }: TOCProps = Astro.props
       }
 
       let currentActive = null
-      const scrollTop = window.pageYOffset + 100 // Offset for better detection
+      const scrollTop = window.pageYOffset + 100
 
-      // Find the current active heading
       headings.forEach((heading, index) => {
         if (index === 0 && heading.tagName === 'H1') return
 
@@ -177,10 +154,8 @@ const { toc = [] }: TOCProps = Astro.props
         }
       })
 
-      // Clear all active states
       tocLinks.forEach((link) => link.classList.remove('active'))
 
-      // Set active state
       if (currentActive && headingMap.has(currentActive)) {
         const activeLink = headingMap.get(currentActive)
         activeLink.classList.add('active')
@@ -189,37 +164,36 @@ const { toc = [] }: TOCProps = Astro.props
       }
     }
 
-    // Initialize TOC with retry mechanism
+    // Initialize TOC
     function initializeTOC() {
       if (!initDOMCache()) {
-        // If TOC container doesn't exist yet, retry after a short delay
         setTimeout(initializeTOC, 100)
         return
       }
 
       adjustTOCPosition()
       checkTOCVisibility()
-      addTOCEventListeners()
+
+      // Add event listeners
+      tocContainer.removeEventListener('click', handleTOCClick)
+      tocContainer.addEventListener('click', handleTOCClick)
+
       updateActiveTOCItem()
     }
 
     // Debounced scroll handler
     function handleScroll() {
       if (scrollTimeout) clearTimeout(scrollTimeout)
-      scrollTimeout = setTimeout(updateActiveTOCItem, 16) // ~60fps
+      scrollTimeout = setTimeout(updateActiveTOCItem, 16)
     }
 
-    // Initialize with a small delay to ensure DOM is ready
+    // Initialize
     setTimeout(initializeTOC, 10)
 
     // Event listeners
     document.addEventListener('astro:page-load', () => {
-      tocContainer = null // Reset container reference
+      tocContainer = null
       setTimeout(initializeTOC, 50)
-    })
-
-    document.addEventListener('DOMContentLoaded', () => {
-      if (!tocContainer) initializeTOC()
     })
 
     window.addEventListener('resize', adjustTOCPosition)
@@ -239,7 +213,7 @@ const { toc = [] }: TOCProps = Astro.props
   .toc-container.fixed-position {
     opacity: 1;
     position: fixed;
-    top: 12rem; /* Position below BackButton */
+    top: 12rem;
     margin-top: 0;
     padding-left: 1rem;
     z-index: 10;
@@ -360,7 +334,7 @@ const { toc = [] }: TOCProps = Astro.props
     background-color: var(--text-primary);
   }
 
-  /* Hide on mobile and when space is limited */
+  /* Hide on mobile */
   @media (max-width: 768px) {
     .toc-container {
       display: none !important;
