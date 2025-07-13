@@ -8,7 +8,7 @@ const { toc = [] }: TOCProps = Astro.props
 <div class="toc-container" id="toc">
   <nav class="toc-nav">
     <ul class="toc-list" id="toc-list">
-      <!-- Back to top link -->
+      <!-- Back to top link - always available for navigation -->
       <li class="toc-item toc-level-0">
         <a href="#" class="toc-link toc-title" title="Back to top" data-text="Back to top">
           Back to top
@@ -48,12 +48,38 @@ const { toc = [] }: TOCProps = Astro.props
     let tocLinks = null
     let headings = null
     let titleLink = null
+    // Add efficient Map lookup
+    const headingMap = new Map()
 
     function initDOMCache() {
       tocContainer = document.querySelector('.toc-container')
       tocLinks = document.querySelectorAll('.toc-link')
       headings = document.querySelectorAll('h1, h2, h3')
       titleLink = document.querySelector('.toc-link.toc-title')
+
+      // Build heading map for efficient lookup
+      buildHeadingMap()
+    }
+
+    // Cache DOM queries to avoid repeated lookups
+    function refreshDOMCache() {
+      tocLinks = document.querySelectorAll('.toc-link')
+      headings = document.querySelectorAll('h1, h2, h3')
+      titleLink = document.querySelector('.toc-link.toc-title')
+      buildHeadingMap()
+    }
+
+    function buildHeadingMap() {
+      headingMap.clear()
+      if (!tocLinks) return
+
+      tocLinks.forEach((link) => {
+        const href = link.getAttribute('href')
+        if (href && href.startsWith('#')) {
+          const id = href.substring(1)
+          headingMap.set(id, link)
+        }
+      })
     }
 
     // TOC positioning logic (similar to BackButton)
@@ -98,7 +124,10 @@ const { toc = [] }: TOCProps = Astro.props
 
     // Hide TOC if there are no headings (only title)
     function checkTOCVisibility() {
-      const tocItems = document.querySelectorAll('.toc-item:not(.toc-level-0)')
+      // Use cached tocLinks if available, otherwise query once
+      const tocItems = tocLinks
+        ? Array.from(tocLinks).filter((link) => !link.classList.contains('toc-title'))
+        : document.querySelectorAll('.toc-item:not(.toc-level-0)')
 
       if (tocContainer && tocItems.length === 0) {
         tocContainer.style.display = 'none'
@@ -148,9 +177,7 @@ const { toc = [] }: TOCProps = Astro.props
     function updateActiveTOCItem() {
       // Check if cache is valid, if not, re-fetch
       if (!tocLinks || !headings || tocLinks.length === 0 || headings.length === 0) {
-        tocLinks = document.querySelectorAll('.toc-link')
-        headings = document.querySelectorAll('h1, h2, h3')
-        titleLink = document.querySelector('.toc-link.toc-title')
+        refreshDOMCache()
       }
 
       if (!tocLinks || !headings) return
@@ -170,16 +197,21 @@ const { toc = [] }: TOCProps = Astro.props
         }
       })
 
+      // Clear all active states first
       tocLinks.forEach((link) => {
         link.classList.remove('active')
-        if (link.getAttribute('href') === `#${currentActive}`) {
-          link.classList.add('active')
-        }
       })
 
-      // Highlight "Back to top" if no other item is active
-      if (!currentActive && titleLink) {
-        titleLink.classList.add('active')
+      // Only highlight a TOC item if we have a valid active heading
+      if (currentActive && headingMap.has(currentActive)) {
+        const activeLink = headingMap.get(currentActive)
+        activeLink.classList.add('active')
+      } else {
+        // If no heading is active (e.g., at the very top of the page),
+        // highlight "Back to top" to indicate we're at the beginning
+        if (titleLink) {
+          titleLink.classList.add('active')
+        }
       }
     }
 
@@ -192,7 +224,7 @@ const { toc = [] }: TOCProps = Astro.props
 
     // Listen for various page load events
     document.addEventListener('astro:page-load', () => {
-      initDOMCache()
+      refreshDOMCache()
       adjustTOCPosition()
       addTOCEventListeners()
       updateActiveTOCItem() // Update active state after page load
@@ -209,8 +241,16 @@ const { toc = [] }: TOCProps = Astro.props
 
     // Re-initialize on resize and scroll
     window.addEventListener('resize', adjustTOCPosition)
+
+    // Add debounced scroll listener for better performance
+    let scrollTimeout = null
     window.addEventListener('scroll', () => {
-      updateActiveTOCItem()
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout)
+      }
+      scrollTimeout = setTimeout(() => {
+        updateActiveTOCItem()
+      }, 16) // ~60fps, 16ms debounce
     })
   })()
 </script>
