@@ -5,11 +5,12 @@ import type { TransitionProps } from '@/types'
 type Props = TransitionProps
 
 const { type, class: className = '' } = Astro.props
+const fadeAnimation = themeConfig.general.fadeAnimation
 const transitionName = type === 'post' ? 'post-content' : 'page-content'
 ---
 
 {
-  themeConfig.general.fadeAnimation ? (
+  fadeAnimation ? (
     <div transition:name={transitionName} transition:animate="initial" class={className}>
       <slot />
     </div>
