@@ -38,78 +38,92 @@ const { toc = [] }: TOCProps = Astro.props
   }}
 >
   ;(function () {
-    let tocContainer = null
-    let tocLinks = null
-    let headings = null
-    let titleLink = null
-    const headingMap = new Map()
-    let scrollTimeout = null
+    // Core state
+    const state = {
+      container: null,
+      links: null,
+      headings: null,
+      titleLink: null,
+      headingMap: new Map(),
+      positions: [],
+      scrollTimeout: null,
+      hasContent: false
+    }
 
-    // Initialize DOM cache
-    function initDOMCache() {
-      tocContainer = document.querySelector('.toc-container')
-      if (!tocContainer) return false
+    // Initialize DOM elements
+    function initElements() {
+      state.container = document.querySelector('.toc-container')
+      if (!state.container) return false
 
-      tocLinks = document.querySelectorAll('.toc-link')
-      headings = document.querySelectorAll('h1, h2, h3')
-      titleLink = document.querySelector('.toc-link.toc-title')
-      buildHeadingMap()
+      state.links = document.querySelectorAll('.toc-link')
+      state.headings = document.querySelectorAll('h1, h2, h3')
+      state.titleLink = document.querySelector('.toc-link.toc-title')
+
+      // Build heading map
+      state.headingMap.clear()
+      state.links.forEach((link) => {
+        const href = link.getAttribute('href')
+        if (href?.startsWith('#')) {
+          state.headingMap.set(href.substring(1), link)
+        }
+      })
+
       return true
     }
 
-    // Build heading map for efficient lookup
-    function buildHeadingMap() {
-      headingMap.clear()
-      if (!tocLinks) return
+    // Check if content exists
+    function checkContent() {
+      if (!state.container || !state.links) return
 
-      tocLinks.forEach((link) => {
-        const href = link.getAttribute('href')
-        if (href && href.startsWith('#')) {
-          const id = href.substring(1)
-          headingMap.set(id, link)
-        }
-      })
+      const tocItems = Array.from(state.links).filter(
+        (link) => !link.classList.contains('toc-title')
+      )
+      state.hasContent = tocItems.length > 0
+
+      if (!state.hasContent) {
+        state.container.style.display = 'none'
+      }
     }
 
-    // Calculate TOC positioning
-    function adjustTOCPosition() {
-      if (!tocContainer || !centeredLayout) {
-        if (tocContainer) tocContainer.style.display = 'none'
+    // Cache heading positions
+    function cachePositions() {
+      if (!state.headings?.length) return
+
+      const scrollTop = window.pageYOffset
+      state.positions = Array.from(state.headings)
+        .filter((_, index) => !(index === 0 && state.headings[0].tagName === 'H1'))
+        .map((heading) => ({
+          id: heading.id,
+          offsetTop: heading.getBoundingClientRect().top + scrollTop
+        }))
+    }
+
+    // Adjust TOC position
+    function adjustPosition() {
+      if (!state.container || !centeredLayout || !state.hasContent) {
+        if (state.container) state.container.style.display = 'none'
         return
       }
 
       const pageWidth = window.innerWidth
-      const contentWidthValue = parseFloat(contentWidth)
-      const widthValue = Math.min(contentWidthValue, 50)
-      const finalWidthValue = widthValue > 25 ? widthValue : 25
-      const margin = (pageWidth - finalWidthValue * 16) / 2
-      const minSpace = toc ? 216 : 176 // 11rem + 40px if toc enabled
+      const contentWidthValue = Math.max(parseFloat(contentWidth), 25)
+      const margin = (pageWidth - contentWidthValue * 16) / 2
+      const minSpace = toc ? 216 : 176
 
       if (margin >= minSpace) {
-        tocContainer.style.display = 'block'
-        tocContainer.classList.add('fixed-position')
+        state.container.style.display = 'block'
+        state.container.classList.add('fixed-position')
         const leftPosition = toc ? margin - 176 - 40 : margin - 176
-        tocContainer.style.left = `${leftPosition}px`
-        setTimeout(updateActiveTOCItem, 100)
+        state.container.style.left = `${leftPosition}px`
       } else {
-        tocContainer.style.display = 'none'
-        tocContainer.classList.remove('fixed-position')
-        tocContainer.style.left = ''
+        state.container.style.display = 'none'
+        state.container.classList.remove('fixed-position')
+        state.container.style.left = ''
       }
     }
 
-    // Check if TOC should be visible based on content
-    function checkTOCVisibility() {
-      if (!tocContainer || !tocLinks) return
-
-      const tocItems = Array.from(tocLinks).filter((link) => !link.classList.contains('toc-title'))
-      if (tocItems.length === 0) {
-        tocContainer.style.display = 'none'
-      }
-    }
-
-    // Handle TOC click events
-    function handleTOCClick(e) {
+    // Handle click events
+    function handleClick(e) {
       const link = e.target.closest('.toc-link')
       if (!link) return
 
@@ -120,9 +134,8 @@ const { toc = [] }: TOCProps = Astro.props
         history.pushState(null, null, '#')
       } else {
         const href = link.getAttribute('href')
-        if (href && href.startsWith('#')) {
-          const targetId = href.substring(1)
-          const target = document.getElementById(targetId)
+        if (href?.startsWith('#')) {
+          const target = document.getElementById(href.substring(1))
           if (target) {
             const rect = target.getBoundingClientRect()
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop
@@ -134,69 +147,94 @@ const { toc = [] }: TOCProps = Astro.props
       }
     }
 
-    // Update active TOC item based on scroll position
-    function updateActiveTOCItem() {
-      if (!tocLinks || !headings || tocLinks.length === 0 || headings.length === 0) {
-        return
-      }
+    // Update active state
+    function updateActive() {
+      if (!state.links?.length || !state.positions.length) return
 
-      let currentActive = null
       const scrollTop = window.pageYOffset + 100
+      let currentActive = null
 
-      headings.forEach((heading, index) => {
-        if (index === 0 && heading.tagName === 'H1') return
-
-        const rect = heading.getBoundingClientRect()
-        const offsetTop = rect.top + window.pageYOffset
-
-        if (scrollTop >= offsetTop) {
-          currentActive = heading.id
+      // Find current active heading
+      for (let i = state.positions.length - 1; i >= 0; i--) {
+        if (scrollTop >= state.positions[i].offsetTop) {
+          currentActive = state.positions[i].id
+          break
         }
-      })
-
-      tocLinks.forEach((link) => link.classList.remove('active'))
-
-      if (currentActive && headingMap.has(currentActive)) {
-        const activeLink = headingMap.get(currentActive)
-        activeLink.classList.add('active')
-      } else if (titleLink) {
-        titleLink.classList.add('active')
-      }
-    }
-
-    // Initialize TOC
-    function initializeTOC() {
-      if (!initDOMCache()) {
-        setTimeout(initializeTOC, 100)
-        return
       }
 
-      adjustTOCPosition()
-      checkTOCVisibility()
+      // Update active state
+      state.links.forEach((link) => link.classList.remove('active'))
 
-      // Add event listeners
-      tocContainer.removeEventListener('click', handleTOCClick)
-      tocContainer.addEventListener('click', handleTOCClick)
-
-      updateActiveTOCItem()
-    }
-
-    // Debounced scroll handler
-    function handleScroll() {
-      if (scrollTimeout) clearTimeout(scrollTimeout)
-      scrollTimeout = setTimeout(updateActiveTOCItem, 16)
+      if (currentActive && state.headingMap.has(currentActive)) {
+        state.headingMap.get(currentActive).classList.add('active')
+      } else if (state.titleLink) {
+        state.titleLink.classList.add('active')
+      }
     }
 
     // Initialize
-    setTimeout(initializeTOC, 10)
+    function init(retryCount = 0) {
+      const maxRetries = 5
+
+      if (initElements()) {
+        checkContent()
+        adjustPosition()
+        cachePositions()
+
+        if (state.container) {
+          state.container.removeEventListener('click', handleClick)
+          state.container.addEventListener('click', handleClick)
+        }
+
+        updateActive()
+      } else if (retryCount < maxRetries) {
+        setTimeout(() => init(retryCount + 1), 100)
+      }
+    }
+
+    // Event handlers
+    function handleScroll() {
+      if (state.scrollTimeout) {
+        cancelAnimationFrame(state.scrollTimeout)
+      }
+      state.scrollTimeout = requestAnimationFrame(updateActive)
+    }
+
+    function handleResize() {
+      adjustPosition()
+      requestAnimationFrame(cachePositions)
+    }
+
+    // Cleanup
+    function cleanup() {
+      if (state.scrollTimeout) {
+        cancelAnimationFrame(state.scrollTimeout)
+        state.scrollTimeout = null
+      }
+
+      Object.assign(state, {
+        container: null,
+        links: null,
+        headings: null,
+        titleLink: null,
+        headingMap: new Map(),
+        positions: [],
+        hasContent: false
+      })
+    }
 
     // Event listeners
     document.addEventListener('astro:page-load', () => {
-      tocContainer = null
-      setTimeout(initializeTOC, 50)
+      cleanup()
+      init()
     })
 
-    window.addEventListener('resize', adjustTOCPosition)
+    document.addEventListener('astro:after-swap', () => {
+      cleanup()
+      init()
+    })
+
+    window.addEventListener('resize', handleResize)
     window.addEventListener('scroll', handleScroll)
   })()
 </script>
@@ -208,6 +246,7 @@ const { toc = [] }: TOCProps = Astro.props
     left: -0.175em;
     opacity: 0;
     transition: opacity 0.2s ease-out;
+    display: none;
   }
 
   .toc-container.fixed-position {
@@ -238,6 +277,7 @@ const { toc = [] }: TOCProps = Astro.props
     margin-left: 0 !important;
     padding-left: 0 !important;
   }
+
   .prose .toc-container .toc-list li {
     margin: 0 !important;
     padding: 0 !important;
