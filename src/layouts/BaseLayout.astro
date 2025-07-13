@@ -1,7 +1,7 @@
 ---
 import { themeConfig } from '@/config'
+import { ClientRouter } from 'astro:transitions'
 import ThemeManager from '@/components/ui/ThemeManager.astro'
-import TransitionInit from '@/components/ui/TransitionInit.astro'
 import FaviconThemeSwitcher from '@/components/ui/FaviconThemeSwitcher.astro'
 import TransitionWrapper from '@/components/layout/TransitionWrapper.astro'
 import type { LayoutProps } from '@/types'
@@ -17,18 +17,13 @@ const shouldUseCustomWidth = widthValue > 25
 const finalWidth = shouldUseCustomWidth ? `${widthValue}rem` : '25rem'
 ---
 
-<html
-  lang={language}
-  class={fadeAnimation ? 'view-transitions-enabled' : 'view-transitions-disabled'}
-  {...fadeAnimation ? { 'transition:animate': 'initial' } : {}}
->
+<html lang={language}>
   <head>
-    <TransitionInit />
+    {fadeAnimation && <ClientRouter />}
     <slot name="head" />
   </head>
   <body
     data-centered={themeConfig.general.centeredLayout}
-    class={!fadeAnimation ? 'no-fade' : ''}
     style={`
       max-width: ${finalWidth};
       ${shouldUseCustomWidth ? `--content-width: ${widthValue}rem;` : ''}
@@ -37,9 +32,17 @@ const finalWidth = shouldUseCustomWidth ? `${widthValue}rem` : '25rem'
     <ThemeManager />
     <FaviconThemeSwitcher />
 
-    <TransitionWrapper type={type} class="layout-wrapper">
-      <slot />
-    </TransitionWrapper>
+    {
+      fadeAnimation ? (
+        <TransitionWrapper type={type} class="layout-wrapper">
+          <slot />
+        </TransitionWrapper>
+      ) : (
+        <div class="layout-wrapper">
+          <slot />
+        </div>
+      )
+    }
   </body>
 </html>
 

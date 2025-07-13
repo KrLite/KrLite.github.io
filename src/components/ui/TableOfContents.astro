@@ -48,27 +48,22 @@ const { toc = [] }: TOCProps = Astro.props
     let tocLinks = null
     let headings = null
     let titleLink = null
-    // Add efficient Map lookup
     const headingMap = new Map()
+    let scrollTimeout = null
 
+    // Initialize DOM cache
     function initDOMCache() {
       tocContainer = document.querySelector('.toc-container')
-      tocLinks = document.querySelectorAll('.toc-link')
-      headings = document.querySelectorAll('h1, h2, h3')
-      titleLink = document.querySelector('.toc-link.toc-title')
+      if (!tocContainer) return false
 
-      // Build heading map for efficient lookup
-      buildHeadingMap()
-    }
-
-    // Cache DOM queries to avoid repeated lookups
-    function refreshDOMCache() {
       tocLinks = document.querySelectorAll('.toc-link')
       headings = document.querySelectorAll('h1, h2, h3')
       titleLink = document.querySelector('.toc-link.toc-title')
       buildHeadingMap()
+      return true
     }
 
+    // Build heading map for efficient lookup
     function buildHeadingMap() {
       headingMap.clear()
       if (!tocLinks) return
@@ -82,39 +77,31 @@ const { toc = [] }: TOCProps = Astro.props
       })
     }
 
-    // TOC positioning logic (similar to BackButton)
+    // Calculate TOC positioning
     function adjustTOCPosition() {
-      if (!tocContainer) return
-
-      // If not using centered layout, hide TOC
-      if (!centeredLayout) {
-        tocContainer.style.display = 'none'
+      if (!tocContainer || !centeredLayout) {
+        if (tocContainer) tocContainer.style.display = 'none'
         return
       }
 
-      // Calculate available margin space for positioning
       const pageWidth = window.innerWidth
       const contentWidthValue = parseFloat(contentWidth)
-      // Apply the same minimum width logic as in BaseLayout
       const widthValue = Math.min(contentWidthValue, 50)
       const shouldUseCustomWidth = widthValue > 25
       const finalWidthValue = shouldUseCustomWidth ? widthValue : 25
       const margin = (pageWidth - finalWidthValue * 16) / 2
       const baseMinSpace = 11 * 16 // Base minimum space needed
-      // If toc is enabled, need additional 2.5rem (40px) space
       const minSpace = toc ? baseMinSpace + 40 : baseMinSpace
 
-      // Show and position TOC fixed on the left if there's enough space
       if (margin >= minSpace) {
         tocContainer.style.display = 'block'
         tocContainer.classList.add('fixed-position')
         const basePosition = margin - baseMinSpace
-        // If toc is enabled, move 2.5rem (40px) further left
         const leftPosition = toc ? basePosition - 40 : basePosition
         tocContainer.style.left = `${leftPosition}px`
 
         // Update active state after TOC becomes visible
-        setTimeout(() => updateActiveTOCItem(), 100)
+        setTimeout(updateActiveTOCItem, 100)
       } else {
         tocContainer.style.display = 'none'
         tocContainer.classList.remove('fixed-position')
@@ -122,27 +109,14 @@ const { toc = [] }: TOCProps = Astro.props
       }
     }
 
-    // Hide TOC if there are no headings (only title)
+    // Check if TOC should be visible based on content
     function checkTOCVisibility() {
-      // Use cached tocLinks if available, otherwise query once
-      const tocItems = tocLinks
-        ? Array.from(tocLinks).filter((link) => !link.classList.contains('toc-title'))
-        : document.querySelectorAll('.toc-item:not(.toc-level-0)')
+      if (!tocContainer || !tocLinks) return
 
-      if (tocContainer && tocItems.length === 0) {
+      const tocItems = Array.from(tocLinks).filter((link) => !link.classList.contains('toc-title'))
+      if (tocItems.length === 0) {
         tocContainer.style.display = 'none'
       }
-    }
-
-    // Add click handlers to TOC links using event delegation
-    function addTOCEventListeners() {
-      if (!tocContainer) return
-
-      // Remove existing event listener to prevent duplicates
-      tocContainer.removeEventListener('click', handleTOCClick)
-
-      // Use event delegation for better performance and reliability
-      tocContainer.addEventListener('click', handleTOCClick)
     }
 
     // Handle TOC click events
@@ -173,19 +147,25 @@ const { toc = [] }: TOCProps = Astro.props
       }
     }
 
+    // Add event listeners
+    function addTOCEventListeners() {
+      if (!tocContainer) return
+
+      // Remove existing event listener to prevent duplicates
+      tocContainer.removeEventListener('click', handleTOCClick)
+      tocContainer.addEventListener('click', handleTOCClick)
+    }
+
     // Update active TOC item based on scroll position
     function updateActiveTOCItem() {
-      // Check if cache is valid, if not, re-fetch
       if (!tocLinks || !headings || tocLinks.length === 0 || headings.length === 0) {
-        refreshDOMCache()
+        return
       }
-
-      if (!tocLinks || !headings) return
 
       let currentActive = null
       const scrollTop = window.pageYOffset + 100 // Offset for better detection
 
-      // Check headings
+      // Find the current active heading
       headings.forEach((heading, index) => {
         if (index === 0 && heading.tagName === 'H1') return
 
@@ -197,61 +177,53 @@ const { toc = [] }: TOCProps = Astro.props
         }
       })
 
-      // Clear all active states first
-      tocLinks.forEach((link) => {
-        link.classList.remove('active')
-      })
+      // Clear all active states
+      tocLinks.forEach((link) => link.classList.remove('active'))
 
-      // Only highlight a TOC item if we have a valid active heading
+      // Set active state
       if (currentActive && headingMap.has(currentActive)) {
         const activeLink = headingMap.get(currentActive)
         activeLink.classList.add('active')
-      } else {
-        // If no heading is active (e.g., at the very top of the page),
-        // highlight "Back to top" to indicate we're at the beginning
-        if (titleLink) {
-          titleLink.classList.add('active')
-        }
+      } else if (titleLink) {
+        titleLink.classList.add('active')
       }
     }
 
-    // Initialize immediately to prevent layout shift
-    initDOMCache()
-    adjustTOCPosition()
-    checkTOCVisibility()
-    addTOCEventListeners()
-    updateActiveTOCItem() // Set initial active state immediately
+    // Initialize TOC with retry mechanism
+    function initializeTOC() {
+      if (!initDOMCache()) {
+        // If TOC container doesn't exist yet, retry after a short delay
+        setTimeout(initializeTOC, 100)
+        return
+      }
 
-    // Listen for various page load events
-    document.addEventListener('astro:page-load', () => {
-      refreshDOMCache()
       adjustTOCPosition()
+      checkTOCVisibility()
       addTOCEventListeners()
-      updateActiveTOCItem() // Update active state after page load
+      updateActiveTOCItem()
+    }
+
+    // Debounced scroll handler
+    function handleScroll() {
+      if (scrollTimeout) clearTimeout(scrollTimeout)
+      scrollTimeout = setTimeout(updateActiveTOCItem, 16) // ~60fps
+    }
+
+    // Initialize with a small delay to ensure DOM is ready
+    setTimeout(initializeTOC, 10)
+
+    // Event listeners
+    document.addEventListener('astro:page-load', () => {
+      tocContainer = null // Reset container reference
+      setTimeout(initializeTOC, 50)
     })
+
     document.addEventListener('DOMContentLoaded', () => {
-      // Only initialize if not already done by astro:page-load
-      if (!tocContainer) {
-        initDOMCache()
-        adjustTOCPosition()
-        addTOCEventListeners()
-        updateActiveTOCItem() // Update active state after DOM ready
-      }
+      if (!tocContainer) initializeTOC()
     })
 
-    // Re-initialize on resize and scroll
     window.addEventListener('resize', adjustTOCPosition)
-
-    // Add debounced scroll listener for better performance
-    let scrollTimeout = null
-    window.addEventListener('scroll', () => {
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout)
-      }
-      scrollTimeout = setTimeout(() => {
-        updateActiveTOCItem()
-      }, 16) // ~60fps, 16ms debounce
-    })
+    window.addEventListener('scroll', handleScroll)
   })()
 </script>
 

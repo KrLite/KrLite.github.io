@@ -1,25 +1,41 @@
 ---
-import { themeConfig } from '@/config'
 import type { TransitionProps } from '@/types'
 
 type Props = TransitionProps
 
 const { type, class: className = '' } = Astro.props
-const fadeAnimation = themeConfig.general.fadeAnimation
 const transitionName = type === 'post' ? 'post-content' : 'page-content'
 ---
 
-{
-  fadeAnimation ? (
-    <div transition:name={transitionName} transition:animate="initial" class={className}>
-      <slot />
-    </div>
-  ) : (
-    <div class={className}>
-      <slot />
-    </div>
-  )
-}
+<div transition:name={transitionName} class={className} id="transition-wrapper">
+  <slot />
+</div>
+
+<script is:inline>
+  let isBackForward = false
+
+  // Listen for back/forward navigation
+  window.addEventListener('popstate', () => {
+    isBackForward = true
+    setTimeout(() => (isBackForward = false), 50)
+  })
+
+  // Override startViewTransition to skip transitions for back/forward navigation
+  const original = document.startViewTransition
+  if (original) {
+    document.startViewTransition = function (callback) {
+      if (isBackForward) {
+        callback?.()
+        return {
+          ready: Promise.resolve(),
+          updateCallbackDone: Promise.resolve(),
+          finished: Promise.resolve()
+        }
+      }
+      return original.call(document, callback)
+    }
+  }
+</script>
 
 <style is:global>
   @supports (view-transition-name: none) {
@@ -62,33 +78,6 @@ const transitionName = type === 'post' ? 'post-content' : 'page-content'
       opacity: 1;
       filter: blur(0);
       transform: translateZ(0);
-    }
-  }
-
-  .no-fade ::view-transition-old(post-content),
-  .no-fade ::view-transition-new(post-content),
-  .no-fade ::view-transition-old(page-content),
-  .no-fade ::view-transition-new(page-content),
-  .disable-transitions ::view-transition-old(post-content),
-  .disable-transitions ::view-transition-new(post-content),
-  .disable-transitions ::view-transition-old(page-content),
-  .disable-transitions ::view-transition-new(page-content) {
-    animation: none !important;
-  }
-
-  .reduce-motion ::view-transition-old(post-content),
-  .reduce-motion ::view-transition-new(post-content),
-  .reduce-motion ::view-transition-old(page-content),
-  .reduce-motion ::view-transition-new(page-content) {
-    animation: none !important;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      scroll-behavior: auto !important;
     }
   }
 </style>

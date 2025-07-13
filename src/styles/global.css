@@ -99,6 +99,9 @@ html.dark {
 
 html {
   scrollbar-gutter: stable;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -126,20 +129,6 @@ body {
   body {
     padding: 4rem 1.25rem 1.25rem 1.25rem;
   }
-}
-
-html {
-  overscroll-behavior-y: contain;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-}
-
-html.view-transitions-enabled {
-  view-transition-name: enabled;
-}
-
-html.view-transitions-disabled {
-  view-transition-name: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
