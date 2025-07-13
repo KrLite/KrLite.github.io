@@ -234,6 +234,13 @@ const { toc = [] }: TOCProps = Astro.props
       init()
     })
 
+    // Fallback for when Astro transitions are disabled
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!state.container || !state.hasContent) {
+        init()
+      }
+    })
+
     window.addEventListener('resize', handleResize)
     window.addEventListener('scroll', handleScroll)
   })()
