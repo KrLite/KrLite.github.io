@@ -7,61 +7,122 @@ const fadeAnimation = themeConfig.general.fadeAnimation
 {fadeAnimation && <meta name="view-transition" content="same-origin" />}
 
 <script is:inline define:vars={{ fadeAnimation }}>
-  // Initialize page transition animation
-  function initMotionPref(doc = document) {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const supportsViewTransitions = 'startViewTransition' in document
+  // Enhanced transition initialization - cache-resistant
+  ;(() => {
+    let isInitialized = false
+    let initCounter = 0
 
-    doc.documentElement.classList.toggle('reduce-motion', prefersReducedMotion)
-
-    doc.documentElement.classList.toggle(
-      'disable-transitions',
-      !fadeAnimation || !supportsViewTransitions
-    )
-
-    // Dynamically control view transition navigation behavior
-    let viewTransitionStyle = doc.getElementById('view-transition-style')
-
-    if (fadeAnimation && supportsViewTransitions && !prefersReducedMotion) {
-      // Enable view transition navigation
-      if (!viewTransitionStyle) {
-        viewTransitionStyle = doc.createElement('style')
-        viewTransitionStyle.id = 'view-transition-style'
-        viewTransitionStyle.textContent = '@view-transition { navigation: auto; }'
-        doc.head.appendChild(viewTransitionStyle)
+    function initMotionPref(doc = document, force = false) {
+      // Force re-initialization even if already done
+      if (!force && isInitialized && initCounter < 3) {
+        return
       }
-    } else {
-      // Disable view transition navigation
-      if (viewTransitionStyle) {
-        viewTransitionStyle.remove()
+
+      initCounter++
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const supportsViewTransitions = 'startViewTransition' in document
+
+      doc.documentElement.classList.toggle('reduce-motion', prefersReducedMotion)
+      doc.documentElement.classList.toggle(
+        'disable-transitions',
+        !fadeAnimation || !supportsViewTransitions
+      )
+
+      // Dynamically control view transition navigation behavior
+      let viewTransitionStyle = doc.getElementById('view-transition-style')
+
+      if (fadeAnimation && supportsViewTransitions && !prefersReducedMotion) {
+        // Enable view transition navigation
+        if (!viewTransitionStyle) {
+          viewTransitionStyle = doc.createElement('style')
+          viewTransitionStyle.id = 'view-transition-style'
+          viewTransitionStyle.textContent = '@view-transition { navigation: auto; }'
+          doc.head.appendChild(viewTransitionStyle)
+        }
+
+        // Ensure HTML has correct transition attributes
+        if (!doc.documentElement.hasAttribute('transition:animate')) {
+          doc.documentElement.setAttribute('transition:animate', 'initial')
+        }
+      } else {
+        // Disable view transition navigation
+        if (viewTransitionStyle) {
+          viewTransitionStyle.remove()
+        }
       }
+
+      doc.documentElement.classList.add('js')
+      isInitialized = true
     }
 
-    doc.documentElement.classList.add('js')
-  }
-
-  // Initialize motion preferences
-  function initAll(doc = document) {
-    initMotionPref(doc)
-  }
-
-  initAll()
-
-  document.addEventListener('astro:before-swap', ({ newDocument }) => {
-    initAll(newDocument)
-  })
-
-  document.addEventListener('astro:page-load', () => {
-    initAll()
-  })
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      initAll()
+    // Initialize motion preferences with force flag
+    function initAll(doc = document, force = false) {
+      initMotionPref(doc, force)
     }
-  })
 
-  window.addEventListener('pageshow', () => {
-    initAll()
-  })
+    // Immediate initialization
+    initAll(document, true)
+
+    // Astro-specific events
+    document.addEventListener('astro:before-swap', ({ newDocument }) => {
+      initAll(newDocument, true)
+    })
+
+    document.addEventListener('astro:page-load', () => {
+      initAll(document, true)
+    })
+
+    document.addEventListener('astro:after-swap', () => {
+      initAll(document, true)
+    })
+
+    // Browser navigation events
+    window.addEventListener('pageshow', () => {
+      // Always re-init on pageshow, especially when coming from cache
+      initAll(document, true)
+    })
+
+    window.addEventListener('pagehide', () => {
+      // Reset state when page is hidden
+      isInitialized = false
+      initCounter = 0
+    })
+
+    // Page visibility changes
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        initAll(document, true)
+      }
+    })
+
+    // DOM ready states
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initAll(document, true)
+      })
+    }
+
+    // Focus events (when user returns to tab)
+    window.addEventListener('focus', () => {
+      initAll(document, true)
+    })
+
+    // Fallback: periodic check for the first few seconds
+    let checkCount = 0
+    const intervalCheck = setInterval(() => {
+      if (checkCount >= 5) {
+        clearInterval(intervalCheck)
+        return
+      }
+
+      checkCount++
+      initAll(document, true)
+    }, 500)
+
+    // Clean up interval when page unloads
+    window.addEventListener('beforeunload', () => {
+      clearInterval(intervalCheck)
+    })
+  })()
 </script>
