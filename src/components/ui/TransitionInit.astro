@@ -108,21 +108,42 @@ const fadeAnimation = themeConfig.general.fadeAnimation
       initAll(document, true)
     })
 
-    // Fallback: periodic check for the first few seconds
-    let checkCount = 0
-    const intervalCheck = setInterval(() => {
-      if (checkCount >= 5) {
-        clearInterval(intervalCheck)
+    // Fallback: periodic check using requestIdleCallback with timeout-based control
+    const startTime = Date.now()
+    const timeoutDuration = 3000 // 3 seconds timeout
+    let idleCallbackId = null
+
+    function scheduleNextCheck() {
+      const elapsed = Date.now() - startTime
+
+      if (elapsed >= timeoutDuration) {
         return
       }
 
-      checkCount++
       initAll(document, true)
-    }, 500)
 
-    // Clean up interval when page unloads
+      // Schedule next check using requestIdleCallback if available, otherwise use requestAnimationFrame
+      if ('requestIdleCallback' in window) {
+        idleCallbackId = requestIdleCallback(scheduleNextCheck, { timeout: 1000 })
+      } else {
+        idleCallbackId = requestAnimationFrame(() => {
+          setTimeout(scheduleNextCheck, 500)
+        })
+      }
+    }
+
+    // Start the fallback checks
+    scheduleNextCheck()
+
+    // Clean up when page unloads
     window.addEventListener('beforeunload', () => {
-      clearInterval(intervalCheck)
+      if (idleCallbackId) {
+        if ('requestIdleCallback' in window) {
+          cancelIdleCallback(idleCallbackId)
+        } else {
+          cancelAnimationFrame(idleCallbackId)
+        }
+      }
     })
   })()
 </script>
