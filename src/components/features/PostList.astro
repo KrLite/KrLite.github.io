@@ -1,13 +1,9 @@
 ---
 import FormattedDate from '@/components/features/FormattedDate.astro'
-import type { CollectionEntry } from 'astro:content'
+import type { PostListProps } from '@/types'
 import { themeConfig } from '@/config'
 
-interface Props {
-  posts: CollectionEntry<'posts'>[]
-}
-
-const { posts } = Astro.props
+const { posts } = Astro.props as PostListProps
 ---
 
 <ul>
@@ -18,14 +14,14 @@ const { posts } = Astro.props
           <div class={`post-item ${!themeConfig.date.dateOnRight ? 'date-left' : ''}`}>
             {!themeConfig.date.dateOnRight && (
               <p class="date font-features">
-                <FormattedDate date={post.data.pubDate} />
+                <FormattedDate date={post.data.pubDate} context="list" />
               </p>
             )}
             <p class="title">{post.data.title}</p>
             {themeConfig.date.dateOnRight && <div class="divider" />}
             {themeConfig.date.dateOnRight && (
               <p class="date font-features">
-                <FormattedDate date={post.data.pubDate} />
+                <FormattedDate date={post.data.pubDate} context="list" />
               </p>
             )}
           </div>

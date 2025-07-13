@@ -13,3 +13,8 @@ export interface TOCItem {
   id: string
   index: number
 }
+
+// PostList component props interface
+export interface PostListProps {
+  posts: CollectionEntry<'posts'>[]
+}

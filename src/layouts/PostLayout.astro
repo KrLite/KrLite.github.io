@@ -38,7 +38,7 @@ const { title, pubDate, readingTime, toc } = Astro.props as PostLayoutProps
         <div class="title">
           <h1>{title}</h1>
           <div class="date">
-            <FormattedDate date={pubDate} />
+            <FormattedDate date={pubDate} context="post" />
             {
               themeConfig.post.readingTime && readingTime && (
                 <span class="reading-time">

@@ -1,22 +1,7 @@
 <script>
+  import type { GitHubRepoData, CachedRepoData, CardElements } from '@/types'
+
   let githubCardsObserver: IntersectionObserver | null = null
-
-  interface GitHubRepoData {
-    owner?: {
-      avatar_url: string
-    }
-    description?: string
-    stargazers_count?: number
-    forks_count?: number
-    license?: {
-      spdx_id: string
-    }
-  }
-
-  interface CachedRepoData {
-    data: GitHubRepoData
-    timestamp: number
-  }
 
   // Retrieve cached GitHub repository data from localStorage with expiration check
   function getCachedData(repo: string): GitHubRepoData | null {
@@ -57,14 +42,6 @@
     } catch (error) {
       console.warn('Failed to save to cache:', error)
     }
-  }
-
-  interface CardElements {
-    avatar: HTMLElement | null
-    desc: HTMLElement | null
-    stars: HTMLElement | null
-    forks: HTMLElement | null
-    license: HTMLElement | null
   }
 
   // Update the GitHub card UI elements with fetched repository data
