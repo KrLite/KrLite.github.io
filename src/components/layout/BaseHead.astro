@@ -57,7 +57,7 @@ const { title, description } = Astro.props as BaseHeadProps
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL('/chiri-og.png', Astro.url)} />
 
-<!-- Transitions Initialization -->
+<!-- Transitions and Theme Initialization -->
 <script is:inline define:vars={{ fadeAnimation: themeConfig.general.fadeAnimation }}>
   function initMotionPref(doc = document) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -91,23 +91,83 @@ const { title, description } = Astro.props as BaseHeadProps
     doc.documentElement.classList.add('js')
   }
 
-  initMotionPref()
+  // Theme initialization function
+  function initTheme(doc = document) {
+    const htmlElement = doc.documentElement
+
+    // Get system theme preference
+    function getSystemTheme() {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      return isDark ? 'dark' : 'light'
+    }
+
+    // Get current actual theme state
+    function getCurrentTheme() {
+      const hasLight = htmlElement.classList.contains('light')
+      const hasDark = htmlElement.classList.contains('dark')
+
+      if (hasLight) {
+        return 'light'
+      }
+      if (hasDark) {
+        return 'dark'
+      }
+
+      const systemTheme = getSystemTheme()
+      return systemTheme
+    }
+
+    // Apply theme
+    function applyTheme(theme) {
+      htmlElement.classList.remove('light', 'dark')
+
+      if (theme === 'dark') {
+        htmlElement.classList.add('dark')
+      } else {
+        htmlElement.classList.add('light')
+      }
+    }
+
+    // Initialize theme - ensure explicit classes are always present
+    function initThemeState() {
+      const systemTheme = getSystemTheme()
+      applyTheme(systemTheme)
+    }
+
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    mediaQuery.addEventListener('change', function (e) {
+      const newTheme = e.matches ? 'dark' : 'light'
+      applyTheme(newTheme)
+    })
+
+    // Initialize theme state
+    initThemeState()
+  }
+
+  // Initialize both motion preferences and theme
+  function initAll(doc = document) {
+    initMotionPref(doc)
+    initTheme(doc)
+  }
+
+  initAll()
 
   document.addEventListener('astro:before-swap', ({ newDocument }) => {
-    initMotionPref(newDocument)
+    initAll(newDocument)
   })
 
   document.addEventListener('astro:page-load', () => {
-    initMotionPref()
+    initAll()
   })
 
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
-      initMotionPref()
+      initAll()
     }
   })
 
   window.addEventListener('pageshow', () => {
-    initMotionPref()
+    initAll()
   })
 </script>
