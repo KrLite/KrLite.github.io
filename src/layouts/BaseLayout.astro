@@ -1,7 +1,9 @@
 ---
 import { themeConfig } from '@/config'
-import TransitionWrapper from '@/components/layout/TransitionWrapper.astro'
+import ThemeManager from '@/components/ui/ThemeManager.astro'
+import TransitionInit from '@/components/ui/TransitionInit.astro'
 import FaviconThemeSwitcher from '@/components/ui/FaviconThemeSwitcher.astro'
+import TransitionWrapper from '@/components/layout/TransitionWrapper.astro'
 import type { LayoutProps } from '@/types'
 
 type Props = LayoutProps
@@ -22,6 +24,7 @@ const finalWidth = shouldUseCustomWidth ? `${widthValue}rem` : '25rem'
   {...themeConfig.general.fadeAnimation ? { 'transition:animate': 'initial' } : {}}
 >
   <head>
+    <TransitionInit />
     <slot name="head" />
   </head>
   <body
@@ -32,10 +35,12 @@ const finalWidth = shouldUseCustomWidth ? `${widthValue}rem` : '25rem'
       ${shouldUseCustomWidth ? `--content-width: ${widthValue}rem;` : ''}
     `}
   >
+    <ThemeManager />
+    <FaviconThemeSwitcher />
+
     <TransitionWrapper type={type} class="layout-wrapper">
       <slot />
     </TransitionWrapper>
-    <FaviconThemeSwitcher />
   </body>
 </html>
 

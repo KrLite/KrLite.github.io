@@ -1,0 +1,67 @@
+---
+import { themeConfig } from '@/config'
+
+const fadeAnimation = themeConfig.general.fadeAnimation
+---
+
+{fadeAnimation && <meta name="view-transition" content="same-origin" />}
+
+<script is:inline define:vars={{ fadeAnimation }}>
+  // Initialize page transition animation
+  function initMotionPref(doc = document) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const supportsViewTransitions = 'startViewTransition' in document
+
+    doc.documentElement.classList.toggle('reduce-motion', prefersReducedMotion)
+
+    doc.documentElement.classList.toggle(
+      'disable-transitions',
+      !fadeAnimation || !supportsViewTransitions
+    )
+
+    // Dynamically control view transition navigation behavior
+    let viewTransitionStyle = doc.getElementById('view-transition-style')
+
+    if (fadeAnimation && supportsViewTransitions && !prefersReducedMotion) {
+      // Enable view transition navigation
+      if (!viewTransitionStyle) {
+        viewTransitionStyle = doc.createElement('style')
+        viewTransitionStyle.id = 'view-transition-style'
+        viewTransitionStyle.textContent = '@view-transition { navigation: auto; }'
+        doc.head.appendChild(viewTransitionStyle)
+      }
+    } else {
+      // Disable view transition navigation
+      if (viewTransitionStyle) {
+        viewTransitionStyle.remove()
+      }
+    }
+
+    doc.documentElement.classList.add('js')
+  }
+
+  // Initialize motion preferences
+  function initAll(doc = document) {
+    initMotionPref(doc)
+  }
+
+  initAll()
+
+  document.addEventListener('astro:before-swap', ({ newDocument }) => {
+    initAll(newDocument)
+  })
+
+  document.addEventListener('astro:page-load', () => {
+    initAll()
+  })
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      initAll()
+    }
+  })
+
+  window.addEventListener('pageshow', () => {
+    initAll()
+  })
+</script>

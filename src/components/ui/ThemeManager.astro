@@ -1,0 +1,84 @@
+<script is:inline>
+  // Global Theme Manager
+  window.ThemeManager = {
+    STORAGE_KEY: 'chiri-theme',
+
+    getSystemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    },
+
+    getStoredTheme() {
+      try {
+        return localStorage.getItem(this.STORAGE_KEY)
+      } catch {
+        return null
+      }
+    },
+
+    setStoredTheme(theme) {
+      try {
+        if (theme === 'system') {
+          localStorage.removeItem(this.STORAGE_KEY)
+        } else {
+          localStorage.setItem(this.STORAGE_KEY, theme)
+        }
+      } catch (e) {
+        console.warn('Failed to store theme preference:', e)
+      }
+    },
+
+    getEffectiveTheme() {
+      return this.getStoredTheme() || this.getSystemTheme()
+    },
+
+    applyTheme(theme) {
+      document.documentElement.classList.remove('light', 'dark')
+      document.documentElement.classList.add(theme)
+
+      // Dispatch event for other components
+      document.dispatchEvent(
+        new CustomEvent('themechange', {
+          detail: { theme, isUserChoice: this.getStoredTheme() !== null }
+        })
+      )
+    },
+
+    toggle() {
+      const currentEffective = this.getEffectiveTheme()
+      const systemTheme = this.getSystemTheme()
+      const storedTheme = this.getStoredTheme()
+
+      let newTheme
+      if (!storedTheme) {
+        newTheme = currentEffective === 'dark' ? 'light' : 'dark'
+      } else {
+        newTheme =
+          storedTheme === systemTheme ? (currentEffective === 'dark' ? 'light' : 'dark') : 'system'
+      }
+
+      this.setStoredTheme(newTheme)
+      this.applyTheme(this.getEffectiveTheme())
+    },
+
+    init() {
+      // Set initial theme
+      this.applyTheme(this.getEffectiveTheme())
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        const stored = this.getStoredTheme()
+        const systemTheme = e.matches ? 'dark' : 'light'
+
+        if (!stored) {
+          this.applyTheme(systemTheme)
+        } else if (stored === systemTheme) {
+          this.setStoredTheme('system')
+          this.applyTheme(systemTheme)
+        }
+      })
+    }
+  }
+
+  // Initialize theme manager
+  window.ThemeManager.init()
+</script>

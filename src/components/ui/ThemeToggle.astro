@@ -13,50 +13,12 @@ import { themeConfig } from '@/config'
 
 <script is:inline>
   window.addEventListener('DOMContentLoaded', function () {
-    const htmlElement = document.documentElement
-
-    // Get current actual theme state
-    function getCurrentTheme() {
-      const hasLight = htmlElement.classList.contains('light')
-      const hasDark = htmlElement.classList.contains('dark')
-
-      if (hasLight) {
-        return 'light'
-      }
-      if (hasDark) {
-        return 'dark'
-      }
-
-      // Fallback to system theme
-      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      return isDark ? 'dark' : 'light'
-    }
-
-    // Apply theme
-    function applyTheme(theme) {
-      htmlElement.classList.remove('light', 'dark')
-
-      if (theme === 'dark') {
-        htmlElement.classList.add('dark')
-      } else {
-        htmlElement.classList.add('light')
-      }
-    }
-
-    // Get theme toggle button (only if it exists)
     const themeToggle = document.getElementById('theme-toggle')
-    if (themeToggle) {
-      // Toggle theme function
-      function toggleTheme() {
-        const currentTheme = getCurrentTheme()
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
-        applyTheme(newTheme)
-      }
-
+    if (themeToggle && window.ThemeManager) {
       themeToggle.addEventListener('click', function (e) {
         e.preventDefault()
         e.stopPropagation()
-        toggleTheme()
+        window.ThemeManager.toggle()
       })
     }
   })
