@@ -1,0 +1,79 @@
+<script is:inline>
+  // Favicon theme switcher for system theme-based favicon updates
+  class FaviconThemeSwitcher {
+    constructor() {
+      this.faviconLink = document.querySelector('link[rel="icon"]')
+      this.currentColor = null
+      this.init()
+    }
+
+    init() {
+      // Listen for system theme changes only
+      this.observeSystemThemeChanges()
+
+      // Set initial favicon color based on system theme
+      this.updateFaviconForSystemTheme()
+    }
+
+    observeSystemThemeChanges() {
+      // Listen for system theme changes using media query
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+      mediaQuery.addEventListener('change', () => {
+        this.updateFaviconForSystemTheme()
+      })
+    }
+
+    updateFaviconForSystemTheme() {
+      // Only use system theme preference, ignore manual theme toggle
+      const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      const newColor = isSystemDark ? '#ccc' : '#111'
+
+      // Only update if color has changed
+      if (this.currentColor !== newColor) {
+        this.currentColor = newColor
+        this.updateFaviconColor(newColor)
+      }
+    }
+
+    updateFaviconColor(color) {
+      if (!this.faviconLink) return
+
+      const currentHref = this.faviconLink.href
+
+      fetch(currentHref)
+        .then((response) => response.text())
+        .then((svgText) => {
+          const parser = new DOMParser()
+          const svgDoc = parser.parseFromString(svgText, 'image/svg+xml')
+          const path = svgDoc.getElementById('favicon-path')
+
+          if (path) {
+            path.setAttribute('fill', color)
+            const serializer = new XMLSerializer()
+            const updatedSvg = serializer.serializeToString(svgDoc)
+            const blob = new Blob([updatedSvg], { type: 'image/svg+xml' })
+            const url = URL.createObjectURL(blob)
+            this.faviconLink.href = url
+          }
+        })
+        .catch((error) => {
+          console.warn('Failed to update favicon color:', error)
+        })
+    }
+  }
+
+  // Initialize favicon theme switcher when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new FaviconThemeSwitcher()
+    })
+  } else {
+    new FaviconThemeSwitcher()
+  }
+
+  // Re-initialize on Astro page loads
+  document.addEventListener('astro:page-load', () => {
+    new FaviconThemeSwitcher()
+  })
+</script>

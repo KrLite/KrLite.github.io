@@ -1,6 +1,7 @@
 ---
 import { themeConfig } from '@/config'
 import TransitionWrapper from '@/components/layout/TransitionWrapper.astro'
+import FaviconThemeSwitcher from '@/components/ui/FaviconThemeSwitcher.astro'
 import type { LayoutProps } from '@/types'
 
 type Props = LayoutProps
@@ -34,6 +35,7 @@ const finalWidth = shouldUseCustomWidth ? `${widthValue}rem` : '25rem'
     <TransitionWrapper type={type} class="layout-wrapper">
       <slot />
     </TransitionWrapper>
+    <FaviconThemeSwitcher />
   </body>
 </html>
 

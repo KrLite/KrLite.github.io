@@ -101,22 +101,6 @@ const { title, description } = Astro.props as BaseHeadProps
       return isDark ? 'dark' : 'light'
     }
 
-    // Get current actual theme state
-    function getCurrentTheme() {
-      const hasLight = htmlElement.classList.contains('light')
-      const hasDark = htmlElement.classList.contains('dark')
-
-      if (hasLight) {
-        return 'light'
-      }
-      if (hasDark) {
-        return 'dark'
-      }
-
-      const systemTheme = getSystemTheme()
-      return systemTheme
-    }
-
     // Apply theme
     function applyTheme(theme) {
       htmlElement.classList.remove('light', 'dark')
