@@ -1,5 +1,5 @@
 <script is:inline>
-  // Favicon theme switcher for system theme-based favicon updates
+  // Favicon theme switcher for system theme-based favicon updates, using external SVG file
   class FaviconThemeSwitcher {
     constructor() {
       this.faviconLink =
@@ -12,53 +12,73 @@
         return
       }
 
-      this.currentColor = null
       this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      this.svgUrl = '/favicon.svg'
+      this.currentColor = null
+      this.svgContent = null
 
-      // SVG template
-      this.svgTemplate = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-        id="favicon-path"
-        d="M12.3785 2C16.2799 2.0001 15.793 5.9958 15.3053 7.99414C16.7687 6.99515 19.8498 5.92943 21.6451 8.99414C23.1079 11.4917 19.6947 14.3221 17.7437 14.9883C19.2069 15.9875 21.3523 18.5847 18.231 20.9824C15.1095 23.3803 12.7031 20.983 11.8902 19.4844C10.9146 20.983 8.28152 23.3801 5.55039 20.9824C2.81905 18.5846 4.41233 16.3199 5.55039 15.4873C3.76201 14.9878 0.672689 12.0909 2.62363 8.49414C3.85202 6.22947 7.01339 6.66254 7.98886 7.49512C7.6637 5.66344 8.47661 2 12.3785 2ZM12.3121 9.49316C8.42708 9.49327 7.3044 16.1247 12.3121 15.4375C15.6222 14.9833 15.6814 9.49316 12.3121 9.49316Z"
-        fill="{{color}}"
-    />
-</svg>`
-
-      // Listen for system theme changes
       this.mediaQuery.addEventListener('change', () => this.updateFavicon())
+      this.init()
+    }
 
-      // Set initial favicon color
+    async init() {
+      if (!this.svgContent) {
+        try {
+          const res = await fetch(this.svgUrl)
+          this.svgContent = await res.text()
+        } catch (e) {
+          console.warn('Failed to fetch favicon.svg:', e)
+          return
+        }
+      }
       this.updateFavicon()
     }
 
     updateFavicon() {
-      const newColor = this.mediaQuery.matches ? '#ccc' : '#111'
-
-      if (this.currentColor !== newColor) {
-        this.currentColor = newColor
-        this.updateFaviconColor(newColor)
-      }
+      const color = this.mediaQuery.matches ? '#ccc' : '#111'
+      if (this.currentColor === color) return
+      this.currentColor = color
+      this.updateFaviconColor(color)
     }
 
     updateFaviconColor(color) {
+      if (!this.svgContent) return
       try {
-        // Replace color placeholder in SVG template
-        const svgContent = this.svgTemplate.replace(/\{\{color\}\}/g, color)
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(this.svgContent, 'image/svg+xml')
 
-        // Create blob URL from the SVG content
-        const blob = new Blob([svgContent], { type: 'image/svg+xml' })
+        // Remove all <style> tags
+        doc.querySelectorAll('style').forEach((style) => style.remove())
+
+        // Recursively set fill attribute for all elements
+        function setFillRecursively(node) {
+          if (node.nodeType === 1) {
+            // Element node
+            node.setAttribute('fill', color)
+            // Remove fill from style attribute if present
+            if (node.hasAttribute('style')) {
+              let style = node.getAttribute('style')
+              style = style.replace(/fill\s*:\s*[^;]+;?/gi, '')
+              node.setAttribute('style', style)
+            }
+            for (let i = 0; i < node.childNodes.length; i++) {
+              setFillRecursively(node.childNodes[i])
+            }
+          }
+        }
+        setFillRecursively(doc.documentElement)
+
+        const serializer = new XMLSerializer()
+        const svg = serializer.serializeToString(doc)
+        const blob = new Blob([svg], { type: 'image/svg+xml' })
         const blobUrl = URL.createObjectURL(blob)
-
-        // Update favicon href
         this.faviconLink.href = blobUrl
-
-        // Clean up previous blob URL if it exists
         if (this.previousBlobUrl) {
           URL.revokeObjectURL(this.previousBlobUrl)
         }
         this.previousBlobUrl = blobUrl
-      } catch (error) {
-        console.warn('Failed to update favicon color:', error)
+      } catch (e) {
+        console.warn('Failed to update favicon color:', e)
       }
     }
   }
