@@ -36,19 +36,20 @@ const transitionName = type === 'post' ? 'post-content' : 'page-content'
     }
   }
 
-  // Cleanup all inline opacity styles after Astro page load and on touch events
-  function cleanupOpacity() {
-    document.querySelectorAll('post-item').forEach((el) => {
-      el.style.opacity = ''
+  // Cleanup hover states after Astro page load and on touch events
+  function cleanupHover() {
+    const hoveredLinks = document.querySelectorAll('ul a:hover')
+    hoveredLinks.forEach((link) => {
+      link.style.opacity = ''
     })
   }
 
   document.addEventListener('astro:page-load', () => {
-    setTimeout(cleanupOpacity, 50)
+    setTimeout(cleanupHover, 50)
   })
 
   // Add touch event listener for touch devices
-  document.addEventListener('touchstart', cleanupOpacity, { passive: true })
+  document.addEventListener('touchstart', cleanupHover, { passive: true })
 </script>
 
 <style is:global>

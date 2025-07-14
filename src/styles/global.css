@@ -109,6 +109,8 @@ body {
   font-family: var(--font-sans);
   font-feature-settings: 'ss03' 1;
   font-size: var(--font-size-m);
+  text-autospace: normal;
+  text-rendering: optimizeLegibility;
   line-height: 1.75;
   color: var(--text-primary);
   font-display: swap;
