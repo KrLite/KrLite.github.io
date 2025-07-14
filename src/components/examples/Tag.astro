@@ -65,111 +65,125 @@
   </div>
 </div>
 
-<script>
-  let currentState = 'add' // 'add', 'input', 'display'
-  let tagValue = ''
+<script is:inline>
+  function setupTag() {
+    let currentState = 'add' // 'add', 'input', 'display'
+    let tagValue = localStorage.getItem('tagValue') || ''
 
-  const addButton = document.getElementById('add-button') as HTMLButtonElement
-  const inputState = document.getElementById('input-state') as HTMLDivElement
-  const tagDisplay = document.getElementById('tag-display') as HTMLDivElement
-  const tagInput = document.getElementById('tag-input') as HTMLInputElement
-  const confirmButton = document.getElementById('confirm-button') as HTMLButtonElement
-  const cancelButton = document.getElementById('cancel-button') as HTMLButtonElement
-  const deleteButton = document.getElementById('delete-button') as HTMLButtonElement
-  const tagText = document.getElementById('tag-text') as HTMLSpanElement
+    const addButton = document.getElementById('add-button')
+    const inputState = document.getElementById('input-state')
+    const tagDisplay = document.getElementById('tag-display')
+    const tagInput = document.getElementById('tag-input')
+    const confirmButton = document.getElementById('confirm-button')
+    const cancelButton = document.getElementById('cancel-button')
+    const deleteButton = document.getElementById('delete-button')
+    const tagText = document.getElementById('tag-text')
 
-  // Switch to input state
-  function switchToInput() {
-    currentState = 'input'
-    addButton?.classList.add('hidden')
-
-    setTimeout(() => {
-      inputState?.classList.add('active')
-      tagInput?.focus()
-    }, 100)
-  }
-
-  // Switch to display state
-  function switchToDisplay() {
-    currentState = 'display'
-
-    inputState?.classList.remove('active')
-
-    setTimeout(() => {
-      tagDisplay?.classList.add('active')
-      if (tagText) tagText.textContent = truncateText(tagValue)
-    }, 300)
-  }
-
-  // Return to add state
-  function switchToAdd() {
-    if (currentState === 'display') {
-      tagDisplay?.classList.remove('active')
-    } else if (currentState === 'input') {
-      inputState?.classList.remove('active')
+    if (tagValue) {
+      addButton.classList.add('hidden')
+      inputState.classList.remove('active')
+      tagDisplay.classList.add('active')
+      tagText.textContent = truncateText(tagValue)
+      currentState = 'display'
+    } else {
+      addButton.classList.remove('hidden')
+      inputState.classList.remove('active')
+      tagDisplay.classList.remove('active')
+      tagInput.value = ''
+      currentState = 'add'
     }
 
-    currentState = 'add'
+    // Switch to input state
+    function switchToInput() {
+      currentState = 'input'
+      addButton.classList.add('hidden')
+      setTimeout(() => {
+        inputState.classList.add('active')
+        tagInput.focus()
+      }, 100)
+    }
 
-    setTimeout(() => {
-      addButton?.classList.remove('hidden')
-      tagValue = ''
-      if (tagInput) tagInput.value = ''
+    // Switch to display state
+    function switchToDisplay() {
+      currentState = 'display'
+      inputState.classList.remove('active')
+      setTimeout(() => {
+        tagDisplay.classList.add('active')
+        tagText.textContent = truncateText(tagValue)
+        // Store to localStorage
+        localStorage.setItem('tagValue', tagValue)
+      }, 300)
+    }
+
+    // Return to add state
+    function switchToAdd() {
+      if (currentState === 'display') {
+        tagDisplay.classList.remove('active')
+      } else if (currentState === 'input') {
+        inputState.classList.remove('active')
+      }
+      currentState = 'add'
+      setTimeout(() => {
+        addButton.classList.remove('hidden')
+        tagValue = ''
+        tagInput.value = ''
+        localStorage.removeItem('tagValue')
+        updateConfirmButton()
+      }, 250)
+    }
+
+    // Update confirm button state
+    function updateConfirmButton() {
+      if (tagInput.value.trim()) {
+        confirmButton.classList.remove('disabled')
+      } else {
+        confirmButton.classList.add('disabled')
+      }
+    }
+
+    // Truncate text to max 24 characters
+    function truncateText(text, maxLength = 24) {
+      if (text.length <= maxLength) {
+        return text
+      }
+      return text.substring(0, maxLength) + '...'
+    }
+
+    // Bind events
+    addButton.onclick = switchToInput
+
+    tagInput.oninput = function (e) {
+      const inputValue = e.target.value
+      if (inputValue.length > 24) {
+        e.target.value = inputValue.substring(0, 24)
+        tagValue = inputValue
+      } else {
+        tagValue = inputValue
+      }
       updateConfirmButton()
-    }, 250)
+    }
+
+    tagInput.onkeydown = function (e) {
+      if (e.key === 'Enter' && tagValue.trim()) {
+        switchToDisplay()
+      } else if (e.key === 'Escape') {
+        switchToAdd()
+      }
+    }
+
+    confirmButton.onclick = function () {
+      if (tagValue.trim()) {
+        switchToDisplay()
+      }
+    }
+
+    cancelButton.onclick = switchToAdd
+    deleteButton.onclick = switchToAdd
   }
 
-  // Update confirm button state
-  function updateConfirmButton() {
-    if (tagInput?.value.trim()) {
-      confirmButton?.classList.remove('disabled')
-    } else {
-      confirmButton?.classList.add('disabled')
-    }
-  }
+  setupTag()
 
-  // Truncate text to max 24 characters
-  function truncateText(text: string, maxLength: number = 24): string {
-    if (text.length <= maxLength) {
-      return text
-    }
-    return text.substring(0, maxLength) + '...'
-  }
-
-  addButton?.addEventListener('click', switchToInput)
-
-  tagInput?.addEventListener('input', (e) => {
-    const target = e.target as HTMLInputElement
-    const inputValue = target.value
-
-    // Limit input to 24 characters
-    if (inputValue.length > 24) {
-      target.value = inputValue.substring(0, 24)
-      tagValue = inputValue // Keep original value for display truncation
-    } else {
-      tagValue = inputValue
-    }
-
-    updateConfirmButton()
-  })
-
-  tagInput?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && tagValue.trim()) {
-      switchToDisplay()
-    } else if (e.key === 'Escape') {
-      switchToAdd()
-    }
-  })
-
-  confirmButton?.addEventListener('click', () => {
-    if (tagValue.trim()) {
-      switchToDisplay()
-    }
-  })
-
-  cancelButton?.addEventListener('click', switchToAdd)
-
-  deleteButton?.addEventListener('click', switchToAdd)
+  document.addEventListener('astro:page-load', setupTag)
 </script>
 
 <style>
@@ -254,7 +268,7 @@
   }
 
   .add-button:hover {
-    opacity: 0.9;
+    opacity: 0.8;
     transform: translate(-50%, -50%) scale(1);
     -webkit-transform: translate(-50%, -50%) scale(1);
   }

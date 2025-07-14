@@ -6,6 +6,27 @@
   </div>
 </div>
 
+<script is:inline>
+  let count = 0
+
+  function setupCounter() {
+    const button = document.getElementById('counter-btn')
+    const valueSpan = document.getElementById('counter-value')
+
+    if (button && valueSpan) {
+      valueSpan.textContent = count.toString()
+      button.onclick = function () {
+        count++
+        valueSpan.textContent = count.toString()
+      }
+    }
+  }
+
+  setupCounter()
+
+  document.addEventListener('astro:page-load', setupCounter)
+</script>
+
 <style>
   .counter-card {
     border: 1px solid var(--border);
@@ -16,13 +37,11 @@
     justify-content: center;
     border-radius: 10px;
   }
-
   .counter-container {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
   .counter-button {
     background-color: var(--text-primary);
     color: var(--bg);
@@ -35,21 +54,7 @@
     height: 44px;
     transition: all 0.15s ease-in-out;
   }
-
   .counter-button:hover {
     opacity: 0.9;
   }
 </style>
-
-<script>
-  let count = 0
-  const button = document.getElementById('counter-btn')
-  const valueSpan = document.getElementById('counter-value')
-
-  if (button && valueSpan) {
-    button.addEventListener('click', () => {
-      count++
-      valueSpan.textContent = count.toString()
-    })
-  }
-</script>
