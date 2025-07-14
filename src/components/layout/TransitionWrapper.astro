@@ -35,6 +35,20 @@ const transitionName = type === 'post' ? 'post-content' : 'page-content'
       return original.call(document, callback)
     }
   }
+
+  // Cleanup all inline opacity styles after Astro page load and on touch events
+  function cleanupOpacity() {
+    document.querySelectorAll('post-item').forEach((el) => {
+      el.style.opacity = ''
+    })
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    setTimeout(cleanupOpacity, 50)
+  })
+
+  // Add touch event listener for touch devices
+  document.addEventListener('touchstart', cleanupOpacity, { passive: true })
 </script>
 
 <style is:global>

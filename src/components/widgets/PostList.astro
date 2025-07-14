@@ -49,12 +49,14 @@ const { posts } = Astro.props as PostListProps
     transition: opacity 0.15s ease-out;
   }
 
-  ul:hover a {
-    opacity: 0.4;
-  }
+  @media (hover: hover) and (pointer: fine) {
+    ul:hover a {
+      opacity: 0.4;
+    }
 
-  ul:hover a:hover {
-    opacity: 1;
+    ul:hover a:hover {
+      opacity: 1;
+    }
   }
 
   .post-item {
