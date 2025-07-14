@@ -45,7 +45,7 @@ import { themeConfig } from '@/config'
       const margin = (pageWidth - finalWidthValue * 16) / 2
       const baseMinSpace = 11 * 16 // Base minimum space needed
       // If toc is enabled, need additional 2.5rem (40px) space
-      const minSpace = toc ? baseMinSpace + 40 : baseMinSpace
+      const minSpace = toc ? baseMinSpace + 52 : baseMinSpace + 12
 
       // Position button fixed on the left if there's enough space
       if (margin >= minSpace) {
@@ -109,7 +109,7 @@ import { themeConfig } from '@/config'
     position: fixed;
     top: 6rem;
     margin-bottom: 0;
-    padding-left: 1rem;
+    padding-left: 0.75rem;
     z-index: 10;
   }
 </style>

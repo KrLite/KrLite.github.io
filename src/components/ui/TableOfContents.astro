@@ -108,7 +108,8 @@ const { toc = [] }: TOCProps = Astro.props
       const pageWidth = window.innerWidth
       const contentWidthValue = Math.max(parseFloat(contentWidth), 25)
       const margin = (pageWidth - contentWidthValue * 16) / 2
-      const minSpace = toc ? 216 : 176
+      const baseMinSpace = 11 * 16 // Base minimum space needed
+      const minSpace = toc ? baseMinSpace + 52 : baseMinSpace + 12
 
       if (margin >= minSpace) {
         state.container.style.display = 'block'
