@@ -45,14 +45,14 @@
 [[headers]]
   for = "/*.html"
   [headers.values]
-    Cache-Control = "public, max-age=3600, s-maxage=7200"
+    Cache-Control = "public, max-age=86400, s-maxage=172800"
     Vary = "Accept-Encoding"
 
 # Blog posts
 [[headers]]
   for = "/*/"
   [headers.values]
-    Cache-Control = "public, max-age=7200, s-maxage=14400"
+    Cache-Control = "public, max-age=86400, s-maxage=172800"
     Vary = "Accept-Encoding"
 
 # Homepage
