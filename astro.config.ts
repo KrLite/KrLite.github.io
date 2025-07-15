@@ -38,7 +38,18 @@ export default defineConfig({
     remarkPlugins: [remarkMath, remarkDirective, remarkEmbeddedMedia, remarkReadingTime, remarkTOC],
     rehypePlugins: [rehypeKatex, rehypeCleanup, rehypeImageProcessor, rehypeCopyCode]
   },
-  integrations: [mdx(), sitemap(), playformInline()],
+  integrations: [
+    mdx(),
+    sitemap(),
+    playformInline({
+      Exclude: [
+        (file: string) => {
+          const fileName = file.toLowerCase()
+          return fileName.includes('katex') || fileName.includes('katex')
+        }
+      ]
+    })
+  ],
   vite: {
     resolve: {
       alias: {
