@@ -30,6 +30,7 @@ export interface LayoutProps extends TransitionProps {
 export interface BaseHeadProps {
   title: string
   description: string
+  ogImage?: string
 }
 
 // ImageOptimizer component props interface

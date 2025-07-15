@@ -1,7 +1,7 @@
 # Chiri 🌸
 
-![screenshot-light](public/images/screenshot-light.png)
-![screenshot-dark](public/images/screenshot-dark.png)
+![screenshot-light](public/screenshots/screenshot-light.png)
+![screenshot-dark](public/screenshots/screenshot-dark.png)
 
 Chiri is a minimal blog theme built with [Astro](https://astro.build), offering customization options while preserving its clean aesthetic.
 

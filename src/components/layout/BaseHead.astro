@@ -7,7 +7,8 @@ import 'katex/dist/katex.min.css'
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
-const { title, description } = Astro.props as BaseHeadProps
+const { title, description, ogImage } = Astro.props as BaseHeadProps
+const imageUrl = ogImage ? new URL(ogImage, Astro.url) : new URL('/og/chiri-og.png', Astro.url)
 ---
 
 <!-- Global Metadata -->
@@ -47,11 +48,11 @@ const { title, description } = Astro.props as BaseHeadProps
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL('/chiri-og.png', Astro.url)} />
+<meta property="og:image" content={imageUrl} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL('/chiri-og.png', Astro.url)} />
+<meta property="twitter:image" content={imageUrl} />
