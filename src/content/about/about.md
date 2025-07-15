@@ -9,7 +9,7 @@ You can leave this empty if you don’t want to show any content.
 
 A static blog theme based on [Astro](https://astro.build), designed for clarity and focus.
 
-The layout is intentionally minimal, letting your content take center stage without distraction. Built with flexibility in mind, the theme offers some freedom to customize while preserving its clean aesthetic.
+With a deliberately minimal design, this layout ensures your content takes center stage. It's built for flexibility, offering customization options that honor its clean and elegant aesthetic.
 
 Effortlessly share your thoughts in _a calm & dustless space._
 
