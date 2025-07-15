@@ -47,7 +47,8 @@ export default function rehypeImageProcessor() {
           // Add decoding hint for better performance
           decoding: 'async',
           // Add fetchpriority for critical images (first image gets high priority)
-          fetchpriority: newNodes.length === 0 ? 'high' : 'auto'
+          fetchpriority: newNodes.length === 0 ? 'high' : 'auto',
+          class: [...(imgNode.properties.class || []), 'img-placeholder']
         }
 
         if (!alt || alt.includes('_')) {
