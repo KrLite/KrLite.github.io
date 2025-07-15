@@ -23,20 +23,20 @@
   document.addEventListener('astro:page-load', loadXCards)
 </script>
 
-<style>
-  :global(.prose .x-card) {
+<style is:inline>
+  .prose .x-card {
     width: 100%;
     margin: 1em auto;
     text-align: center;
   }
 
-  :global(.prose .x-card > *) {
+  .prose .x-card > * {
     display: inline-block;
     max-width: 100%;
     margin: 0 auto;
   }
 
-  :global(.prose .x-card iframe) {
+  .prose .x-card iframe {
     max-width: 100%;
     width: auto;
   }

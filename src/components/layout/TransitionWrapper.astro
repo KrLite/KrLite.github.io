@@ -52,7 +52,7 @@ const transitionName = type === 'post' ? 'post-content' : 'page-content'
   document.addEventListener('touchstart', cleanupHover, { passive: true })
 </script>
 
-<style is:global>
+<style is:inline>
   @supports (view-transition-name: none) {
     @media not (prefers-reduced-motion: reduce) {
       ::view-transition-old(post-content),

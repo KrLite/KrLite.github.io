@@ -32,11 +32,11 @@ export default defineConfig({
     rehypePlugins: [rehypeKatex, rehypeCleanup, rehypeImageProcessor, rehypeCopyCode]
   },
   integrations: [
-    mdx(),
-    sitemap(),
     playformInline({
-      Path: ['./src/styles']
-    })
+      Exclude: [(file) => file.toLowerCase().includes('katex')]
+    }),
+    mdx(),
+    sitemap()
   ],
   vite: {
     resolve: {
