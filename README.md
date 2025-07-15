@@ -12,9 +12,10 @@ Check the [demo](https://astro-chiri.netlify.app/) for more details.
 - Built with Astro
 - Responsive
 - Light / Dark mode
-- MD & MDX
+- MDX
 - KaTeX
 - Sitemap
+- OpenGraph
 - RSS
 - ...
 
