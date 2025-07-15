@@ -42,12 +42,7 @@ export default defineConfig({
     mdx(),
     sitemap(),
     playformInline({
-      Exclude: [
-        (file: string) => {
-          const fileName = file.toLowerCase()
-          return fileName.includes('katex') || fileName.includes('katex')
-        }
-      ]
+      Path: ['./src/styles']
     })
   ],
   vite: {
