@@ -17,13 +17,6 @@ import path from 'path'
 
 export default defineConfig({
   site: themeConfig.site.website,
-  devToolbar: {
-    enabled: false
-  },
-  output: 'static',
-  build: {
-    inlineStylesheets: 'auto'
-  },
   image: {
     service: {
       entrypoint: 'astro/assets/services/sharp',
@@ -50,19 +43,9 @@ export default defineConfig({
       alias: {
         '@': path.resolve('./src')
       }
-    },
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'vendor-katex': ['katex'],
-            'vendor-utils': ['reading-time', 'mdast-util-to-string']
-          }
-        }
-      }
-    },
-    optimizeDeps: {
-      include: ['katex', 'reading-time']
     }
+  },
+  devToolbar: {
+    enabled: false
   }
 })
