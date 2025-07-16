@@ -5,9 +5,7 @@ import ThemeToggle from '@/components/ui/ThemeToggle.astro'
 
 <header>
   <nav>
-    <div class="logo-container">
-      <a href="/">{themeConfig.site.title}</a>
-    </div>
+    <a href="/">{themeConfig.site.title}</a>
     <ThemeToggle />
   </nav>
 </header>
@@ -26,8 +24,5 @@ import ThemeToggle from '@/components/ui/ThemeToggle.astro'
     text-decoration: none;
     min-width: 3rem;
     display: inline-block;
-  }
-  .logo-container {
-    position: relative;
   }
 </style>
