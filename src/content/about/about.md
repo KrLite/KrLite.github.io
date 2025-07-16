@@ -13,4 +13,4 @@ With a deliberately minimal design, this layout ensures your content takes cente
 
 Effortlessly share your thoughts in _a calm & dustless space._
 
-Check posts below for details and view source on [GitHub](https://github.com/the3ash/astro-chiri).
+Check posts for details and view source on [GitHub](https://github.com/the3ash/astro-chiri).
