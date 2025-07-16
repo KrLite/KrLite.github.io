@@ -39,7 +39,7 @@
 
 /* Italic text */
 .prose em {
-  font-family: var(--font-serif);
+  font-family: var(--serif);
   font-style: italic;
   letter-spacing: 0;
 }
@@ -174,7 +174,7 @@
   border-radius: 6px;
   background-color: var(--code-bg);
   border: 0.5px solid var(--border);
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: 0.9em;
   font-feature-settings:
     'liga' 0,
@@ -325,7 +325,7 @@
 
 .prose ul.contains-task-list li.task-list-item input[type='checkbox']:checked::before {
   content: '✓';
-  font-family: var(--font-sans);
+  font-family: var(--sans);
   color: var(--text-primary);
   opacity: 0.75;
   font-weight: var(--font-weight-bold);
@@ -368,7 +368,7 @@
 
 .prose hr::before {
   content: '***';
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   color: var(--text-tertiary);
   font-size: 0.875em;
   letter-spacing: 0.25em;
@@ -376,7 +376,7 @@
 
 /* Keyboard input */
 .prose kbd {
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: var(--font-size-s);
   border: 1px solid var(--text-tertiary);
   padding: 1px 4px;
@@ -418,7 +418,7 @@
 /* Footnote references */
 .prose [data-footnote-backref] {
   position: relative;
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: var(--font-size-l);
   top: -0.05em;
 }
@@ -467,7 +467,7 @@
 }
 
 .prose pre > code {
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-feature-settings:
     'liga' 0,
     'calt' 0;

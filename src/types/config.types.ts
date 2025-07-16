@@ -19,7 +19,6 @@ export interface SiteInfo {
 export interface GeneralSettings {
   contentWidth: string
   centeredLayout: boolean
-  favicon: boolean
   themeToggle: boolean
   footer: boolean
   fadeAnimation: boolean

@@ -43,8 +43,6 @@ general: {
   contentWidth: '35rem',
   // Use centered layout (false for left-aligned)
   centeredLayout: true,
-  // Show favicon on index page
-  favicon: false,
   // Show theme toggle button (uses system theme by default)
   themeToggle: false,
   // Show footer

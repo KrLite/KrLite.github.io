@@ -6,7 +6,6 @@ import ThemeToggle from '@/components/ui/ThemeToggle.astro'
 <header>
   <nav>
     <div class="logo-container">
-      {themeConfig.general.favicon && <img src="/favicon.svg" alt="favicon" class="favicon" />}
       <a href="/">{themeConfig.site.title}</a>
     </div>
     <ThemeToggle />
@@ -30,12 +29,5 @@ import ThemeToggle from '@/components/ui/ThemeToggle.astro'
   }
   .logo-container {
     position: relative;
-  }
-  .favicon {
-    position: absolute;
-    width: 1.125rem;
-    height: 1.125rem;
-    bottom: calc(100% + 3.5rem);
-    left: 0;
   }
 </style>
