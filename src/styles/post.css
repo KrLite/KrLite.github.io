@@ -170,8 +170,8 @@
 
 /* Inline code */
 .prose code {
-  padding: 3px 5px;
-  border-radius: 6px;
+  padding: 2.5px 3.5px;
+  border-radius: 5px;
   background-color: var(--code-bg);
   border: 0.5px solid var(--border);
   font-family: var(--mono);

@@ -9,7 +9,7 @@ Chiri is a minimal blog theme built with [Astro](https://astro.build), offering 
 
 ## Basic Commands
 
-- `pnpm new <title>` - Create a new post (use `_title` for drafts)
+- `pnpm new <title` - Create a new post (use `_title` for drafts)
 - `pnpm update-theme` - Update the theme to the latest version
 
 ## Main Files & Directories
@@ -91,6 +91,28 @@ Only `title` and `pubDate` are required fields
 title: 'Post Title'
 pubDate: '2025-07-10'
 ---
+```
+
+---
+
+## Syntax Highlighting
+
+You can configure the theme via `shikiConfig` in `astro.config.ts`.
+
+For more details: [Syntax Highlighting | Astro Docs](https://docs.astro.build/en/guides/syntax-highlighting/)
+
+```ts
+import { defineConfig } from 'astro/config'
+
+export default defineConfig({
+  markdown: {
+    shikiConfig: {
+      light: 'github-light',
+      dark: 'github-dark',
+      wrap: false
+    }
+  }
+})
 ```
 
 ---
