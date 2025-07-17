@@ -15,34 +15,40 @@
         viewerImg.src = src
         viewerImg.alt = alt || ''
       }
-      viewer?.classList.add('active')
+      // Show visibility first
+      viewer!.style.visibility = 'visible'
+      void viewer!.offsetWidth
+      viewer!.classList.add('active')
       document.body.classList.add('image-viewer-open')
       document.body.style.overflow = 'hidden'
       document.body.dataset.scrollY = window.scrollY.toString()
-      if (viewer) {
-        viewer.style.cursor = 'auto'
-        setTimeout(() => {
-          viewer.style.cursor = ''
-        }, 10)
-      }
+      viewer!.style.cursor = 'auto'
+      setTimeout(() => {
+        viewer!.style.cursor = ''
+      }, 10)
     }
 
     // Hide the image viewer and restore page scroll
     function hideImage() {
-      viewer?.classList.remove('active')
+      viewer!.classList.remove('active')
       document.body.classList.remove('image-viewer-open')
       document.body.style.overflow = ''
-      setTimeout(() => {
-        if (viewer && !viewer.classList.contains('active') && viewerImg) {
+    }
+
+    // Hide and clear image after transition ends
+    viewer!.addEventListener('transitionend', (e) => {
+      if (e.propertyName === 'opacity' && !viewer!.classList.contains('active')) {
+        viewer!.style.visibility = 'hidden'
+        if (viewerImg) {
           viewerImg.src = ''
           viewerImg.alt = ''
-          viewer.style.cursor = 'auto'
-          setTimeout(() => {
-            viewer.style.cursor = ''
-          }, 10)
         }
-      }, 300)
-    }
+        viewer!.style.cursor = 'auto'
+        setTimeout(() => {
+          viewer!.style.cursor = ''
+        }, 10)
+      }
+    })
 
     // Bind click events to images with data-preview="true" attribute
     function bindImageClickEvents() {
@@ -87,6 +93,9 @@
       childList: true,
       subtree: true
     })
+
+    // Hide initially
+    viewer!.style.visibility = 'hidden'
   }
 
   if (document.readyState === 'loading') {
@@ -110,15 +119,13 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    visibility: hidden;
-    transition: all 0.15s ease-in-out;
+    transition: opacity 0.15s ease-in-out;
     background: color-mix(in srgb, var(--bg) 90%, transparent);
     cursor: zoom-out;
   }
 
   .image-viewer.active {
     opacity: 1;
-    visibility: visible;
   }
 
   .image-viewer img {
