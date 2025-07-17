@@ -99,6 +99,12 @@ import { themeConfig } from '@/config'
     color: var(--text-primary);
   }
 
+  @media (hover: none) and (pointer: coarse) {
+    .back-button:hover {
+      color: var(--text-secondary);
+    }
+  }
+
   .back-button svg {
     width: 0.8rem;
     height: 0.8rem;
