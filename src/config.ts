@@ -15,6 +15,7 @@ export const themeConfig: ThemeConfig = {
     contentWidth: '35rem', // Content area width
     centeredLayout: true, // Use centered layout (false for left-aligned)
     themeToggle: false, // Show theme toggle button (uses system theme by default)
+    postListDottedDivider: false, // Show dotted divider in post list
     footer: true, // Show footer
     fadeAnimation: true // Enable fade animations
   },

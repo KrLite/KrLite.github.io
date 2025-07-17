@@ -45,6 +45,8 @@ general: {
   centeredLayout: true,
   // Show theme toggle button (uses system theme by default)
   themeToggle: false,
+  // Show dotted divider in post list
+  postListDottedDivider: false,
   // Show footer
   footer: true,
   // Enable fade animations
@@ -98,6 +100,10 @@ pubDate: '2025-07-10'
 - Theme Toggle
 
 ![_Theme Toggle Button](./_assets/theme-toggle.png)
+
+- Dotted Divider
+
+![_Dotted Divider](./_assets/dotted-divider.png)
 
 - Date on Left Side
 
