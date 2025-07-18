@@ -17,7 +17,9 @@ Use these directives to embed media:
 ::x{url="https://x.com/username/status/xxxxxx"}
 ```
 
----
+```
+🟡 When embedded content is still loading, the table of contents positioning may be inaccurate.
+```
 
 ## Spotify
 
