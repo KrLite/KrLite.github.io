@@ -28,13 +28,6 @@ const transitionName = type === 'post' ? 'post-content' : 'page-content'
     }
   }
 
-  html.astro-backward::view-transition-old(*),
-  html.astro-backward::view-transition-new(*),
-  html.astro-forward::view-transition-old(*),
-  html.astro-forward::view-transition-new(*) {
-    animation-name: none !important;
-  }
-
   @keyframes fade-out {
     0% {
       opacity: 1;

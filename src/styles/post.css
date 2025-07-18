@@ -321,14 +321,14 @@
   position: relative;
   background: var(--code-bg);
   border: 1.35px solid var(--text-tertiary);
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .prose ul.contains-task-list li.task-list-item input[type='checkbox']:checked::before {
   content: '✓';
   font-family: var(--sans);
   color: var(--text-primary);
-  opacity: 0.75;
+  opacity: 0.6;
   font-weight: var(--font-weight-bold);
   position: absolute;
   left: 0.15em;
