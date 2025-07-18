@@ -11,50 +11,6 @@ const transitionName = type === 'post' ? 'post-content' : 'page-content'
   <slot />
 </div>
 
-<script is:inline>
-  let isBackForward = false
-
-  // Check if View Transitions API is supported
-  const isViewTransitionSupported = 'startViewTransition' in document
-
-  // Listen for back/forward navigation
-  window.addEventListener('popstate', () => {
-    isBackForward = true
-    setTimeout(() => (isBackForward = false), 50)
-  })
-
-  // Override startViewTransition to skip transitions for back/forward navigation
-  if (isViewTransitionSupported && document.startViewTransition) {
-    const original = document.startViewTransition
-    document.startViewTransition = function (callback) {
-      if (isBackForward) {
-        callback?.()
-        return {
-          ready: Promise.resolve(),
-          updateCallbackDone: Promise.resolve(),
-          finished: Promise.resolve()
-        }
-      }
-      return original.call(document, callback)
-    }
-  }
-
-  // Cleanup hover states after Astro page load and on touch events
-  function cleanupHover() {
-    const hoveredLinks = document.querySelectorAll('ul a:hover')
-    hoveredLinks.forEach((link) => {
-      link.style.opacity = ''
-    })
-  }
-
-  document.addEventListener('astro:page-load', () => {
-    setTimeout(cleanupHover, 50)
-  })
-
-  // Add touch event listener for touch devices
-  document.addEventListener('touchstart', cleanupHover, { passive: true })
-</script>
-
 <style is:inline>
   @supports (view-transition-name: none) {
     @media not (prefers-reduced-motion: reduce) {
@@ -70,6 +26,13 @@ const transitionName = type === 'post' ? 'post-content' : 'page-content'
         will-change: filter, opacity, transform;
       }
     }
+  }
+
+  html.astro-backward::view-transition-old(*),
+  html.astro-backward::view-transition-new(*),
+  html.astro-forward::view-transition-old(*),
+  html.astro-forward::view-transition-new(*) {
+    animation-name: none !important;
   }
 
   @keyframes fade-out {
