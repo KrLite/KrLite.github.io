@@ -93,8 +93,6 @@ pubDate: '2025-07-10'
 ---
 ```
 
----
-
 ## Syntax Highlighting
 
 You can configure the theme via `shikiConfig` in `astro.config.ts`.
