@@ -6,6 +6,8 @@ pubDate: '2025-06-06'
 Use these directives to embed media:
 
 ```
+::link{url="https://xxxxx"}
+
 ::spotify{url="https://open.spotify.com/type/xxxxxx"}
 
 ::youtube{url="https://www.youtube.com/watch?v=xxxxxx"}
@@ -20,6 +22,10 @@ Use these directives to embed media:
 ```
 🟡 When embedded content is still loading, the table of contents positioning may be inaccurate.
 ```
+
+## Link Card
+
+::link{url="https://pitchfork.com/reviews/albums/ichiko-aoba-luminescent-creatures/"}
 
 ## Spotify
 

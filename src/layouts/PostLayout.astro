@@ -10,6 +10,7 @@ import TableOfContents from '@/components/ui/TableOfContents.astro'
 import GradientMask from '@/components/ui/GradientMask.astro'
 import ImageViewer from '@/components/ui/ImageViewer.astro'
 import GitHubCard from '@/components/ui/GitHubCard.astro'
+import LinkCard from '@/components/ui/LinkCard.astro'
 import ImageOptimizer from '@/components/ui/ImageOptimizer.astro'
 import XPOST from '@/components/ui/XPOST.astro'
 import CopyCode from '@/components/ui/CopyCode.astro'
@@ -60,6 +61,7 @@ const ogImage = `/open-graph/${postSlug}.png`
     <FootnoteScroll />
     <CopyCode />
     <GitHubCard />
+    <LinkCard />
     <XPOST />
     <ImageOptimizer />
     {themeConfig.post.imageViewer && <ImageViewer />}
