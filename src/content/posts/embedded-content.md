@@ -20,12 +20,27 @@ Use these directives to embed media:
 ```
 
 ```
-🟡 When embedded content is still loading, the table of contents positioning may be inaccurate.
+🟡
+
+When embedded content is still loading, the table of contents positioning may be inaccurate.
 ```
 
 ## Link Card
 
 ::link{url="https://pitchfork.com/reviews/albums/ichiko-aoba-luminescent-creatures/"}
+
+```
+🟡
+
+If you don’t need Link Card, you can skip adapter setup:
+
+- Run「pnpm remove @astrojs/netlify」
+- Delete the following content:
+  - src/component/ui/LinkCard.astro
+  - src/plugins/remark-embedded-media.mjs (Lines 8 - 32)
+  - src/pages/api/proxy.ts
+  - astro.config.ts (Lines 17 & 20)
+```
 
 ## Spotify
 
