@@ -88,6 +88,7 @@ const embedHandlers = {
     return `
     <figure>
       <iframe
+        style="border-radius:6px"
         src="https://www.youtube.com/embed/${videoId}"
         title="YouTube video player"
         loading="lazy"
@@ -114,6 +115,7 @@ const embedHandlers = {
     return `
     <figure>
       <iframe
+        style="border-radius:6px"
         src="//player.bilibili.com/player.html?isOutside=true&bvid=${bvid}&p=1&autoplay=0&muted=0"
         title="Bilibili video player"
         loading="lazy"
