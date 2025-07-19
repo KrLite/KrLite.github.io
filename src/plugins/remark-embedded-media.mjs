@@ -17,9 +17,9 @@ const embedHandlers = {
       <div class="link-card-wrapper">
         <a href="${url}" class="link-card" target="_blank" rel="noopener noreferrer" data-url="${url}">
           <div class="link-card-content">
+            <div class="link-card-url"></div>
             <p class="link-card-title" style="display: none;"></p>
             <p class="link-card-description" style="display: none;"></p>
-            <div class="link-card-url">Loading...</div>
           </div>
           <div class="link-card-image-outer">
             <div class="link-card-image" style="display: none;">
