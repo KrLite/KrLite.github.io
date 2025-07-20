@@ -11,6 +11,23 @@ const transitionName = type === 'post' ? 'post-content' : 'page-content'
   <slot />
 </div>
 
+<script is:inline>
+  // Cleanup hover states after Astro page load and on touch events
+  function cleanupHover() {
+    const hoveredLinks = document.querySelectorAll('ul a:hover')
+    hoveredLinks.forEach((link) => {
+      link.style.opacity = ''
+    })
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    setTimeout(cleanupHover, 50)
+  })
+
+  // Add touch event listener for touch devices
+  document.addEventListener('touchstart', cleanupHover, { passive: true })
+</script>
+
 <style is:inline>
   @supports (view-transition-name: none) {
     @media not (prefers-reduced-motion: reduce) {

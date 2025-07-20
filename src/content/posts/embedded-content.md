@@ -22,7 +22,8 @@ Use these directives to embed media:
 ```
 🟡
 
-When embedded content is still loading, the table of contents positioning may be inaccurate.
+When embedded content is still loading,
+the table of contents positioning may be inaccurate.
 ```
 
 ## Link Card
