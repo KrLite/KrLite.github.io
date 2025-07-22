@@ -187,9 +187,9 @@
 
 /* Blockquotes */
 .prose blockquote {
-  border-left: 1.5px solid var(--border);
+  border-left: 2px solid var(--border);
   margin: 0 0 1.75em 0.125em;
-  padding: 0 0 0 1.5em;
+  padding: 0 0 0 1.375em;
   text-align: left;
 }
 
@@ -320,21 +320,22 @@
 .prose ul.contains-task-list li.task-list-item input[type='checkbox']:checked {
   position: relative;
   background: var(--code-bg);
+  font-family: var(--sans);
   border: 1.35px solid var(--text-tertiary);
   opacity: 0.75;
 }
 
-.prose ul.contains-task-list li.task-list-item input[type='checkbox']:checked::before {
+.prose ul.contains-task-list li.task-list-item input[type='checkbox']:checked::after {
   content: '✓';
-  font-family: var(--sans);
-  color: var(--text-primary);
-  opacity: 0.6;
-  font-weight: var(--font-weight-bold);
   position: absolute;
-  left: 0.15em;
-  top: 0.05em;
-  font-size: 0.75em;
-  line-height: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-45%, -55%);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 650;
+  color: var(--text-primary);
+  opacity: 0.55;
 }
 
 .prose ul.contains-task-list li.task-list-item input[type='checkbox'] + * {
