@@ -100,7 +100,7 @@
 
       if (!response.ok) {
         if (el.desc) {
-          el.desc.textContent = '⚠ Loading failed'
+          el.desc.textContent = '--'
         }
         return
       }
@@ -113,7 +113,7 @@
     } catch (error) {
       console.error(`Failed to fetch ${repo}:`, error)
       if (el.desc) {
-        el.desc.textContent = '⚠ Loading failed'
+        el.desc.textContent = '--'
       }
     }
   }

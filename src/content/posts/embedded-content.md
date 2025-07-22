@@ -6,17 +6,19 @@ pubDate: '2025-06-06'
 Use these directives to embed media:
 
 ```
-::link{url="https://xxxxx"}
+::link{url="https://xxxxx.xxx"}
 
-::spotify{url="https://open.spotify.com/type/xxxxxx"}
+::spotify{url="https://open.spotify.com/type/xxxxx"}
 
-::youtube{url="https://www.youtube.com/watch?v=xxxxxx"}
+::youtube{url="https://www.youtube.com/watch?v=xxxxx"}
 
-::bilibili{url="https://www.bilibili.com/video/xxxxxx"}
+::bilibili{url="https://www.bilibili.com/video/xxxxx"}
 
 ::github{repo="username/repo"}
 
-::x{url="https://x.com/username/status/xxxxxx"}
+::x{url="https://x.com/username/status/xxxxx"}
+
+::neodb{url="https://neodb.social/category/xxxxx"}
 ```
 
 ```
@@ -59,3 +61,13 @@ then you don't need to set adapter before building.
 ## X Post
 
 ::x{url="https://x.com/DAVID_LYNCH/status/1174367510893752321"}
+
+## NeoDB (CN Only)
+
+::neodb{url="https://neodb.social/album/5nD3R8gmnVlsoOBdyO8PA3"}
+
+::neodb{url="https://neodb.social/movie/1bhogjXkNnlWWM0bf6aj8P"}
+
+::neodb{url="https://neodb.social/book/4BqQ5mhfKMHPND3L6hf0Qh"}
+
+::neodb{url="https://neodb.social/game/1hl18l0qD5UN93k8ZkCZ7Q"}
