@@ -73,12 +73,14 @@ date: {
 post: {
   // Show reading time in posts
   readingTime: false,
-  // Show the table of contents (when there is enough page width)
+  // Show table of contents (when there is enough page width)
   toc: true,
   // Enable image viewer
   imageViewer: true,
   // Enable copy button in code blocks
-  copyCode: true
+  copyCode: true,
+  // Enable link card
+  linkCard: true
 }
 ```
 

@@ -61,10 +61,10 @@ const ogImage = `/open-graph/${postSlug}.png`
     <FootnoteScroll />
     <CopyCode />
     <GitHubCard />
-    <LinkCard />
     <XPOST />
     <ImageOptimizer />
     {themeConfig.post.imageViewer && <ImageViewer />}
+    {themeConfig.post.linkCard && <LinkCard />}
     {themeConfig.general.footer && <Footer />}
   </div>
 </BaseLayout>

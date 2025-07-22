@@ -33,14 +33,9 @@ the table of contents positioning may be inaccurate.
 ```
 🟡
 
-If you don’t need Link Card, you can skip adapter setup:
-
-- Run「pnpm remove @astrojs/netlify」
-- Delete the following content:
-  - src/component/ui/LinkCard.astro
-  - src/plugins/remark-embedded-media.mjs (Lines 8 - 32)
-  - src/pages/api/proxy.ts
-  - astro.config.ts (Lines 17 & 20)
+If you don’t need Link Card,
+you can set `linkCard` to `false` in `src/config.ts`,
+then you don't need to set adapter before building.
 ```
 
 ## Spotify

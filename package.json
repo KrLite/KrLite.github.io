@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "prebuild": "pnpm exec tsx scripts/toggle-proxy.ts",
+    "build": "pnpm run prebuild && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
