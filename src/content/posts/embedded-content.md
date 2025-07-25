@@ -32,8 +32,6 @@ the table of contents positioning may be inaccurate.
 
 ::link{url="https://pitchfork.com/reviews/albums/ichiko-aoba-luminescent-creatures/"}
 
-::link{url="https://tures/"}
-
 ```
 🟡
 
