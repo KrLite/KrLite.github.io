@@ -20,67 +20,44 @@ Chiri is a minimal blog theme built with [Astro](https://astro.build), offering 
 
 ```ts
 // Site Info
-
 site: {
-  // Site domain
-  website: 'https://astro-chiri.netlify.app/',
-  // Site title
-  title: 'CHIRI',
-  // Author name
-  author: '3ASH',
-  // Site description
-  description: 'Minimal blog built by Astro',
-  // Default language
-  language: 'en-US'
+  website: 'https://astro-chiri.netlify.app/', // Site domain
+  title: 'CHIRI', // Site title
+  author: '3ASH', // Author name
+  description: 'Minimal blog built by Astro', // Site description
+  language: 'en-US' // Default language
 },
 ```
 
 ```ts
 // General Settings
-
 general: {
-  // Content area width
-  contentWidth: '35rem',
-  // Use centered layout (false for left-aligned)
-  centeredLayout: true,
-  // Show theme toggle button (uses system theme by default)
-  themeToggle: false,
-  // Show dotted divider in post list
-  postListDottedDivider: false,
-  // Show footer
-  footer: true,
-  // Enable fade animations
-  fadeAnimation: true
+  contentWidth: '35rem', // Content area width
+  centeredLayout: true, // Use centered layout (false for left-aligned)
+  themeToggle: false, // Show theme toggle button (uses system theme by default)
+  postListDottedDivider: false, // Show dotted divider in post list
+  footer: true, // Show footer
+  fadeAnimation: true // Enable fade animations
 },
 ```
 
 ```ts
 // Date Settings
-
 date: {
-  // Date format: YYYY-MM-DD, MM-DD-YYYY, DD-MM-YYYY, MONTH DAY YYYY, DAY MONTH YYYY
-  dateFormat: 'YYYY-MM-DD',
-  // Date separator: . - / (except for MONTH DAY YYYY and DAY MONTH YYYY)
-  dateSeparator: '.',
-  // Date position in post list (true for right, false for left)
-  dateOnRight: true
+  dateFormat: 'YYYY-MM-DD', // Date format: YYYY-MM-DD, MM-DD-YYYY, DD-MM-YYYY, MONTH DAY YYYY, DAY MONTH YYYY
+  dateSeparator: '.', // Date separator: . - / (except for MONTH DAY YYYY and DAY MONTH YYYY)
+  dateOnRight: true // Date position in post list (true for right, false for left)
 },
 ```
 
 ```ts
 // Post Settings
-
 post: {
-  // Show reading time in posts
-  readingTime: false,
-  // Show table of contents (when there is enough page width)
-  toc: true,
-  // Enable image viewer
-  imageViewer: true,
-  // Enable copy button in code blocks
-  copyCode: true,
-  // Enable link card
-  linkCard: true
+  readingTime: false, // Show reading time in posts
+  toc: true, // Show table of contents (when there is enough page width)
+  imageViewer: true, // Enable image viewer
+  copyCode: true, // Enable copy button in code blocks
+  linkCard: true // Enable link card
 }
 ```
 
