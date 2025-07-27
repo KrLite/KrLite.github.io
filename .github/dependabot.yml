@@ -11,9 +11,15 @@ updates:
       timezone: 'Asia/Shanghai'
     # Limit the number of open PRs created by Dependabot
     open-pull-requests-limit: 10
+    # Allow automatic merging of non-major version updates
+    allow:
+      - dependency-type: 'all'
+    assignees:
+      - 'the3ash'
     commit-message:
-      # Use 'chore' as the commit message prefix
-      prefix: 'chore'
+      # Use 'deps' for production dependencies, 'dev' for development dependencies
+      prefix: 'deps'
+      prefix-development: 'dev'
       include: 'scope'
     # Labels to add to Dependabot PRs
     labels:
@@ -23,8 +29,24 @@ updates:
       # Ignore major version updates (breaking changes)
       - dependency-name: '*'
         update-types: ['version-update:semver-major']
-    allow:
-      # Allow updates for development dependencies
-      - dependency-type: 'development'
-      # Allow updates for direct dependencies
-      - dependency-type: 'direct'
+    versioning-strategy: auto
+
+  # Enable GitHub Actions updates
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      # Check for updates every Monday at 09:00 (Asia/Shanghai)
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'Asia/Shanghai'
+    open-pull-requests-limit: 10
+    assignees:
+      - 'the3ash'
+    commit-message:
+      prefix: 'github-actions'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'automated'
+      - 'github-actions'
