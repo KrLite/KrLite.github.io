@@ -1,0 +1,71 @@
+:root {
+  --palette--light-accent: #09d181;
+  --palette--light-accent-translucent: rgba(9, 209, 129, 0.1);
+
+  --palette--light-text: var(--palette--light-primary);
+
+  --palette--light-primary: #141414;
+  --palette--light-secondary: #212121;
+  --palette--light-tertiary: #3f3f3f;
+  --palette--light-translucent: rgba(20, 20, 20, 0.1);
+
+  --palette--light-background: #f5f5f5;
+  --palette--light-background-secondary: #e0e0e0;
+  --palette--light-background-tertiary: #d5d5d5;
+  --palette--light-background-translucent: rgba(245, 245, 245, 0.1);
+}
+
+:root {
+  --palette--dark-accent: #1dfabf;
+  --palette--dark-accent-translucent: rgba(29, 250, 191, 0.1);
+
+  --palette--dark-text: var(--palette--dark-primary);
+
+  --palette--dark-primary: #ebebeb;
+  --palette--dark-secondary: #d8d8d8;
+  --palette--dark-tertiary: #b0b0b0;
+  --palette--dark-translucent: rgba(255, 255, 255, 0.1);
+
+  --palette--dark-background: #060606;
+  --palette--dark-background-secondary: #1f1f2a;
+  --palette--dark-background-tertiary: #30303e;
+  --palette--dark-background-translucent: rgba(6, 6, 6, 0.1);
+}
+
+:root {
+  --palette--accent: var(--palette--light-accent);
+  --palette--accent-translucent: var(--palette--light-accent-translucent);
+
+  --palette--text: var(--palette--light-text);
+
+  --palette--primary: var(--palette--light-primary);
+  --palette--secondary: var(--palette--light-secondary);
+  --palette--tertiary: var(--palette--light-tertiary);
+  --palette--translucent: var(--palette--light-translucent);
+
+  --palette--background: var(--palette--light-background);
+  --palette--background-secondary: var(--palette--light-background-secondary);
+  --palette--background-tertiary: var(--palette--light-background-tertiary);
+  --palette--background-translucent: var(
+    --palette--light-background-translucent
+  );
+
+  @media (prefers-color-scheme: dark) {
+    --palette--accent: var(--palette--dark-accent);
+    --palette--accent-translucent: var(--palette--dark-accent-translucent);
+
+    --palette--text: var(--palette--dark-text);
+
+    --palette--primary: var(--palette--dark-primary);
+    --palette--secondary: var(--palette--dark-secondary);
+    --palette--tertiary: var(--palette--dark-tertiary);
+    --palette--translucent: var(--palette--dark-translucent);
+
+    --palette--background: var(--palette--dark-background);
+    --palette--background-secondary: var(--palette--dark-background-secondary);
+    --palette--background-tertiary: var(--palette--dark-background-tertiary);
+    --palette--background-translucent: var(
+      --palette--dark-background-translucent
+    );
+  }
+}

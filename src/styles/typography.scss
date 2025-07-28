@@ -1,0 +1,20 @@
+@import url("/fonts/sf-pro/index.scss");
+@import url("/fonts/oppo-sans/index.scss");
+@import url("/fonts/liga-sf-mono/index.scss");
+
+:root {
+  --typography--font-body: "SF Pro", "OPPO Sans", sans-serif;
+  --typography--font-monospace: "Liga SF Mono", monospace;
+}
+
+body {
+  font-family: var(--typography--font-body);
+}
+
+code,
+pre,
+kbd,
+samp,
+tt {
+  font-family: var(--typography--font-monospace);
+}
