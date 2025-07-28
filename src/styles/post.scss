@@ -465,9 +465,6 @@
 
 .prose pre > code {
   font-family: var(--mono);
-  font-feature-settings:
-    'liga' 0,
-    'calt' 0;
   display: block;
   white-space: pre;
   word-break: normal;
