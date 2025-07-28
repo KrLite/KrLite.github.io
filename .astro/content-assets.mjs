@@ -1,0 +1,11 @@
+
+import __ASTRO_IMAGE_IMPORT_1li1aI from "./_assets/hikari.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Fmarkdown-style-guide.md";
+import __ASTRO_IMAGE_IMPORT_7TKOF from "./_assets/theme-toggle.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md";
+import __ASTRO_IMAGE_IMPORT_Z1RwvTv from "./_assets/dotted-divider.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md";
+import __ASTRO_IMAGE_IMPORT_2jEvYl from "./_assets/date-on-left.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md";
+import __ASTRO_IMAGE_IMPORT_Z12gcxN from "./_assets/toc.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md";
+import __ASTRO_IMAGE_IMPORT_1N77cp from "./_assets/reading-time.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md";
+import __ASTRO_IMAGE_IMPORT_1K8Ssl from "./_assets/copy-code.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md";
+import __ASTRO_IMAGE_IMPORT_aiESF from "./_assets/tr-808.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Fthe-tr-808-story.md";
+export default new Map([["./_assets/hikari.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Fmarkdown-style-guide.md", __ASTRO_IMAGE_IMPORT_1li1aI], ["./_assets/theme-toggle.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md", __ASTRO_IMAGE_IMPORT_7TKOF], ["./_assets/dotted-divider.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md", __ASTRO_IMAGE_IMPORT_Z1RwvTv], ["./_assets/date-on-left.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md", __ASTRO_IMAGE_IMPORT_2jEvYl], ["./_assets/toc.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md", __ASTRO_IMAGE_IMPORT_Z12gcxN], ["./_assets/reading-time.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md", __ASTRO_IMAGE_IMPORT_1N77cp], ["./_assets/copy-code.png?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Ftheme-guide.md", __ASTRO_IMAGE_IMPORT_1K8Ssl], ["./_assets/tr-808.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fposts%2Fthe-tr-808-story.md", __ASTRO_IMAGE_IMPORT_aiESF]]);
+		
