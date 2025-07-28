@@ -10,10 +10,12 @@ const today = new Date()
         &copy;
         {today.getFullYear()}
       </span>
-      {themeConfig.site.author}
+      <a href={themeConfig.site.source}>
+        {themeConfig.site.author}
+      </a>
     </div>
     <div class="powered-by">
-      Powered by{' '}
+      Built using{' '}
       <a href="https://astro.build">Astro</a> &{' '}
       <a href="https://github.com/the3ash/astro-chiri">Chiri</a>
     </div>

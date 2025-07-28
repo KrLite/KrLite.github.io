@@ -11,6 +11,7 @@ export interface SiteInfo {
   website: string
   title: string
   author: string
+  source?: string
   description: string
   language: string
 }
