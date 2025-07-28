@@ -1,6 +1,5 @@
 <script is:inline>
-  // This script finds all NeoDB containers on the page and fetches data for each one.
-  document.addEventListener('DOMContentLoaded', () => {
+  function loadNeoDBCards() {
     const allContainers = document.querySelectorAll('.neodb-card-container')
 
     allContainers.forEach((container) => {
@@ -200,7 +199,11 @@
         renderError(container)
       }
     })
-  })
+  }
+
+  document.addEventListener('DOMContentLoaded', loadNeoDBCards)
+
+  document.addEventListener('astro:page-load', loadNeoDBCards)
 </script>
 
 <style is:inline>
