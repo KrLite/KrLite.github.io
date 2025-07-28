@@ -1,5 +1,5 @@
-@import './fonts.css';
-@import './post.css';
+@import './fonts.scss';
+@import './post.scss';
 
 :root {
   /* Min Content Width */
@@ -7,10 +7,12 @@
 
   /* Typography */
   --sans:
-    Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    'SF Pro', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   --serif: Besley, Baskerville, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --mono:
+    'Liga SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
 
   --font-size-s: 0.8125rem;
   --font-size-m: 0.9375rem;
