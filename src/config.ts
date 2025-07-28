@@ -3,7 +3,7 @@ import type { ThemeConfig } from './types'
 export const themeConfig: ThemeConfig = {
   // SITE INFO ///////////////////////////////////////////////////////////////////////////////////////////
   site: {
-    website: 'https://astro-chiri.netlify.app/', // Site domain
+    website: 'https://krlite.netlify.app/', // Site domain
     title: 'Facts About KrLite', // Site title
     author: 'KrLite', // Author name
     source: 'https://github.com/KrLite',
